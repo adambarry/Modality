@@ -22,7 +22,10 @@ var Modal = function (options) {
     //Private function names
     var init,
         destroy,
-        abort;
+        abort,
+        enableViewportScroll,
+        position,
+        resize;
 
     //Private functions
     //Default options
@@ -32,15 +35,15 @@ var Modal = function (options) {
         //className: false,
         //displayTime: false,
         //element: false,
-        //onClose: function () {},
+        onClose: function () {},
         //buttonConfirmText: "ok",
         //buttonCancelText: "cancel",
         //inputFieldType: false,
         //inputFieldValue: false,
         //inputFieldClass: false,
-        //margin: 5, //px
+        margin: 5, //px
         disablePageScroll: true,
-        //verticalCenter: false,
+        verticalCenter: false,
         //showLoader: false,
         //loaderMessage: false
         closeLink: "<span>Close <span class=\"hotkey\">(esc)</span></span>"
@@ -55,18 +58,20 @@ var Modal = function (options) {
         }
     }
 
+    enableViewportScroll = function () {
+        // Renable page scroll, i.e. revert to external CSS-specifications
+        console.log("Reanable viewport scroll");
+        //if ((self.options.disablePageScroll === true && popupWindows.length === 0) || popupWindows.length === 0) {
+        if (self.options.disablePageScroll) {
+            document.getElementsByTagName("body")[0].style.overflow = "";
+            document.getElementsByTagName("body")[0].style.marginLeft = "";
+        }
+    };
+
     destroy = function (e) {
         console.group("Modal: Destroy()");
 
-        (function reanableViewportScroll () {
-            // Renable page scroll, i.e. revert to external CSS-specifications
-            console.log("Reanable viewport scroll");
-            //if ((self.options.disablePageScroll === true && popupWindows.length === 0) || popupWindows.length === 0) {
-            if (self.options.disablePageScroll) {
-                document.getElementsByTagName("body")[0].style.overflow = "";
-                document.getElementsByTagName("body")[0].style.marginLeft = "";
-            }
-        }());
+        enableViewportScroll();
 
         (function removeModalWindow () {
             console.log("Remove modal window from DOM");
@@ -93,7 +98,89 @@ var Modal = function (options) {
         destroy();
     };
 
+    position = function () {
+        var viewportWidth = document.documentElement.clientWidth,
+            viewportHeight = document.documentElement.clientHeight,
+            scrollTop = document.body.scrollTop,
+            topPlacement;
+
+        //Center the popup-window horizontally
+        modalContainer.style.left = Math.round((viewportWidth / 2) - (modalContainer.offsetWidth / 2)) + "px";
+
+        /* Position the popup-window vertically */
+        if (scrollTop === 0) {
+            if (window.pageYOffset) {
+                scrollTop = window.pageYOffset;
+            } else {
+                scrollTop = (document.body.parentElement) ? document.body.parentElement.scrollTop : 0;
+            }
+        }
+
+        // If specified, center the popup-window vertically
+        if (self.options.verticalCenter) {
+          topPlacement = scrollTop + (Math.round((viewportHeight / 2) - (modalContainer.offsetHeight / 2)));
+        } else {
+          //or else, place the popup-window towards the top of the screen
+          topPlacement = scrollTop + (Math.round((viewportHeight / 4) - (modalContainer.offsetHeight / 4)));
+        }
+
+        if ((topPlacement - scrollTop) > self.options.margin) {
+          modalContainer.style.top = topPlacement + "px";
+        } else {
+          modalContainer.style.top = self.options.margin + scrollTop + "px";
+        }
+
+
+    };
+
+    resize = function () {
+        var viewportWidth,
+            viewportHeight,
+            maxWidth,
+            maxHeight,
+            popupWidth,
+            popupHeight;
+
+        //Set proportions of the wrapper to cover the entire page using position:absolute instead of position:fixed (for IE6 and iOS-compatability)
+        if (document.documentElement.clientWidth > document.documentElement.scrollWidth) {
+            viewportWidth = document.documentElement.clientWidth;
+        } else {
+            viewportWidth = document.documentElement.scrollWidth;
+        }
+        wrapper.style.width = viewportWidth + "px";
+
+        if (document.documentElement.clientHeight > document.documentElement.scrollHeight) {
+            viewportHeight = document.documentElement.clientHeight;
+        } else {
+            viewportHeight = document.documentElement.scrollHeight;
+        }
+        wrapper.style.height = viewportHeight + "px";
+
+        //Calculate the available viewport size
+        maxWidth = document.documentElement.clientWidth - (self.options.margin * 2);
+        maxHeight = document.documentElement.clientHeight - (self.options.margin * 2);
+
+        //Reset popup size to CSS specifications
+        modalContainer.style.width = "";
+        modalContainer.style.height = "";
+
+        //Current popup size
+        popupWidth = modalContainer.offsetWidth;
+        popupHeight = modalContainer.offsetHeight;
+
+        if (popupHeight > maxHeight) {
+            modalContainer.style.height = Math.round(maxHeight) + "px";
+        }
+
+        if (popupWidth > maxWidth) {
+            modalContainer.style.width = Math.round(maxWidth) + "px";
+        }
+
+        position();
+    };
+
     (function init() {
+        console.group("Modal: init()");
 
         //Check for existing .modal "wrapper" element
         (function prepareElements() {
@@ -119,9 +206,12 @@ var Modal = function (options) {
             }
 
             console.log("wrapper", wrapper);
+
             if (!wrapper.onclick) {
                 wrapper.onclick = function () {
                     //Give the wrapper its own closing function to prevent binding it to a certain Modal-objects abort-function
+
+                    enableViewportScroll();
                     wrapper.parentNode.removeChild(wrapper);
                 };
             }
@@ -205,7 +295,16 @@ var Modal = function (options) {
             }
         }());*/
 
+        window.addEventListener("resize", function () {
+            resize();
+        });
 
+        window.addEventListener("scroll", function () {
+            position();
+        });
+
+        resize();
+        console.groupEnd();
     }());
 
 

@@ -25,7 +25,7 @@
         <!-- Add your site or application content here -->
         <p>Hello world! This is HTML5 Boilerplate...</p>
 
-        <button type="button" class="btn btn--primary" onclick="javascript: var maf = new Modal({content: '<h2>Heading</h2><p>Content</p>'})">Trigger modal</button>
+        <button type="button" class="btn btn--primary" onclick="javascript: var maf = new Modal({onClose: function () { alert('closed');},content: '<h2>Heading</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus. Nulla augue nisl, fermentum quis hendrerit sed, fermentum at mauris. Cras sodales risus vel nisi pellentesque rhoncus. Praesent vulputate dolor nisi, id pharetra nisi varius eu. Fusce non auctor dui. Quisque a ullamcorper nisi. Integer laoreet velit et suscipit luctus.</p>'})">Trigger modal</button>
 
         <!--
 <div class="modal">
