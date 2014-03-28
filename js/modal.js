@@ -17,16 +17,17 @@ var Modal = function (options) {
         modalContent,
         initialWindowSize,
         newWindowSize,
-        sizeDelta;
+        sizeDelta,
 
     //Private function names
-    var init,
+        init,
         destroy,
         abort,
         enableViewportScroll,
         position,
         resize,
-        addButtons;
+        addButtons,
+        cancelAction;
 
     //Private functions
     //Default options
@@ -66,6 +67,14 @@ var Modal = function (options) {
         if (self.options.disablePageScroll) {
             document.getElementsByTagName("body")[0].style.overflow = "";
             document.getElementsByTagName("body")[0].style.marginLeft = "";
+        }
+    };
+
+    cancelAction = function () {
+        if (self.options.type) {
+            abort();
+        } else {
+            destroy();
         }
     };
 
@@ -244,7 +253,16 @@ var Modal = function (options) {
         buttonReset.setAttribute("type", "button");
         buttonReset.setAttribute("class", "btn btn--reset");
         buttonReset.innerHTML = self.options.buttonCancelText;
-        buttonReset.onclick = destroy;
+
+        /*
+if (self.options.type) {
+            buttonReset.onclick = abort;
+        } else {
+            buttonReset.onclick = destroy;
+        }
+*/
+        buttonReset.onclick = cancelAction;
+
         modalContent.appendChild(buttonReset);
 
         //Set focus to the cancel button
@@ -261,8 +279,7 @@ var Modal = function (options) {
 
         //Check for existing .modal "wrapper" element
         (function prepareElements() {
-            var elements = document.getElementsByTagName("div"),
-                i;
+            var elements = document.getElementsByTagName("div");
 
             for (i = 0; i < elements.length; i += 1) {
                 if (elements[i].className.indexOf('modal') > -1) {
@@ -329,7 +346,8 @@ var Modal = function (options) {
             modalClose = document.createElement("a");
             modalClose.className = "modal-close";
             modalClose.innerHTML = self.options.closeLink;
-            modalClose.onclick = destroy;
+            //modalClose.onclick = destroy;
+            modalClose.onclick = cancelAction;
             modalWindow.appendChild(modalClose);
 
             // Add the modal-content
