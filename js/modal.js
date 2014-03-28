@@ -25,22 +25,23 @@ var Modal = function (options) {
         abort,
         enableViewportScroll,
         position,
-        resize;
+        resize,
+        addButtons;
 
     //Private functions
     //Default options
     self.options = {
-        //type: false,
+        type: false, //false|confirm|prompt
         content: false,
-        //className: false,
+        className: false,
         //displayTime: false,
         //element: false,
-        onClose: function () {},
-        //buttonConfirmText: "ok",
-        //buttonCancelText: "cancel",
-        //inputFieldType: false,
-        //inputFieldValue: false,
-        //inputFieldClass: false,
+        callback: function () {},
+        buttonConfirmText: "ok",
+        buttonCancelText: "cancel",
+        inputFieldType: false,
+        inputFieldValue: false,
+        inputFieldClass: false,
         margin: 5, //px
         disablePageScroll: true,
         verticalCenter: false,
@@ -68,7 +69,7 @@ var Modal = function (options) {
         }
     };
 
-    destroy = function (e) {
+    destroy = function (data) {
         console.group("Modal: Destroy()");
 
         enableViewportScroll();
@@ -86,15 +87,17 @@ var Modal = function (options) {
             }
         }());
 
-        // Fire the onClose function
-        console.log("Fire onClose function (which can have been nullified)");
-        self.options.onClose(e);
+        // Fire the callback function
+        if (self.options.callback) {
+            console.log("Fire callback function (which can have been nullified)");
+            self.options.callback(data);
+        }
 
         console.groupEnd();
     };
 
     abort = function () {
-        self.options.onClose = function () {};
+        self.options.callback = function () {};
         destroy();
     };
 
@@ -179,6 +182,80 @@ var Modal = function (options) {
         position();
     };
 
+    addButtons = function () {
+        console.group("Modal: addButtons()");
+
+        var buttonReset,
+            buttonConfirm,
+            theForm,
+            theFieldset,
+            inputField;
+
+        if (self.options.type === "prompt") {
+            //Create and add the form
+            theForm = document.createElement("form");
+            //theForm.setAttribute("onsubmit", "return validateForm(this)");
+            modalContent.appendChild(theForm);
+
+            //Create and add the fieldset
+            theFieldset = document.createElement("fieldset");
+            theForm.appendChild(theFieldset);
+
+            //Create the input field and add it to the fieldset
+            inputField = document.createElement("input");
+            if (self.options.inputFieldType) {
+                inputField.setAttribute("type", self.options.inputFieldType);
+            } else {
+                inputField.setAttribute("type", "text");
+            }
+
+            inputField.setAttribute("class", "modal-prompt");
+
+            if (self.options.inputFieldClass) {
+                inputField.className += " " + self.options.inputFieldClass;
+            }
+            if (self.options.inputFieldValue) {
+                inputField.value = self.options.inputFieldValue;
+            }
+
+            theFieldset.appendChild(inputField);
+            try {
+                inputField.focus();
+                inputField.select();
+            } catch (e) {}
+        }
+
+        /* Create and add the confirm-button */
+        if (self.options.type) {
+            buttonConfirm = document.createElement('button');
+            buttonConfirm.setAttribute("type", "btn btn--submit");
+            buttonConfirm.setAttribute("class", "submit");
+            buttonConfirm.innerHTML = self.options.buttonConfirmText;
+            buttonConfirm.onclick = function () {
+                var value = inputField ? inputField.value : false;
+                destroy(value);
+            };
+            modalContent.appendChild(buttonConfirm);
+        }
+
+
+        //Create and add the reset-button
+        buttonReset = document.createElement('button');
+        buttonReset.setAttribute("type", "button");
+        buttonReset.setAttribute("class", "btn btn--reset");
+        buttonReset.innerHTML = self.options.buttonCancelText;
+        buttonReset.onclick = destroy;
+        modalContent.appendChild(buttonReset);
+
+        //Set focus to the cancel button
+        if (self.options.type !== "prompt") {
+            buttonReset.focus();
+        }
+
+
+        console.groupEnd();
+    };
+
     (function init() {
         console.group("Modal: init()");
 
@@ -243,13 +320,16 @@ var Modal = function (options) {
             //Add the modal-window
             modalWindow = document.createElement("div");
             modalWindow.className = "modal-window";
+            if(self.options.className) {
+                modalWindow.className += " " + self.options.className;
+            }
             modalContainer.appendChild(modalWindow);
 
             //Add the modal-close element
             modalClose = document.createElement("a");
             modalClose.className = "modal-close";
             modalClose.innerHTML = self.options.closeLink;
-            modalClose.onclick = abort;
+            modalClose.onclick = destroy;
             modalWindow.appendChild(modalClose);
 
             // Add the modal-content
@@ -266,6 +346,9 @@ var Modal = function (options) {
               modalContent.innerHTML = "";
             }
         }());
+
+        //Add buttons to the modal-window
+        addButtons();
 
         (function disableViewportScroll () {
             // Disable page scroll
@@ -295,15 +378,19 @@ var Modal = function (options) {
             }
         }());*/
 
+        //Do an initial resize to size and position the content nicely
+        resize();
+
+        //Make sure that changes to the viewport size resizes the content
         window.addEventListener("resize", function () {
             resize();
         });
 
+        //Make sure that the modal-wndow is repositioned when scrolling (for iOS)
         window.addEventListener("scroll", function () {
             position();
         });
 
-        resize();
         console.groupEnd();
     }());
 
