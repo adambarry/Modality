@@ -8,6 +8,7 @@ var Modal = function (options) {
     "use strict";
 
     //Private variables
+    //-----------------------------------------
     var self = this,
         i,
         wrapper,
@@ -18,8 +19,11 @@ var Modal = function (options) {
         initialWindowSize,
         newWindowSize,
         sizeDelta,
+        cancelDelay = 400, //milliseconds. To prevent doubleclicks accidentally closing the modal
+
 
     //Private function names
+    //-----------------------------------------
         init,
         destroy,
         abort,
@@ -29,15 +33,18 @@ var Modal = function (options) {
         addButtons,
         cancelAction;
 
+
     //Private functions
+    //-----------------------------------------
     //Default options
     self.options = {
-        type: false, //false|confirm|prompt
+        type: false, //false|confirm|prompt (adds buttons corresponding to the required functionality of the type
         content: false,
-        className: false,
-        //displayTime: false,
-        //element: false,
-        callback: function () {},
+        className: false, //Classname for the modal-window
+        displayTime: false, //Time in milliseconds, e.g. 2500, before the popup is automatically closed
+        onReady: false, //A function that is executed when the modal has loaded its content, e.g. onReady: function () { alert("ready"); }
+        callback: false, //A function that is executed upon closing the modal-window, e.g. callback: function (e) { alert("callback: " + e); }
+        buttons: true, //Add buttons (depending on the type-property)
         buttonConfirmText: "ok",
         buttonCancelText: "cancel",
         inputFieldType: false,
@@ -98,7 +105,7 @@ var Modal = function (options) {
 
         // Fire the callback function
         if (self.options.callback) {
-            console.log("Fire callback function (which can have been nullified)");
+            console.log("Fire callback function");
             self.options.callback(data);
         }
 
@@ -106,7 +113,7 @@ var Modal = function (options) {
     };
 
     abort = function () {
-        self.options.callback = function () {};
+        self.options.callback = false;
         destroy();
     };
 
@@ -234,7 +241,7 @@ var Modal = function (options) {
             } catch (e) {}
         }
 
-        /* Create and add the confirm-button */
+        //Create and add the confirm-button
         if (self.options.type) {
             buttonConfirm = document.createElement('button');
             buttonConfirm.setAttribute("type", "btn btn--submit");
@@ -254,14 +261,9 @@ var Modal = function (options) {
         buttonReset.setAttribute("class", "btn btn--reset");
         buttonReset.innerHTML = self.options.buttonCancelText;
 
-        /*
-if (self.options.type) {
-            buttonReset.onclick = abort;
-        } else {
-            buttonReset.onclick = destroy;
-        }
-*/
-        buttonReset.onclick = cancelAction;
+        window.setTimeout(function () {
+            buttonReset.onclick = cancelAction;
+        }, cancelDelay);
 
         modalContent.appendChild(buttonReset);
 
@@ -269,7 +271,6 @@ if (self.options.type) {
         if (self.options.type !== "prompt") {
             buttonReset.focus();
         }
-
 
         console.groupEnd();
     };
@@ -302,25 +303,24 @@ if (self.options.type) {
             console.log("wrapper", wrapper);
 
             if (!wrapper.onclick) {
-                wrapper.onclick = function () {
-                    //Give the wrapper its own closing function to prevent binding it to a certain Modal-objects abort-function
+                window.setTimeout(function () {
+                    wrapper.onclick = function () {
+                        //Give the wrapper its own closing function to prevent binding it to a certain Modal-objects abort-function
 
-                    enableViewportScroll();
-                    wrapper.parentNode.removeChild(wrapper);
-                };
+                        enableViewportScroll();
+                        wrapper.parentNode.removeChild(wrapper);
+                    };
+                }, cancelDelay);
             }
-
 
             //Add the modal-container
             modalContainer = document.createElement("div");
             modalContainer.className = "modal-container";
             wrapper.appendChild(modalContainer);
 
-            // Prevent clicks on the popupContainer to bubble up to the popupWindow
+            //Prevent clicks on the modal-container to bubble up to the modal-window
             modalContainer.onclick = function (event) {
                 var e = event || window.event; //get window.event if argument is falsy (in IE)
-
-                //console.log(e.stopPropagation);
 
                 if (e.stopPropagation) {
                     //For all the clever browsers
@@ -346,8 +346,11 @@ if (self.options.type) {
             modalClose = document.createElement("a");
             modalClose.className = "modal-close";
             modalClose.innerHTML = self.options.closeLink;
-            //modalClose.onclick = destroy;
-            modalClose.onclick = cancelAction;
+
+            window.setTimeout(function () {
+                modalClose.onclick = cancelAction;
+            }, cancelDelay);
+
             modalWindow.appendChild(modalClose);
 
             // Add the modal-content
@@ -365,10 +368,12 @@ if (self.options.type) {
             }
         }());
 
-        //Add buttons to the modal-window
-        addButtons();
+        if (self.options.buttons) {
+            //Add buttons to the modal-window
+            addButtons();
+        }
 
-        (function disableViewportScroll () {
+        (function disableViewportScroll() {
             // Disable page scroll
             //if (this.options.disablePageScroll === true && popupWindows.length === 1) {
             if (self.options.disablePageScroll === true) {
@@ -396,27 +401,48 @@ if (self.options.type) {
             }
         }());*/
 
-        //Do an initial resize to size and position the content nicely
-        resize();
-
-        //Make sure that changes to the viewport size resizes the content
-        window.addEventListener("resize", function () {
+        (function resizeAndPosition() {
+            //Do an initial resize to size and position the content nicely
             resize();
-        });
 
-        //Make sure that the modal-wndow is repositioned when scrolling (for iOS)
-        window.addEventListener("scroll", function () {
-            position();
-        });
+            //Make sure that changes to the viewport size resizes the content
+            window.addEventListener("resize", function () {
+                resize();
+            });
+
+            //Make sure that the modal-wndow is repositioned when scrolling (for iOS)
+            window.addEventListener("scroll", function () {
+                position();
+            });
+        }());
+
+        //The modal is loaded and in position, so fire the onReady function
+        if (self.options.onReady) {
+            self.options.onReady();
+        }
+
+        (function autoClose() {
+            //If the popupWindow is set to auto-close
+            if (self.options.displayTime) {
+                // Wait for time to pass, and then close the popupWindow while passing on the onClose-function
+                window.setTimeout(function () {
+                  try {
+                    destroy();
+                  } catch (e) {}
+                }, self.options.displayTime, this);
+            }
+        }());
 
         console.groupEnd();
     }());
 
 
     //Public functions
+    //-----------------------------------------
     return {
         options: self.options,
         close: destroy,
-        abort: abort
+        abort: abort,
+        element: modalWindow
     };
 };

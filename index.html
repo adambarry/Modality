@@ -16,6 +16,11 @@
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="css/modal.css">
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+        <script src="js/modal.js"></script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -26,9 +31,37 @@
         <p>Hello world! This is HTML5 Boilerplate...</p>
 
         <button type="button" class="btn btn--primary" onclick="javascript: var maf = new Modal({className: 'modal-window--alert', buttonCancelText: 'close', content: '<h2>Alert</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus. Nulla augue nisl, fermentum quis hendrerit sed, fermentum at mauris. Cras sodales risus vel nisi pellentesque rhoncus. Praesent vulputate dolor nisi, id pharetra nisi varius eu. Fusce non auctor dui. Quisque a ullamcorper nisi. Integer laoreet velit et suscipit luctus.</p>'})">Simple modal (equivalent to alert)</button>
+        <button type="button" class="btn btn--primary" onclick="javascript: var maf = new Modal({className: 'modal-window--alert', buttons: false, content: '<h2>Alert</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus. Nulla augue nisl, fermentum quis hendrerit sed, fermentum at mauris. Cras sodales risus vel nisi pellentesque rhoncus. Praesent vulputate dolor nisi, id pharetra nisi varius eu. Fusce non auctor dui. Quisque a ullamcorper nisi. Integer laoreet velit et suscipit luctus.</p>'})">Simple modal without buttons</button>
         <button type="button" class="btn btn--primary" onclick="javascript: var maf = new Modal({className: 'modal-window--alert', callback: function() { alert('callback');}, buttonCancelText: 'close', content: '<h2>Alert</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus. Nulla augue nisl, fermentum quis hendrerit sed, fermentum at mauris. Cras sodales risus vel nisi pellentesque rhoncus. Praesent vulputate dolor nisi, id pharetra nisi varius eu. Fusce non auctor dui. Quisque a ullamcorper nisi. Integer laoreet velit et suscipit luctus.</p>'})">Simple modal with callback</button>
+        <button type="button" class="btn btn--primary" onclick="javascript: var maf = new Modal({className: 'modal-window--alert', displayTime: 2500, buttonCancelText: 'close', content: '<h2>Alert</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus. Nulla augue nisl, fermentum quis hendrerit sed, fermentum at mauris. Cras sodales risus vel nisi pellentesque rhoncus. Praesent vulputate dolor nisi, id pharetra nisi varius eu. Fusce non auctor dui. Quisque a ullamcorper nisi. Integer laoreet velit et suscipit luctus.</p>'})">Simple modal with displayTime (auto-closing)</button>
         <button type="button" class="btn btn--primary" onclick="javascript: var maf = new Modal({className: 'modal-window--alert', type: 'confirm', callback: function () { alert('confirmed'); }, content: '<h2>Confirm</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus.</p>'})">Confirm</button>
         <button type="button" class="btn btn--primary" onclick="javascript: var maf = new Modal({className: 'modal-window--alert', type: 'prompt', callback: function (data) { alert('From prompt: ' + data);}, buttonConfirmText: 'submit', buttonCancelText: 'close', content: '<h2>Prompt</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus.</p>'})">Prompt</button>
+
+        <script type="text/javascript">
+            "use strict";
+
+            var theFormModal;
+
+            function formInit() {
+                alert("init the form");
+                console.log("theFormModal", theFormModal);
+            }
+
+
+            var formModal = function () {
+                theFormModal = new Modal({
+                    className: 'modal-window--alert',
+                    buttons: false,
+                    content: '<h2>Form</h2><form><fieldset><label class="formcontrol">Email<input type="email" placeholder="email@domain.tld" required="required" /></label><label class="formcontrol">Password<input type="password" /></label></fieldset><button type="submit" class="btn btn--primary">Sign in</button><button type="button">close</button></form>',
+                    onReady: function () {
+                        formInit();
+                    }
+                });
+            };
+        </script>
+        <button type="button" class="btn btn--primary" onclick="javascript: formModal();">HTML form</button>
+
+<!-- <label class='formcontrol'><p class='formcontrol-label'>Email</p><input class='formcontrol-input' type='email' value='' placeholder='email@domain.tld' /></label><label class='formcontrol'><p class='formcontrol-label'>Password</p><input class='formcontrol-input' type='password' value='' placeholder='password' /></label><button class='btn btn--primary' type='submit'>Sign in</button><button class='btn btn--secondary' type='button'>Close</button> -->
 
         <!--
 <div class="modal">
@@ -45,11 +78,7 @@
         </div>
 -->
 
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
-        <script src="js/plugins.js"></script>
-        <script src="js/main.js"></script>
-        <script src="js/modal.js"></script>
+
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
