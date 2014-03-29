@@ -433,6 +433,7 @@ var Modal = function (options) {
             }
         }());
 
+
         console.groupEnd();
     }());
 
