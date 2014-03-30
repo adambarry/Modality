@@ -46,7 +46,9 @@ var Modal = function (options) {
         callback: false, //A function that is executed upon closing the modal-window, e.g. callback: function (data) { alert("callback: " + data); }
         buttons: true, //Add buttons (depending on the type-property)
         buttonCancelText: "cancel", //Text for cancel/close button
+        buttonCancelClass: "btn btn--secondary",
         buttonConfirmText: "ok", //Text for ok/confirm button
+        buttonConfirmClass: "btn btn--primary",
         inputFieldType: false, //For type === "confirm"
         inputFieldClass: false, //For type === "confirm"
         inputFieldPlaceholder: false, //For type === "confirm"
@@ -269,8 +271,10 @@ var Modal = function (options) {
         //Create and add the confirm-button
         if (self.options.type) {
             buttonConfirm = document.createElement('button');
-            buttonConfirm.setAttribute("type", "btn btn--submit");
-            buttonConfirm.setAttribute("class", "submit");
+            buttonConfirm.setAttribute("type", "submit");
+            if (self.options.buttonConfirmClass) {
+                buttonConfirm.setAttribute("class", self.options.buttonConfirmClass);
+            }
             buttonConfirm.innerHTML = self.options.buttonConfirmText;
             buttonConfirm.onclick = function () {
                 var value = inputField ? inputField.value : false;
@@ -283,7 +287,9 @@ var Modal = function (options) {
         //Create and add the reset-button
         buttonReset = document.createElement('button');
         buttonReset.setAttribute("type", "button");
-        buttonReset.setAttribute("class", "btn btn--reset");
+        if (self.options.buttonCancelClass) {
+            buttonReset.setAttribute("class", self.options.buttonCancelClass);
+        }
         buttonReset.innerHTML = self.options.buttonCancelText;
 
         defer({
