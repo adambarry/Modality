@@ -135,6 +135,8 @@ var Modal = function (options) {
     };
 
     position = function () {
+        if (!self) { return false; }
+
         var viewportWidth = document.documentElement.clientWidth,
             viewportHeight = document.documentElement.clientHeight,
             scrollTop = document.body.scrollTop,
@@ -170,6 +172,8 @@ var Modal = function (options) {
     };
 
     resize = function () {
+        if (!self) { return false; }
+
         var viewportWidth,
             viewportHeight,
             maxWidth,
