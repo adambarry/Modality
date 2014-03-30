@@ -26,6 +26,7 @@ var Modal = function (options) {
     //-----------------------------------------
         destroy,
         abort,
+        defer,
         enableViewportScroll,
         position,
         resize,
@@ -65,6 +66,20 @@ var Modal = function (options) {
             }
         }
     }
+
+    defer = function (options) {
+        options.delay = options.delay || 0;
+
+        if (options.func) {
+            window.setTimeout(function () {
+                console.log("Modal: defer() - enable");
+                try {
+                    options.func();
+                } catch (ignore) {}
+
+            }, options.delay);
+        }
+    };
 
     enableViewportScroll = function () {
         // Renable page scroll, i.e. revert to external CSS-specifications
@@ -260,9 +275,10 @@ var Modal = function (options) {
         buttonReset.setAttribute("class", "btn btn--reset");
         buttonReset.innerHTML = self.options.buttonCancelText;
 
-        window.setTimeout(function () {
-            buttonReset.onclick = cancelAction;
-        }, cancelDelay);
+        defer({
+            func: function () { buttonReset.onclick = cancelAction; },
+            delay: cancelDelay
+        });
 
         modalContent.appendChild(buttonReset);
 
@@ -302,14 +318,17 @@ var Modal = function (options) {
             console.log("wrapper", wrapper);
 
             if (!wrapper.onclick) {
-                window.setTimeout(function () {
-                    wrapper.onclick = function () {
-                        //Give the wrapper its own closing function to prevent binding it to a certain Modal-objects abort-function
+                defer({
+                    func: function () {
+                        wrapper.onclick = function () {
+                            //Give the wrapper its own closing function to prevent binding it to a certain Modal-objects abort-function
 
-                        enableViewportScroll();
-                        wrapper.parentNode.removeChild(wrapper);
-                    };
-                }, cancelDelay);
+                            enableViewportScroll();
+                            wrapper.parentNode.removeChild(wrapper);
+                        };
+                    },
+                    delay: cancelDelay
+                });
             }
 
             //Add the modal-container
@@ -346,9 +365,12 @@ var Modal = function (options) {
             modalClose.className = "modal-close";
             modalClose.innerHTML = self.options.closeLink;
 
-            window.setTimeout(function () {
-                modalClose.onclick = cancelAction;
-            }, cancelDelay);
+            defer({
+                func: function () {
+                    modalClose.onclick = cancelAction;
+                },
+                delay: cancelDelay
+            });
 
             modalWindow.appendChild(modalClose);
 
@@ -424,11 +446,12 @@ var Modal = function (options) {
             //If the popupWindow is set to auto-close
             if (self.options.displayTime) {
                 // Wait for time to pass, and then close the popupWindow while passing on the onClose-function
-                window.setTimeout(function () {
-                  try {
-                    destroy();
-                  } catch (ignore) {}
-                }, self.options.displayTime, this);
+                defer({
+                    func: function () {
+                        destroy();
+                    },
+                    delay: self.options.displayTime
+                });
             }
         }());
 
