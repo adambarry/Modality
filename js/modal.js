@@ -73,7 +73,7 @@ var Modal = function (options) {
         if (options.func) {
             window.setTimeout(function () {
                 if (self) {
-                    console.log("Modal: defer() - enable");
+                    console.log("Modal: defer()");
                     try {
                         options.func();
                     } catch (ignore) {}
@@ -445,7 +445,8 @@ var Modal = function (options) {
             console.group("Modal: onReady");
             self.options.onReady({
                 element: modalWindow,
-                close: destroy //include the close-function so that it's available before the return has been executed
+                close: destroy, //include the close-function so that it's available before the return has been executed
+                abort: abort
             });
             console.groupEnd();
         }
