@@ -24,7 +24,6 @@ var Modal = function (options) {
 
     //Private function names
     //-----------------------------------------
-        init,
         destroy,
         abort,
         enableViewportScroll,
@@ -238,7 +237,7 @@ var Modal = function (options) {
             try {
                 inputField.focus();
                 inputField.select();
-            } catch (e) {}
+            } catch (ignore) {}
         }
 
         //Create and add the confirm-button
@@ -428,7 +427,7 @@ var Modal = function (options) {
                 window.setTimeout(function () {
                   try {
                     destroy();
-                  } catch (e) {}
+                  } catch (ignore) {}
                 }, self.options.displayTime, this);
             }
         }());
