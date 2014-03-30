@@ -413,6 +413,7 @@ var Modal = function (options) {
             }
 
             theFieldset.appendChild(inputField);
+
             try {
                 inputField.focus();
                 inputField.select();
