@@ -42,8 +42,8 @@ var Modal = function (options) {
         content: false,
         className: false, //Classname for the modal-window
         displayTime: false, //Time in milliseconds, e.g. 2500, before the popup is automatically closed
-        onReady: false, //A function that is executed when the modal has loaded its content, e.g. onReady: function () { alert("ready"); }
-        callback: false, //A function that is executed upon closing the modal-window, e.g. callback: function (e) { alert("callback: " + e); }
+        onReady: false, //A function that is executed when the modal has loaded its content, e.g. onReady: function (data) { console.log("onReady", data); }
+        callback: false, //A function that is executed upon closing the modal-window, e.g. callback: function (data) { alert("callback: " + data); }
         buttons: true, //Add buttons (depending on the type-property)
         buttonConfirmText: "ok",
         buttonCancelText: "cancel",
@@ -439,7 +439,12 @@ var Modal = function (options) {
 
         //The modal is loaded and in position, so fire the onReady function
         if (self.options.onReady) {
-            self.options.onReady();
+            console.group("Modal: onReady");
+            self.options.onReady({
+                element: modalWindow,
+                close: destroy
+            });
+            console.groupEnd();
         }
 
         (function autoClose() {

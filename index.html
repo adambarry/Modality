@@ -42,9 +42,30 @@
 
             var theFormModal;
 
-            function formInit() {
+            function formInit(data) {
                 //alert("init the form");
-                console.log("theFormModal", theFormModal);
+                console.log("theFormModal", data);
+
+                var modalWindow = data.element,
+                    i,
+                    buttons = modalWindow.getElementsByTagName("button"),
+                    btnSubmit,
+                    btnClose;
+
+                for (i = 0; i < buttons.length; i += 1) {
+                    if (buttons[i].className.indexOf("js-submit")) {
+                        btnSubmit = buttons[i];
+                    }
+
+                    if (buttons[i].className.indexOf("js-close")) {
+                        btnClose = buttons[i];
+                    }
+                }
+
+                console.log("btnSubmit", btnSubmit);
+                console.log("btnClose", btnClose);
+
+                btnClose.onclick = data.close;
             }
 
 
@@ -52,9 +73,9 @@
                 theFormModal = new Modal({
                     className: 'modal-window--alert',
                     buttons: false,
-                    content: '<h2>Form</h2><form><fieldset><label class="formcontrol">Email<input type="email" placeholder="email@domain.tld" required="required" /></label><label class="formcontrol">Password<input type="password" /></label></fieldset><button type="submit" class="btn btn--primary">Sign in</button><button type="button">close</button></form>',
-                    onReady: function () {
-                        formInit();
+                    content: '<h2>Form</h2><form><fieldset><label class="formcontrol">Email<input type="email" placeholder="email@domain.tld" required="required" /></label><label class="formcontrol">Password<input type="password" /></label></fieldset><button type="submit" class="btn btn--primary js-submit">Sign in</button><button type="button" class="btn btn--secondary js-close">close</button></form>',
+                    onReady: function (data) {
+                        formInit(data);
                     }
                 });
             };
