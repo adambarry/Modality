@@ -72,11 +72,12 @@ var Modal = function (options) {
 
         if (options.func) {
             window.setTimeout(function () {
-                console.log("Modal: defer() - enable");
-                try {
-                    options.func();
-                } catch (ignore) {}
-
+                if (self) {
+                    console.log("Modal: defer() - enable");
+                    try {
+                        options.func();
+                    } catch (ignore) {}
+                }
             }, options.delay);
         }
     };
@@ -122,6 +123,8 @@ var Modal = function (options) {
             console.log("Fire callback function");
             self.options.callback(data);
         }
+
+        self = null;
 
         console.groupEnd();
     };
@@ -442,7 +445,7 @@ var Modal = function (options) {
             console.group("Modal: onReady");
             self.options.onReady({
                 element: modalWindow,
-                close: destroy
+                close: destroy //include the close-function so that it's available before the return has been executed
             });
             console.groupEnd();
         }

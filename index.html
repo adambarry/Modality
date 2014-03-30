@@ -53,17 +53,14 @@
                     btnClose;
 
                 for (i = 0; i < buttons.length; i += 1) {
-                    if (buttons[i].className.indexOf("js-submit")) {
+                    if (buttons[i].className.indexOf("js-submit") > -1) {
                         btnSubmit = buttons[i];
                     }
 
-                    if (buttons[i].className.indexOf("js-close")) {
+                    if (buttons[i].className.indexOf("js-close") > -1) {
                         btnClose = buttons[i];
                     }
                 }
-
-                console.log("btnSubmit", btnSubmit);
-                console.log("btnClose", btnClose);
 
                 btnClose.onclick = data.close;
             }
