@@ -38,19 +38,20 @@ var Modal = function (options) {
     //-----------------------------------------
     //Default options
     self.options = {
-        type: false, //false|confirm|prompt (adds buttons corresponding to the required functionality of the type
-        content: false,
+        type: false, //false|confirm|prompt (adds buttons corresponding to the required functionality of the type)
+        content: false, //The HTML contents of the modal-window
         className: false, //Classname for the modal-window
         displayTime: false, //Time in milliseconds, e.g. 2500, before the popup is automatically closed
         onReady: false, //A function that is executed when the modal has loaded its content, e.g. onReady: function (data) { console.log("onReady", data); }
         callback: false, //A function that is executed upon closing the modal-window, e.g. callback: function (data) { alert("callback: " + data); }
         buttons: true, //Add buttons (depending on the type-property)
-        buttonConfirmText: "ok",
-        buttonCancelText: "cancel",
-        inputFieldType: false,
-        inputFieldValue: false,
-        inputFieldClass: false,
-        margin: 5, //px
+        buttonCancelText: "cancel", //Text for cancel/close button
+        buttonConfirmText: "ok", //Text for ok/confirm button
+        inputFieldType: false, //For type === "confirm"
+        inputFieldClass: false, //For type === "confirm"
+        inputFieldPlaceholder: false, //For type === "confirm"
+        inputFieldValue: false, //For type === "confirm"
+        margin: 5, //Minimum number of px between the viewport border and the modal-window. Modal-window will shrink when too little space
         disablePageScroll: true,
         verticalCenter: false,
         //showLoader: false,
@@ -250,6 +251,9 @@ var Modal = function (options) {
 
             if (self.options.inputFieldClass) {
                 inputField.className += " " + self.options.inputFieldClass;
+            }
+            if (self.options.inputFieldPlaceholder) {
+                inputField.setAttribute("placeholder", self.options.inputFieldPlaceholder);
             }
             if (self.options.inputFieldValue) {
                 inputField.value = self.options.inputFieldValue;
