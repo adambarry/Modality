@@ -25,20 +25,18 @@ Modal script
 
 --------------------------------------------------------------------------------
 Description:
-Functions that enable an integrated popup-window which
-sits in front of the normal page content.
+Function that enable an integrated modal-window (popup) which sits in front of
+the "normal" page content.
 
 --------------------------------------------------------------------------------
 Usage:
-Simply place a link to the this script in the the HTML page.
-The script will then automatically execute when the related
-constructor are envoked.
-
-<script type="text/javascript" src="modal.js"></script>
+Simply place a link to the this script in the the HTML page. The script will
+then automatically execute when the related constructor is subsequently envoked.
 
 --------------------------------------------------------------------------------
 Example:
 
+<script type="text/javascript" src="modal.js"></script>
 
 --------------------------------------------------------------------------------
 Options:
@@ -146,6 +144,7 @@ Resize-events removed for touch-devices, as bringing up the on-screen-keyboard c
 var Modal = function (options) {
     "use strict";
 
+
     //Private variables
     //-----------------------------------------
     var self = this,
@@ -170,14 +169,15 @@ var Modal = function (options) {
         position,
         resize,
         addButtons,
-        cancelAction;
+        cancelAction,
+        update;
 
 
     //Private functions
     //-----------------------------------------
     //Default options
     self.options = {
-        type: false, //false|confirm|prompt (adds buttons corresponding to the required functionality of the type)
+        type: false, //false|confirm|prompt (adds functionality corresponding to the type)
         content: false, //The HTML contents of the modal-window
         className: false, //Classname for the modal-window
         displayTime: false, //Time in milliseconds, e.g. 2500, before the popup is automatically closed
@@ -200,7 +200,7 @@ var Modal = function (options) {
         closeLink: "<span>Close <span class=\"hotkey\">(esc)</span></span>" //Contents of permanent close button for the modal-window
     };
 
-    /* User defined options */
+    //User defined options
     if (typeof options === 'object') {
         for (i in options) {
             if (options.hasOwnProperty(i)) {
@@ -361,8 +361,20 @@ var Modal = function (options) {
         position();
     };
 
+    update = function (html) {
+        console.group("Modal: update()");
+
+        modalContent.innerHTML = html;
+        addButtons();
+        resize();
+
+        console.groupEnd();
+    };
+
     addButtons = function () {
         console.group("Modal: addButtons()");
+
+        if (!self.options.buttons) { return false; }
 
         var buttonReset,
             buttonConfirm,
@@ -545,10 +557,8 @@ var Modal = function (options) {
             }
         }());
 
-        if (self.options.buttons) {
-            //Add buttons to the modal-window
-            addButtons();
-        }
+        //Add buttons to the modal-window
+        addButtons();
 
         (function disableViewportScroll() {
             // Disable page scroll
@@ -598,6 +608,7 @@ var Modal = function (options) {
             console.group("Modal: onReady");
             self.options.onReady({
                 element: modalWindow,
+                update: function (html) { update(html); },
                 close: destroy, //include the close-function so that it's available before the return has been executed
                 abort: abort
             });
@@ -628,6 +639,9 @@ var Modal = function (options) {
         options: self.options,
         close: destroy,
         abort: abort,
+        update: function (html) {
+            update(html);
+        },
         element: modalWindow
     };
 };
