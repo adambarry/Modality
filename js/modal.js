@@ -1,3 +1,142 @@
+/*******************************************************************************
+Copyright (c) Adam Barry, www.adambarry.dk
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+of the Software, and to permit persons to whom the Software is furnished to do
+so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+--------------------------------------------------------------------------------
+
+Name:
+Modal script
+
+--------------------------------------------------------------------------------
+Description:
+Functions that enable an integrated popup-window which
+sits in front of the normal page content.
+
+--------------------------------------------------------------------------------
+Usage:
+Simply place a link to the this script in the the HTML page.
+The script will then automatically execute when the related
+constructor are envoked.
+
+<script type="text/javascript" src="modal.js"></script>
+
+--------------------------------------------------------------------------------
+Example:
+
+
+--------------------------------------------------------------------------------
+Options:
+
+--------------------------------------------------------------------------------
+Dependencies:
+None
+
+--------------------------------------------------------------------------------
+Revision history:
+2010-06-17: Adam Barry
+Entire popupwindow-structure is injected/removed, except when using a manually placed
+<div class="popupWindow"></div>
+
+2010-06-18: Adam Barry
+Popupwindow-elements split up into different functions to enable the popupWindow
+to be used for various purposes other than just alerts.
+
+2011-02-08: Adam Barry
+PopupWindows converted into objects with multiple options.
+Custom confirm added (very small extension of standard JavaScript confirm required in order to work).
+
+2011-02-18: Adam Barry
+Compatible with Internet Explorer 6-8.
+Calculated scrollbar-compensation on removal of scroll-bars.
+Code refactored in accordance with JSLint
+
+2011-02-20: Adam Barry
+manualPopupWindow extended to handle multiple popupWindows.
+Class-name for manual popupWindow changed from "popupWindow" to "manualPopupWindow", i.e.:
+<div class="manualPopupWindow"></div>
+
+2011-03-07: Adam Barry
+resize() of popupContainer updated to handle situation where page-scroll is smaller than then client-window.
+
+2011-03-15: Adam Barry
+update() added to the popupWindow-framework
+
+2011-03-17: Adam Barry
+Elements for confirm and prompt (i.e. inputfield and buttons) moved to prototype to enable re-insertion on update()
+PopupWindow receiving confirmation event correctly
+
+2011-05-22: Adam Barry
+verticalCenter added for placement of popupWindow in the center of the screen
+
+2011-06-14: Adam Barry
+Standard vertical placement for larger popup-windows fixed
+
+2011-09-25: Adam Barry
+onClose-handler working correctly after introduction of abort()-method
+
+2011-09-28: Adam Barry
+Fieldset added when type === "prompt" and check for value.length > 0 before submitting.
+inputFieldClass added for classname-specification of input-field when type === "prompt"
+
+2011-10-04: Adam Barry
+inputFieldType added for support for HTML5 input-types
+
+2011-10-13: Adam Barry
+self.confirmAction proceeding directly to self.destroy() when no self.options.element.href
+
+2011-10-22: Adam Barry
+Code refactored in accordance with JSLint
+
+2011-12-30: Adam Barry
+Type === "form" added with corresponding self.focusOnFirstInputField() method
+
+2012-01-28: Adam Barry
+Addition of enableFormFunctions-method for type "prompt" and "form"
+
+2012-02-06: Adam Barry
+Form functions enabled for Microsoft .Net pseudo-forms (i.e. div.form)
+
+2012-04-12: Adam Barry
+Timeout set before activating setActiveKeyElement to prevent key-events from propagating to the popup-window.
+
+2012-08-02: Adam Barry
+focusOnFirstInputField now tests for type="hidden" when setting focus to first input-element.
+
+2012-08-02: Adam Barry
+focusOnFirstInputField tests for multiple element-types and sets focus to first form-element.
+
+2012-08-06: Adam Barry
+Clicks outside the popup-area now close the entire popup-window.
+
+2012-08-06: Adam Barry
+iScroll added for touch-enabled devices
+
+2012-10-19: Adam Barry
+Scroll-events (addScrollEvent) removed for touch-devices, as the on-screen-keyboard makes everything jump
+when typing
+
+2012-10-24: Adam Barry
+Resize-events removed for touch-devices, as bringing up the on-screen-keyboard causes a screen-resize-event.
+
+*******************************************************************************/
+
+
 /*global window,
     document,
     console
