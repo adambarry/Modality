@@ -141,7 +141,7 @@ Resize-events removed for touch-devices, as bringing up the on-screen-keyboard c
 */
 
 
-var Modal = function (options) {
+var Modal = function (options, evt) {
     "use strict";
 
 
@@ -159,6 +159,7 @@ var Modal = function (options) {
         sizeDelta,
         cancelDelay = 400, //milliseconds. To prevent doubleclicks accidentally closing the modal,
         cancelCounter = false, //Counter used for showing remaining visible time for displayTime modal-windows
+        triggerElement = false, //Element that triggered the modal-window
 
 
     //Private function names
@@ -252,6 +253,13 @@ var Modal = function (options) {
         try {
             clearTimeout(cancelCounter);
         } catch (ignore) {}
+
+        //Restore focus to the triggerElement
+        try {
+            if (triggerElement) {
+                triggerElement.focus();
+            }
+        } catch (ignore) {}
     };
 
     destroy = function (data) {
@@ -272,10 +280,12 @@ var Modal = function (options) {
             }
         }());
 
-        // Fire the callback function
-        if (self.options.callback) {
-            console.log("Fire callback function");
-            self.options.callback(data);
+        //Fire the callback function
+        if (self) {
+            if (self.options.callback) {
+                console.log("Fire callback function");
+                self.options.callback(data);
+            }
         }
 
         destroyActions();
@@ -383,7 +393,6 @@ var Modal = function (options) {
         console.groupEnd();
     };
 
-
     countdown = function (obj) {
         var refreshRate = 500, //Milliseconds
             initialTime = self.options.displayTime,
@@ -420,7 +429,9 @@ var Modal = function (options) {
     addButtons = function () {
         console.group("Modal: addButtons()");
 
-        if (!self.options.buttons) { return false; }
+        if (!self.options.buttons) {
+            return false;
+        }
 
         var buttonReset,
             buttonConfirm,
@@ -513,6 +524,16 @@ var Modal = function (options) {
 
     (function init() {
         console.group("Modal: init()");
+
+        (function removeFocusFromTrigger () {
+            var event = evt || window.event; //get window.event if argument is falsy (in IE)
+
+            if (event) {
+                triggerElement = event.target || event.srcElement;
+
+                triggerElement.blur();
+            }
+        }());
 
         //Check for existing .modal "wrapper" element
         (function prepareElements() {
