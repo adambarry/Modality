@@ -198,8 +198,8 @@ var Modal = function (options) {
         margin: 5, //Minimum distance in px between the viewport border and the modal-window. Modal-window will shrink when too little space
         disablePageScroll: true, //When set to true, body.style.overflow will be set to hidden, while modal-windows are active
         verticalCenter: false, //When set to true, the popupWindow will be centered vertically, instead of being placed towards the top of the screen
-        loaderElement: false,
-        showLoader: false,
+        //loaderElement: false,
+        //showLoader: false,
         //loaderMessage: false
         closeLink: "<span>Close <span class=\"hotkey\">(esc)</span></span>" //Contents of permanent close button for the modal-window
     };
