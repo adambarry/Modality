@@ -157,11 +157,13 @@ var Modal = function (options) {
         initialWindowSize,
         newWindowSize,
         sizeDelta,
-        cancelDelay = 400, //milliseconds. To prevent doubleclicks accidentally closing the modal
+        cancelDelay = 400, //milliseconds. To prevent doubleclicks accidentally closing the modal,
+        cancelCounter = false, //Counter used for showing remaining visible time for displayTime modal-windows
 
 
     //Private function names
     //-----------------------------------------
+        destroyActions,
         destroy,
         abort,
         defer,
@@ -170,7 +172,8 @@ var Modal = function (options) {
         resize,
         addButtons,
         cancelAction,
-        update;
+        update,
+        countdown;
 
 
     //Private functions
@@ -195,7 +198,8 @@ var Modal = function (options) {
         margin: 5, //Minimum distance in px between the viewport border and the modal-window. Modal-window will shrink when too little space
         disablePageScroll: true, //When set to true, body.style.overflow will be set to hidden, while modal-windows are active
         verticalCenter: false, //When set to true, the popupWindow will be centered vertically, instead of being placed towards the top of the screen
-        //showLoader: false,
+        loaderElement: false,
+        showLoader: false,
         //loaderMessage: false
         closeLink: "<span>Close <span class=\"hotkey\">(esc)</span></span>" //Contents of permanent close button for the modal-window
     };
@@ -242,6 +246,14 @@ var Modal = function (options) {
         }
     };
 
+    destroyActions = function () {
+        self = null;
+
+        try {
+            clearTimeout(cancelCounter);
+        } catch (ignore) {}
+    };
+
     destroy = function (data) {
         console.group("Modal: Destroy()");
 
@@ -266,7 +278,7 @@ var Modal = function (options) {
             self.options.callback(data);
         }
 
-        self = null;
+        destroyActions();
 
         console.groupEnd();
     };
@@ -371,6 +383,40 @@ var Modal = function (options) {
         console.groupEnd();
     };
 
+
+    countdown = function (obj) {
+        var refreshRate = 500, //Milliseconds
+            initialTime = self.options.displayTime,
+            buttonText,
+            updateCounter,
+            timer;
+
+        console.log("Modal: countdown()");
+
+        if (!obj.element) { return false; }
+
+        buttonText = obj.element.innerHTML;
+
+        updateCounter = function () {
+            obj.element.innerHTML = buttonText + " (" + Math.round(initialTime / 1000) + " sec.)";
+            initialTime -= refreshRate;
+        };
+
+        timer = function () {
+            updateCounter();
+
+            cancelCounter = window.setTimeout(function () {
+                timer();
+            }, refreshRate);
+        };
+
+        if (self.options.displayTime === initialTime) {
+            timer();
+        }
+
+
+    };
+
     addButtons = function () {
         console.group("Modal: addButtons()");
 
@@ -449,6 +495,12 @@ var Modal = function (options) {
             delay: cancelDelay
         });
 
+        if (self.options.displayTime) {
+            countdown({
+                element: buttonReset
+            });
+        }
+
         modalContent.appendChild(buttonReset);
 
         //Set focus to the cancel button
@@ -491,8 +543,9 @@ var Modal = function (options) {
                     func: function () {
                         wrapper.onclick = function () {
                             //Give the wrapper its own closing function to prevent binding it to a certain Modal-objects abort-function
-
                             enableViewportScroll();
+                            destroyActions();
+
                             wrapper.parentNode.removeChild(wrapper);
                         };
                     },
