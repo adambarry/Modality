@@ -23,15 +23,81 @@
                 background-color: white;
             }
 
+            code {
+                border-radius: 4px;
+                padding: 2px 4px;
+                background-color: #f9f2f4;
+                font-size: 90%;
+                color: #c7254e;
+                white-space: nowrap;
+            }
+
+            .highlight {
+                border: 1px solid #e1e1e8;
+                border-radius: 4px;
+                padding: 10px;
+                margin-bottom: 14px;
+                background-color: #f7f7f9;
+            }
+
+            pre code {
+                background-color: transparent;
+                white-space: pre-wrap;
+            }
+/*
+            code {
+                background-color:
+                white-space: pre;
+            }
+*/
+
             .test-callout {
                 border-left: 3px solid #eee;
                 padding: 10px;
-                margin: 20px 0;
+                margin: 1.5em 0;
+            }
+
+            .test-callout--info {
+                border-color: #5bc0de;
+                background-color: #f4f8fa;
+            }
+
+            .test-callout--interface {
+                border-color: #8ee66c;
+                background-color: #dff0d8;
+            }
+
+            .test-callout--warning {
+                border-color: #f0ad4e;
+                background-color: #fcf8f2;
             }
 
             .test-callout--danger {
                 border-color: #d9534f;
                 background-color: #fdf7f7;
+            }
+
+            .test-case {
+                border: 1px solid #e1e1e8;
+                border-radius: 4px;
+                padding: 24px 12px 12px 12px;
+                margin-bottom: 14px;
+                position: relative;
+            }
+
+            .test-case:before {
+                content: "Test case";
+                border-right: 1px solid #e1e1e8;
+                border-bottom: 1px solid #e1e1e8;
+                border-bottom-right-radius: 4px;
+                padding: 4px;
+                margin-bottom: 14px;
+                position: absolute;
+                top: 0;
+                left: 0;
+                background-color: #f7f7f9;
+                font-size: 9px;
+                color: gray;
             }
         </style>
         <script src="js/modal.js"></script>
@@ -43,13 +109,46 @@
             <h1>Test Page for Modal Component</h1>
 
             <div class="test-intro">
-                <p>The modal component makes it easy to use modal-windows in your HTML5 project. It's framework independent; versatile; and hopefully you'll find it easy to work with.</p>
+                <p>The modal component makes it easy to use modal-windows in your HTML5 project. It's framework independent; versatile; and hopefully you'll find it easy to work with. Features include:</p>
+                <ul>
+                    <li>Self-closing (timed) modals, e.g. for notification use - countdown timer included.</li>
+                    <li>Replacement for native HTML prompt().</li>
+                    <li>Replacement for native HTML confirm().</li>
+                    <li>Updatable modals so that you can update the content of the individual modal windows.</li>
+                    <li>Auto-placement, also when resizing the viewport or scrolling (although page-scrolling is disabled for desktops when the modal overlay is visible).</li>
+                </ul>
+
+                <p>The modal is built using a <a href="http://coding.smashingmagazine.com/2012/04/16/a-new-front-end-methodology-bem/" target="_blank">BEM</a> inspired CSS model, resulting in the following fundamental component HTML:</p>
+                <pre class="highlight">
+                    <code>
+&ltdiv class="modal"&gt;
+    &ltdiv class="modal-container"&gt;
+
+        &ltdiv class="modal-window modal-window--alert"&gt;
+            &lta class="modal-close"&gt;&lt;/a&gt;
+
+            &ltdiv class="modal-content"&gt;
+                &lt;!-- Content goes here --&gt;
+            &lt/div&gt;
+        &lt/div&gt;
+    &lt/div&gt;
+&lt/div&gt;
+                    </code>
+                </pre>
+
+                <p>The <code>.modal</code> wrapper can contain multiple <code>.modal-window</code> elements and will only display the top element in the stack.</p>
             </div>
 
             <div class="test-callout test-callout--info">
+                <h4>Info</h4>
             </div>
 
             <div class="test-callout test-callout--interface">
+                <h4>Interface</h4>
+            </div>
+
+            <div class="test-callout test-callout--warning">
+                <h4>Warning</h4>
             </div>
 
             <div class="test-callout test-callout--danger">
@@ -60,8 +159,26 @@
             <div class="test-case">
                 <button type="button" class="btn btn--primary" onclick="javascript: new Modal({content: '<h2>Alert</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus. Nulla augue nisl, fermentum quis hendrerit sed, fermentum at mauris. Cras sodales risus vel nisi pellentesque rhoncus. Praesent vulputate dolor nisi, id pharetra nisi varius eu. Fusce non auctor dui. Quisque a ullamcorper nisi. Integer laoreet velit et suscipit luctus.</p>'})">Basic modal (no bells or whistles - or modifier-classnames)</button>
             </div>
+
+            <h3 class="test-title">With special class</h3>
+
+            <div class="test-callout test-callout--interface">
+                <p><code>className: 'modal-window--alert'</code></p>
+            </div>
+
             <div class="test-case">
-                <button type="button" class="btn btn--primary" onclick="javascript: new Modal({className: 'modal-window--alert', buttonCancelText: 'close', content: '<h2>Alert</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus. Nulla augue nisl, fermentum quis hendrerit sed, fermentum at mauris. Cras sodales risus vel nisi pellentesque rhoncus. Praesent vulputate dolor nisi, id pharetra nisi varius eu. Fusce non auctor dui. Quisque a ullamcorper nisi. Integer laoreet velit et suscipit luctus.</p>'})">Simple modal (equivalent to alert)</button>
+                <button type="button" class="btn btn--primary" onclick="javascript: new Modal({className: 'modal-window--alert', content: '<h2>Alert</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus. Nulla augue nisl, fermentum quis hendrerit sed, fermentum at mauris. Cras sodales risus vel nisi pellentesque rhoncus. Praesent vulputate dolor nisi, id pharetra nisi varius eu. Fusce non auctor dui. Quisque a ullamcorper nisi. Integer laoreet velit et suscipit luctus.</p>'})">Simple modal (equivalent to alert)</button>
+            </div>
+
+            <div class="test-callout test-callout--info">
+                <h4>Modifier class <code>modal-window--alert</code> added to remainder of test cases</h4>
+                <p>In order to display modals realistically, i.e. displaying a modal that doesn't fill the entire width of the screen, the remainder of the test-cases all contain a modal-window modifier-class.</p>
+            </div>
+
+            <h3 class="test-title">Vertically centered</h3>
+
+            <div class="test-callout test-callout--interface">
+                <p><code>verticalCenter: true</code></p>
             </div>
 
             <div class="test-case">
