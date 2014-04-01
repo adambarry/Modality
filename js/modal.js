@@ -73,6 +73,7 @@ var Modal = function (options, evt) {
         cancelDelay = 400, //milliseconds. To prevent doubleclicks accidentally closing the modal,
         cancelCounter = false, //Counter used for showing remaining visible time for displayTime modal-windows
         triggerElement = false, //Element that triggered the modal-window
+        fadeInTime = 250, //Milliseconds
 
 
     //Private function names
@@ -114,7 +115,7 @@ var Modal = function (options, evt) {
         verticalCenter: false, //When set to true, the popupWindow will be centered vertically, instead of being placed towards the top of the screen
         //loaderElement: false,
         //showLoader: false,
-        //loaderMessage: false
+        //loaderMessage: false,
         closeLink: "<span>Close <span class=\"hotkey\">(esc)</span></span>" //Contents of permanent close button for the modal-window
     };
 
@@ -188,8 +189,12 @@ var Modal = function (options, evt) {
         (function removeModalFromDOM () {
             //If no more modal-windows are present, remove the wrapper
             if (wrapper.childNodes.length === 0) {
-                console.log("Remove modal from DOM");
-                document.getElementsByTagName("body")[0].removeChild(wrapper);
+                wrapper.className += " modal--hidden";
+
+                window.setTimeout(function () {
+                    console.log("Remove modal from DOM");
+                    document.getElementsByTagName("body")[0].removeChild(wrapper);
+                }, fadeInTime);
             }
         }());
 
@@ -465,9 +470,15 @@ var Modal = function (options, evt) {
                 //create a new wrapper element
                 wrapper = document.createElement("div");
                 wrapper.className = "modal";
+                wrapper.className += " modal--hidden";
 
                 //Add the wrapper to the DOM
                 document.getElementsByTagName("body")[0].appendChild(wrapper);
+
+                //Make sure that the fade-in transition starts after the element has been added to the DOM, i.e. on nextTick
+                defer({
+                   func: function () { wrapper.className = "modal"; },
+                });
             }
 
             console.log("wrapper", wrapper);
@@ -478,9 +489,14 @@ var Modal = function (options, evt) {
                         wrapper.onclick = function () {
                             //Give the wrapper its own closing function to prevent binding it to a certain Modal-objects abort-function
                             enableViewportScroll();
-                            destroyActions();
 
-                            wrapper.parentNode.removeChild(wrapper);
+                            wrapper.className += " modal--hidden";
+
+                            window.setTimeout(function () {
+                                console.log("Remove modal from DOM");
+                                destroyActions();
+                                wrapper.parentNode.removeChild(wrapper);
+                            }, fadeInTime);
                         };
                     },
                     delay: cancelDelay
