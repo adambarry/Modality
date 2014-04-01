@@ -101,7 +101,7 @@ var Modal = function (options, evt) {
         onReady: false, //A function that is executed when the modal has loaded its content, e.g. onReady: function (data) { console.log("onReady", data); }
         callback: false, //A function that is executed upon closing the modal-window, e.g. callback: function (data) { alert("callback: " + data); }
         buttons: true, //Add buttons (depending on the type-property)
-        buttonCancelText: "cancel", //Text for cancel/close button
+        buttonCloseText: "close", //Text for cancel/close button
         buttonCancelClass: "btn btn--secondary",
         buttonConfirmText: "ok", //Text for ok/confirm button
         buttonConfirmClass: "btn btn--primary",
@@ -387,10 +387,12 @@ var Modal = function (options, evt) {
 
                 theFieldset.appendChild(inputField);
 
-                try {
+                /*
+try {
                     inputField.focus();
                     inputField.select();
                 } catch (ignore) {}
+*/
             }
 
             //Create and add the confirm-button
@@ -415,7 +417,7 @@ var Modal = function (options, evt) {
             if (self.options.buttonCancelClass) {
                 buttonReset.setAttribute("class", self.options.buttonCancelClass);
             }
-            buttonReset.innerHTML = self.options.buttonCancelText;
+            buttonReset.innerHTML = self.options.buttonCloseText;
 
             defer({
                 func: function () { buttonReset.onclick = cancelAction; },
@@ -431,9 +433,11 @@ var Modal = function (options, evt) {
             modalContent.appendChild(buttonReset);
 
             //Set focus to the cancel button
-            if (self.options.type !== "prompt") {
+            /*
+if (self.options.type !== "prompt") {
                 buttonReset.focus();
             }
+*/
         }
 
         console.groupEnd();
