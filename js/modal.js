@@ -31,7 +31,7 @@ the "normal" page content.
 --------------------------------------------------------------------------------
 Usage:
 Simply place a link to the this script in the the HTML page. The script will
-then automatically execute when the related constructor is subsequently envoked.
+then automatically execute when the related constructor is subsequently invoked.
 
 --------------------------------------------------------------------------------
 Example:
@@ -47,7 +47,7 @@ None
 
 *******************************************************************************/
 
-
+//JSLint stuff:
 /*global window,
     document,
     console
@@ -73,7 +73,6 @@ var Modal = function (options, evt) {
         cancelDelay = 400, //milliseconds. To prevent doubleclicks accidentally closing the modal,
         cancelCounter = false, //Counter used for showing remaining visible time for displayTime modal-windows
         triggerElement = false, //Element that triggered the modal-window
-        fadeInTime = 250, //Milliseconds
 
 
     //Private function names
@@ -116,6 +115,8 @@ var Modal = function (options, evt) {
         //loaderElement: false,
         //showLoader: false,
         //loaderMessage: false,
+        fadeTime: 250, //Milliseconds for CSS3-based fade-in/out for the modal element
+        fadeHiddenClass: "modal--hidden",
         closeLink: "<span>Close <span class=\"hotkey\">(esc)</span></span>" //Contents of permanent close button for the modal-window
     };
 
@@ -189,12 +190,12 @@ var Modal = function (options, evt) {
         (function removeModalFromDOM () {
             //If no more modal-windows are present, remove the wrapper
             if (wrapper.childNodes.length === 0) {
-                wrapper.className += " modal--hidden";
+                wrapper.className += " " + self.options.fadeHiddenClass;
 
                 window.setTimeout(function () {
                     console.log("Remove modal from DOM");
                     document.getElementsByTagName("body")[0].removeChild(wrapper);
-                }, fadeInTime);
+                }, self.options.fadeTime);
             }
         }());
 
@@ -347,94 +348,93 @@ var Modal = function (options, evt) {
     addButtons = function () {
         console.group("Modal: addButtons()");
 
-        if (!self.options.buttons) {
-            return false;
-        }
+        if (self.options.buttons) {
 
-        var buttonReset,
-            buttonConfirm,
-            theForm,
-            theFieldset,
-            inputField;
+            var buttonReset,
+                buttonConfirm,
+                theForm,
+                theFieldset,
+                inputField;
 
-        if (self.options.type === "prompt") {
-            //Create and add the form
-            theForm = document.createElement("form");
-            //theForm.setAttribute("onsubmit", "return validateForm(this)");
-            modalContent.appendChild(theForm);
+            if (self.options.type === "prompt") {
+                //Create and add the form
+                theForm = document.createElement("form");
+                //theForm.setAttribute("onsubmit", "return validateForm(this)");
+                modalContent.appendChild(theForm);
 
-            //Create and add the fieldset
-            theFieldset = document.createElement("fieldset");
-            theForm.appendChild(theFieldset);
+                //Create and add the fieldset
+                theFieldset = document.createElement("fieldset");
+                theForm.appendChild(theFieldset);
 
-            //Create the input field and add it to the fieldset
-            inputField = document.createElement("input");
-            if (self.options.inputFieldType) {
-                inputField.setAttribute("type", self.options.inputFieldType);
-            } else {
-                inputField.setAttribute("type", "text");
+                //Create the input field and add it to the fieldset
+                inputField = document.createElement("input");
+                if (self.options.inputFieldType) {
+                    inputField.setAttribute("type", self.options.inputFieldType);
+                } else {
+                    inputField.setAttribute("type", "text");
+                }
+
+                inputField.setAttribute("class", "modal-prompt");
+
+                if (self.options.inputFieldClass) {
+                    inputField.className += " " + self.options.inputFieldClass;
+                }
+                if (self.options.inputFieldPlaceholder) {
+                    inputField.setAttribute("placeholder", self.options.inputFieldPlaceholder);
+                }
+                if (self.options.inputFieldValue) {
+                    inputField.value = self.options.inputFieldValue;
+                }
+
+                theFieldset.appendChild(inputField);
+
+                try {
+                    inputField.focus();
+                    inputField.select();
+                } catch (ignore) {}
             }
 
-            inputField.setAttribute("class", "modal-prompt");
-
-            if (self.options.inputFieldClass) {
-                inputField.className += " " + self.options.inputFieldClass;
+            //Create and add the confirm-button
+            if (self.options.type) {
+                buttonConfirm = document.createElement('button');
+                buttonConfirm.setAttribute("type", "submit");
+                if (self.options.buttonConfirmClass) {
+                    buttonConfirm.setAttribute("class", self.options.buttonConfirmClass);
+                }
+                buttonConfirm.innerHTML = self.options.buttonConfirmText;
+                buttonConfirm.onclick = function () {
+                    var value = inputField ? inputField.value : false;
+                    destroy(value);
+                };
+                modalContent.appendChild(buttonConfirm);
             }
-            if (self.options.inputFieldPlaceholder) {
-                inputField.setAttribute("placeholder", self.options.inputFieldPlaceholder);
+
+
+            //Create and add the reset-button
+            buttonReset = document.createElement('button');
+            buttonReset.setAttribute("type", "button");
+            if (self.options.buttonCancelClass) {
+                buttonReset.setAttribute("class", self.options.buttonCancelClass);
             }
-            if (self.options.inputFieldValue) {
-                inputField.value = self.options.inputFieldValue;
-            }
+            buttonReset.innerHTML = self.options.buttonCancelText;
 
-            theFieldset.appendChild(inputField);
-
-            try {
-                inputField.focus();
-                inputField.select();
-            } catch (ignore) {}
-        }
-
-        //Create and add the confirm-button
-        if (self.options.type) {
-            buttonConfirm = document.createElement('button');
-            buttonConfirm.setAttribute("type", "submit");
-            if (self.options.buttonConfirmClass) {
-                buttonConfirm.setAttribute("class", self.options.buttonConfirmClass);
-            }
-            buttonConfirm.innerHTML = self.options.buttonConfirmText;
-            buttonConfirm.onclick = function () {
-                var value = inputField ? inputField.value : false;
-                destroy(value);
-            };
-            modalContent.appendChild(buttonConfirm);
-        }
-
-
-        //Create and add the reset-button
-        buttonReset = document.createElement('button');
-        buttonReset.setAttribute("type", "button");
-        if (self.options.buttonCancelClass) {
-            buttonReset.setAttribute("class", self.options.buttonCancelClass);
-        }
-        buttonReset.innerHTML = self.options.buttonCancelText;
-
-        defer({
-            func: function () { buttonReset.onclick = cancelAction; },
-            delay: cancelDelay
-        });
-
-        if (self.options.displayTime) {
-            countdown({
-                element: buttonReset
+            defer({
+                func: function () { buttonReset.onclick = cancelAction; },
+                delay: cancelDelay
             });
-        }
 
-        modalContent.appendChild(buttonReset);
+            if (self.options.displayTime) {
+                countdown({
+                    element: buttonReset
+                });
+            }
 
-        //Set focus to the cancel button
-        if (self.options.type !== "prompt") {
-            buttonReset.focus();
+            modalContent.appendChild(buttonReset);
+
+            //Set focus to the cancel button
+            if (self.options.type !== "prompt") {
+                buttonReset.focus();
+            }
         }
 
         console.groupEnd();
@@ -470,38 +470,44 @@ var Modal = function (options, evt) {
                 //create a new wrapper element
                 wrapper = document.createElement("div");
                 wrapper.className = "modal";
-                wrapper.className += " modal--hidden";
+                wrapper.className += " " + self.options.fadeHiddenClass;
 
                 //Add the wrapper to the DOM
                 document.getElementsByTagName("body")[0].appendChild(wrapper);
 
                 //Make sure that the fade-in transition starts after the element has been added to the DOM, i.e. on nextTick
                 defer({
-                   func: function () { wrapper.className = "modal"; },
+                   func: function () { wrapper.className = "modal"; }
                 });
             }
 
             console.log("wrapper", wrapper);
 
-            if (!wrapper.onclick) {
-                defer({
-                    func: function () {
-                        wrapper.onclick = function () {
-                            //Give the wrapper its own closing function to prevent binding it to a certain Modal-objects abort-function
-                            enableViewportScroll();
+            (function () {
+                //Store the fadeTime variable as 'self' may not exist any longer when the wrapper is clicked
+                var fadeTime = self.options.fadeTime,
+                    fadeHiddenClass = self.options.fadeHiddenClass;
 
-                            wrapper.className += " modal--hidden";
+                if (!wrapper.onclick) {
+                    defer({
+                        func: function () {
+                            wrapper.onclick = function () {
+                                //Give the wrapper its own closing function to prevent binding it to a certain Modal-objects abort-function
+                                enableViewportScroll();
 
-                            window.setTimeout(function () {
-                                console.log("Remove modal from DOM");
-                                destroyActions();
-                                wrapper.parentNode.removeChild(wrapper);
-                            }, fadeInTime);
-                        };
-                    },
-                    delay: cancelDelay
-                });
-            }
+                                wrapper.className += " " + fadeHiddenClass;
+
+                                window.setTimeout(function () {
+                                    console.log("Remove modal from DOM");
+                                    destroyActions();
+                                    wrapper.parentNode.removeChild(wrapper);
+                                }, fadeTime);
+                            };
+                        },
+                        delay: cancelDelay
+                    });
+                }
+            }());
 
             //Add the modal-container
             modalContainer = document.createElement("div");
