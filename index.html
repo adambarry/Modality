@@ -6,108 +6,132 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
+        <title>Test-page for Modal-component</title>
+        <meta name="description" content="Test-page for Modal-component">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-
-        <link rel="stylesheet" href="css/normalize.css">
-        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/normalize.css" />
         <link rel="stylesheet" href="css/modal.css">
-        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
-        <script src="js/plugins.js"></script>
-        <script src="js/main.js"></script>
+        <style type="text/css">
+            body {
+                background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAgAAZABkAAD/7AARRHVja3kAAQAEAAAAPAAA/+4ADkFkb2JlAGTAAAAAAf/bAIQABgQEBAUEBgUFBgkGBQYJCwgGBggLDAoKCwoKDBAMDAwMDAwQDA4PEA8ODBMTFBQTExwbGxscHx8fHx8fHx8fHwEHBwcNDA0YEBAYGhURFRofHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8f/8AAEQgAZABkAwERAAIRAQMRAf/EAHsAAQEBAAMBAQAAAAAAAAAAAAQABQIDBgEHAQEAAAAAAAAAAAAAAAAAAAAAEAABAwMBBAUJBwQBBQAAAAABAgMEABEFITESFAZBURN0FXEjs9M0VJS0NWGR0SKSk1XSU3UWNoJj1LVWEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwD965R5R5Uf5Uwr7+FgOvOwIy3XVxmVKUpTKSpSlFNySdpoFweTuUVScgFYTHqCJCUoBiskAcO0bD8umpJoJ3k7lEZeM2MJjwhUd9SkcKzYlK2QCRu9G8aCynJ3KKIyCjCY9JMiMkkRWQbKkIBGiekGxoF/6Xyd/BY74Rj+igJh+TuUXMRBccwmPWtcdpS1qiskklAJJJTQdOK5K5XE7MdthsetszEcOkxmSEN8JHukAo/L+feVYdd+mg7neTuURl4zYwmPCFR31KRwrNiUrZAJG70bxoLKcncoojIKMJj0kyIySRFZBsqQgEaJ6QbGgX/pfJ38FjvhGP6KAmH5O5RcxEFxzCY9a1x2lLWqKySSUAkklNBQeTuUVScgFYTHqCJCUoBiskAcO0bD8umpJoF/6Xyd/BY74Rj+igJydBkq5RwihkJCArHxSEJTHsAWU6C7ROn2mgZBgyTJyAGQkJKZCQSEx7qPDtG5u0eu2lBOwZPi8ZPiEgkx3yF7se4AWzoPNW1v1dFBZSDJTGQTkJCxxEYWKY9rmQgA6NDZtFAvw+X/ACUn9Mb1NATDwZKsRBUMhIQFR2iEJTHsAUDQXaJ0+00FBgyTJyAGQkJKZCQSEx7qPDtG5u0eu2lBOwZPi8ZPiEgkx3yF7se4AWzoPNW1v1dFBZSDJTGQTkJCxxEYWKY9rmQgA6NDZtFAvw+X/JSf0xvU0BMPBkqxEFQyEhAVHaIQlMewBQNBdonT7TQUGDJMnIAZCQkpkJBITHuo8O0bm7R67aUC/D5f8lJ/TG9TQZHJzuXHKOEDcaOpAx8XcUp9aSR2KbEgMqt99AyC7l+JyG7GjkmQnfBfWADw7Wg8yb6W6qCddy/i8YmNH3+Hf3U9uuxG+zck9j5Oigso7lzGRvxo6RxEaxD6yb8Qiw1ZG07aBfa5r3WN8Q56igJh3cuMRBDcaOpAjtbilPrSSNwWJAZVb76Cgu5fichuxo5JkJ3wX1gA8O1oPMm+luqgnXcv4vGJjR9/h391PbrsRvs3JPY+TooLKO5cxkb8aOkcRGsQ+sm/EIsNWRtO2gX2ua91jfEOeooCYd3LjEQQ3GjqQI7W4pT60kjcFiQGVW++goLuX4nIbsaOSZCd8F9YAPDtaDzJvpbqoF9rmvdY3xDnqKDI5OykZHKOEQUSCU4+KCUxpChcMpGhCCD5RQMg5SMmTkCUSLLkJItGkE24doagI02bDQTuUjHLxl7kiyY74I4aRe5WydBuXOzbQWUykZcZACJAIkRjrGkJFkyEE6lA6tB00C/F4n9uT8LJ9XQEw+UjIxEFBRIJTHaBKY0hQuEAaEIIPlFBQcpGTJyBKJFlyEkWjSCbcO0NQEabNhoJ3KRjl4y9yRZMd8EcNIvcrZOg3LnZtoLKZSMuMgBEgESIx1jSEiyZCCdSgdWg6aBfi8T+3J+Fk+roCYfKRkYiCgokEpjtAlMaQoXCANCEEHyigoOUjJk5AlEiy5CSLRpBNuHaGoCNNmw0C/F4n9uT8LJ9XQD5L/4dgv8AHRPQIoGY/wBryXeU/LM0E79ai92kekYoLL+yN95i/Mt0DaAWE+iwO7M+jFBY/wBryXeU/LM0E79ai92kekYoLL+yN95i/Mt0DaAWE+iwO7M+jFBY/wBryXeU/LM0DaDzfJ2HxDnKOEccgx1rXj4qlrU0gkkspJJJFAyDh8QqTkAqDHUESEpQC0ggDh2jYaaakmgncPiBl4zYgxwhUd9SkdkixKVsgEi3RvGgsph8QiMgogx0kyIySQ0gGypCARoOkGxoF+CYX3CN+y3+FATD4fEOYiC45BjrWuO0pa1NIJJKASSSKDhjsbhHpmUbEOOvh5SWiktIsm8ZlzdFx/3L6ddBzdw+IGXjNiDHCFR31KR2SLEpWyASLdG8aCymHxCIyCiDHSTIjJJDSAbKkIBGg6QbGgX4JhfcI37Lf4UBMPh8Q5iILjkGOta47SlrU0gkkoBJJIoKDh8QqTkAqDHUESEpQC0ggDh2jYaaakmgX4JhfcI37Lf4UGFyVipw5Xwz3jEwtrx8Ypj7kTs0AsoICTw+/wDl2DeUftvQaUGDJMnIAZCQkpkJBITHuo8O0bm7R67aUE7Bk+Lxk+ISCTHfIXux7gBbOg81bW/V0UFlIMlMZBOQkLHERhYpj2uZCADo0Nm0UC/D5f8AJSf0xvU0Acbjpj2EhhvKSo+/HaKS0mMd0bgNk9oy55Nb0GdhMJk05PNqVm56Qme2SS3Cs8OCjHeVeN/0fkts67mg1HYMnxeMnxCQSY75C92PcALZ0Hmra36uigspBkpjIJyEhY4iMLFMe1zIQAdGhs2igX4fL/kpP6Y3qaAmHgyVYiCoZCQgKjtEISmPYAoGgu0Tp9poKDBkmTkAMhISUyEgkJj3UeHaNzdo9dtKD54FlP8A6PI/t4//AMSgJyc7lxyjhA3GjqQMfF3FKfWkkdimxIDKrffQMgu5fichuxo5JkJ3wX1gA8O1oPMm+luqgnXcv4vGJjR9/h391PbrsRvs3JPY+TooLKO5cxkb8aOkcRGsQ+sm/EIsNWRtO2gX2ua91jfEOeooCYd3LjEQQ3GjqQI7W4pT60kjcFiQGVW++goLuX4nIbsaOSZCd8F9YAPDtaDzJvpbqoJ13L+LxiY0ff4d/dT267Eb7NyT2Pk6KCyjuXMZG/GjpHERrEPrJvxCLDVkbTtoF9rmvdY3xDnqKAmHdy4xEENxo6kCO1uKU+tJI3BYkBlVvvoKC7l+JyG7GjkmQnfBfWADw7Wg8yb6W6qBfa5r3WN8Q56igyOTspGRyjhEFEglOPiglMaQoXDKRoQgg+UUDIOUjJk5AlEiy5CSLRpBNuHaGoCNNmw0E7lIxy8Ze5IsmO+COGkXuVsnQblzs20FlMpGXGQAiQCJEY6xpCRZMhBOpQOrQdNAvxeJ/bk/CyfV0BMPlIyMRBQUSCUx2gSmNIULhAGhCCD5RQUHKRkycgSiRZchJFo0gm3DtDUBGmzYaCdykY5eMvckWTHfBHDSL3K2ToNy52baCymUjLjIARIBEiMdY0hIsmQgnUoHVoOmgX4vE/tyfhZPq6AmHykZGIgoKJBKY7QJTGkKFwgDQhBB8ooKDlIyZOQJRIsuQki0aQTbh2hqAjTZsNAvxeJ/bk/CyfV0A+S/+HYL/HRPQIoGY/2vJd5T8szQTv1qL3aR6Rigsv7I33mL8y3QNoBYT6LA7sz6MUFj/a8l3lPyzNBO/WovdpHpGKCy/sjfeYvzLdA2gFhPosDuzPoxQWP9ryXeU/LM0DaDzfJ2HxDnKOEccgx1rXj4qlrU0gkkspJJJFAyDh8QqTkAqDHUESEpQC0ggDh2jYaaakmgncPiBl4zYgxwhUd9SkdkixKVsgEi3RvGgsph8QiMgogx0kyIySQ0gGypCARoOkGxoF+CYX3CN+y3+FATD4fEOYiC45BjrWuO0pa1NIJJKASSSKCg4fEKk5AKgx1BEhKUAtIIA4do2GmmpJoJ3D4gZeM2IMcIVHfUpHZIsSlbIBIt0bxoLKYfEIjIKIMdJMiMkkNIBsqQgEaDpBsaBfgmF9wjfst/hQEw+HxDmIguOQY61rjtKWtTSCSSgEkkigoOHxCpOQCoMdQRISlALSCAOHaNhppqSaBfgmF9wjfst/hQZHJ0GSrlHCKGQkICsfFIQlMewBZToLtE6faaBkGDJMnIAZCQkpkJBITHuo8O0bm7R67aUE7Bk+Lxk+ISCTHfIXux7gBbOg81bW/V0UFlIMlMZBOQkLHERhYpj2uZCADo0Nm0UC/D5f8AJSf0xvU0BMPBkqxEFQyEhAVHaIQlMewBQNBdonT7TQUGDJMnIAZCQkpkJBITHuo8O0bm7R67aUE7Bk+Lxk+ISCTHfIXux7gBbOg81bW/V0UFlIMlMZBOQkLHERhYpj2uZCADo0Nm0UC/D5f8lJ/TG9TQEw8GSrEQVDISEBUdohCUx7AFA0F2idPtNBQYMkycgBkJCSmQkEhMe6jw7RubtHrtpQL8Pl/yUn9Mb1NAPkv/AIdgv8dE9AigZj/a8l3lPyzNBO/WovdpHpGKCy/sjfeYvzLdA2gFhPosDuzPoxQDwX1TmP8AyLf/AK+JQMd+tRe7SPSMUFl/ZG+8xfmW6BtALCfRYHdmfRigsf7Xku8p+WZoG0H/2Q==);
+            }
+
+            .test {
+                width: 996px;
+                padding: 20px;
+                margin: 0 auto;
+                background-color: white;
+            }
+
+            .test-callout {
+                border-left: 3px solid #eee;
+                padding: 10px;
+                margin: 20px 0;
+            }
+
+            .test-callout--danger {
+                border-color: #d9534f;
+                background-color: #fdf7f7;
+            }
+        </style>
         <script src="js/modal.js"></script>
     </head>
     <body>
-        <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
 
-        <!-- Add your site or application content here -->
-        <p>Hello world! This is HTML5 Boilerplate...</p>
+        <article class="test">
 
-        <button type="button" class="btn btn--primary" onclick="javascript: var maf = new Modal({className: 'modal-window--alert', buttonCancelText: 'close', content: '<h2>Alert</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus. Nulla augue nisl, fermentum quis hendrerit sed, fermentum at mauris. Cras sodales risus vel nisi pellentesque rhoncus. Praesent vulputate dolor nisi, id pharetra nisi varius eu. Fusce non auctor dui. Quisque a ullamcorper nisi. Integer laoreet velit et suscipit luctus.</p>'})">Simple modal (equivalent to alert)</button>
-        <button type="button" class="btn btn--primary" onclick="javascript: var maf = new Modal({className: 'modal-window--alert', buttonCancelText: 'close', verticalCenter: true, content: '<h2>Alert</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus. Nulla augue nisl, fermentum quis hendrerit sed, fermentum at mauris. Cras sodales risus vel nisi pellentesque rhoncus. Praesent vulputate dolor nisi, id pharetra nisi varius eu. Fusce non auctor dui. Quisque a ullamcorper nisi. Integer laoreet velit et suscipit luctus.</p>'})">Simple modal (vertically centered)</button>
-        <button type="button" class="btn btn--primary" onclick="javascript: var maf = new Modal({className: 'modal-window--alert', buttons: false, content: '<h2>Alert</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus. Nulla augue nisl, fermentum quis hendrerit sed, fermentum at mauris. Cras sodales risus vel nisi pellentesque rhoncus. Praesent vulputate dolor nisi, id pharetra nisi varius eu. Fusce non auctor dui. Quisque a ullamcorper nisi. Integer laoreet velit et suscipit luctus.</p>'})">Simple modal without buttons</button>
-        <button type="button" class="btn btn--primary" onclick="javascript: var maf = new Modal({className: 'modal-window--alert', callback: function() { alert('callback');}, buttonCancelText: 'close', content: '<h2>Alert</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus. Nulla augue nisl, fermentum quis hendrerit sed, fermentum at mauris. Cras sodales risus vel nisi pellentesque rhoncus. Praesent vulputate dolor nisi, id pharetra nisi varius eu. Fusce non auctor dui. Quisque a ullamcorper nisi. Integer laoreet velit et suscipit luctus.</p>'})">Simple modal with callback</button>
-        <button type="button" class="btn btn--primary" onclick="javascript: var maf = new Modal({className: 'modal-window--alert', displayTime: 5000, buttonCancelText: 'close', content: '<h2>Notification</h2><p>This message will self-desctuct.</p>'})">Simple modal with displayTime (auto-closing)</button>
-        <button type="button" class="btn btn--primary" onclick="javascript: var maf = new Modal({className: 'modal-window--alert', type: 'confirm', callback: function () { alert('confirmed'); }, content: '<h2>Confirm</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus.</p>'})">Confirm</button>
-        <button type="button" class="btn btn--primary" onclick="javascript: var maf = new Modal({className: 'modal-window--alert', type: 'prompt', inputFieldType: 'email', inputFieldClass: 'formcontrol-input', inputFieldPlaceholder: 'email@domain.tld', inputFieldValue: 'prefilled@domain.tld', callback: function (data) { alert('From prompt: ' + data);}, buttonConfirmText: 'submit', buttonCancelText: 'close', content: '<h2>Prompt</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus.</p>'})">Prompt</button>
+            <h1>Test Page for Modal Component</h1>
 
-        <script type="text/javascript">
-            "use strict";
-
-            var ajaxLoader = document.createElement("p");
-            ajaxLoader.className = "ajax-loader";
-
-            var theFormModal;
-
-            function formInit(data) {
-                //alert("init the form");
-                console.log("theFormModal", data);
-
-                var modalWindow = data.element,
-                    i,
-                    buttons = modalWindow.getElementsByTagName("button"),
-                    btnSubmit,
-                    btnClose;
-
-                for (i = 0; i < buttons.length; i += 1) {
-                    if (buttons[i].className.indexOf("js-submit") > -1) {
-                        btnSubmit = buttons[i];
-                    }
-
-                    if (buttons[i].className.indexOf("js-close") > -1) {
-                        btnClose = buttons[i];
-                    }
-                }
-
-                btnClose.onclick = data.abort;
-            }
-
-            var formModal = function () {
-                theFormModal = new Modal({
-                    className: 'modal-window--alert',
-                    buttons: false,
-                    content: '<h2>Form</h2><form><fieldset><label class="formcontrol"><p class="formcontrol-label">Email</p><input class="formcontrol-input" type="email" placeholder="email@domain.tld" required="required" autofocus="autofocus"/></label><label class="formcontrol"><p class="formcontrol-label">Password</p><input class="formcontrol-input" type="password" required="required"/></label></fieldset><button type="submit" class="btn btn--primary js-submit">Sign in</button><button type="button" class="btn btn--secondary js-close">close</button></form>',
-                    onReady: function (data) {
-                        formInit(data);
-                    }
-                });
-            };
-        </script>
-        <button type="button" class="btn btn--primary" onclick="javascript: formModal();">HTML form (with onReady-function)</button>
-
-        <!--
-<div class="modal">
-            <div class="modal-container">
-                <div class="modal-window">
-                    <a class="modal-close"><span>Close<span class="hotkey">(esc)</span></span></a>
-
-                    <div class="modal-content">
-                        <h2>New HTML</h2>
-                        <p>This text has been injected into the popup-window.</p>
-                    </div>
-                </div>
+            <div class="test-intro">
+                <p>The modal component makes it easy to use modal-windows in your HTML5 project. It's framework independent; versatile; and hopefully you'll find it easy to work with.</p>
             </div>
-        </div>
--->
 
+            <div class="test-callout test-callout--info">
+            </div>
 
+            <div class="test-callout test-callout--interface">
+            </div>
 
-        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-        <script>
-            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-            e.src='//www.google-analytics.com/analytics.js';
-            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-            ga('create','UA-XXXXX-X');ga('send','pageview');
-        </script>
-		<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+            <div class="test-callout test-callout--danger">
+                <h4>Danger</h4>
+            </div>
+
+            <h3 class="test-title">Normal</h3>
+            <div class="test-case">
+                <button type="button" class="btn btn--primary" onclick="javascript: new Modal({content: '<h2>Alert</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus. Nulla augue nisl, fermentum quis hendrerit sed, fermentum at mauris. Cras sodales risus vel nisi pellentesque rhoncus. Praesent vulputate dolor nisi, id pharetra nisi varius eu. Fusce non auctor dui. Quisque a ullamcorper nisi. Integer laoreet velit et suscipit luctus.</p>'})">Basic modal (no bells or whistles - or modifier-classnames)</button>
+            </div>
+            <div class="test-case">
+                <button type="button" class="btn btn--primary" onclick="javascript: new Modal({className: 'modal-window--alert', buttonCancelText: 'close', content: '<h2>Alert</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus. Nulla augue nisl, fermentum quis hendrerit sed, fermentum at mauris. Cras sodales risus vel nisi pellentesque rhoncus. Praesent vulputate dolor nisi, id pharetra nisi varius eu. Fusce non auctor dui. Quisque a ullamcorper nisi. Integer laoreet velit et suscipit luctus.</p>'})">Simple modal (equivalent to alert)</button>
+            </div>
+
+            <div class="test-case">
+                <button type="button" class="btn btn--primary" onclick="javascript: new Modal({className: 'modal-window--alert', buttonCancelText: 'close', verticalCenter: true, content: '<h2>Alert</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus. Nulla augue nisl, fermentum quis hendrerit sed, fermentum at mauris. Cras sodales risus vel nisi pellentesque rhoncus. Praesent vulputate dolor nisi, id pharetra nisi varius eu. Fusce non auctor dui. Quisque a ullamcorper nisi. Integer laoreet velit et suscipit luctus.</p>'})">Simple modal (vertically centered)</button>
+            </div>
+
+            <div class="test-case">
+                <button type="button" class="btn btn--primary" onclick="javascript: new Modal({className: 'modal-window--alert', buttons: false, content: '<h2>Alert</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus. Nulla augue nisl, fermentum quis hendrerit sed, fermentum at mauris. Cras sodales risus vel nisi pellentesque rhoncus. Praesent vulputate dolor nisi, id pharetra nisi varius eu. Fusce non auctor dui. Quisque a ullamcorper nisi. Integer laoreet velit et suscipit luctus.</p>'})">Simple modal without buttons</button>
+            </div>
+
+            <div class="test-case">
+                <button type="button" class="btn btn--primary" onclick="javascript: new Modal({className: 'modal-window--alert', callback: function() { alert('callback');}, buttonCancelText: 'close', content: '<h2>Alert</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus. Nulla augue nisl, fermentum quis hendrerit sed, fermentum at mauris. Cras sodales risus vel nisi pellentesque rhoncus. Praesent vulputate dolor nisi, id pharetra nisi varius eu. Fusce non auctor dui. Quisque a ullamcorper nisi. Integer laoreet velit et suscipit luctus.</p>'})">Simple modal with callback</button>
+            </div>
+
+            <div class="test-case">
+                <button type="button" class="btn btn--primary" onclick="javascript: new Modal({className: 'modal-window--alert', displayTime: 5000, buttonCancelText: 'close', content: '<h2>Notification</h2><p>This message will self-desctuct.</p>'})">Simple modal with displayTime (auto-closing)</button>
+            </div>
+
+            <div class="test-case">
+                <button type="button" class="btn btn--primary" onclick="javascript: new Modal({className: 'modal-window--alert', type: 'confirm', callback: function () { alert('confirmed'); }, content: '<h2>Confirm</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus.</p>'})">Confirm</button>
+            </div>
+
+            <div class="test-case">
+                <button type="button" class="btn btn--primary" onclick="javascript: new Modal({className: 'modal-window--alert', type: 'prompt', inputFieldType: 'email', inputFieldClass: 'formcontrol-input', inputFieldPlaceholder: 'email@domain.tld', inputFieldValue: 'prefilled@domain.tld', callback: function (data) { alert('From prompt: ' + data);}, buttonConfirmText: 'submit', buttonCancelText: 'close', content: '<h2>Prompt</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus.</p>'})">Prompt</button>
+            </div>
+
+            <div class="test-case">
+
+                <script type="text/javascript">
+                    "use strict";
+
+                    var theFormModal;
+
+                    function formInit(data) {
+                        //alert("init the form");
+                        console.log("theFormModal", data);
+
+                        var modalWindow = data.element,
+                            i,
+                            buttons = modalWindow.getElementsByTagName("button"),
+                            btnSubmit,
+                            btnClose;
+
+                        for (i = 0; i < buttons.length; i += 1) {
+                            if (buttons[i].className.indexOf("js-submit") > -1) {
+                                btnSubmit = buttons[i];
+                            }
+
+                            if (buttons[i].className.indexOf("js-close") > -1) {
+                                btnClose = buttons[i];
+                            }
+                        }
+
+                        btnClose.onclick = data.abort;
+                    }
+
+                    var formModal = function () {
+                        theFormModal = new Modal({
+                            className: 'modal-window--alert',
+                            buttons: false,
+                            content: '<h2>Form</h2><form><fieldset><label class="formcontrol"><p class="formcontrol-label">Email</p><input class="formcontrol-input" type="email" placeholder="email@domain.tld" required="required" autofocus="autofocus"/></label><label class="formcontrol"><p class="formcontrol-label">Password</p><input class="formcontrol-input" type="password" required="required"/></label></fieldset><button type="submit" class="btn btn--primary js-submit">Sign in</button><button type="button" class="btn btn--secondary js-close">close</button></form>',
+                            onReady: function (data) {
+                                formInit(data);
+                            }
+                        });
+                    };
+                </script>
+                <button type="button" class="btn btn--primary" onclick="javascript: formModal();">HTML form (with onReady-function)</button>
+            </div>
+
+        </article>
     </body>
 </html>

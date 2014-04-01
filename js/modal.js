@@ -145,9 +145,8 @@ var Modal = function (options, evt) {
     };
 
     enableViewportScroll = function () {
-        // Renable page scroll, i.e. revert to external CSS-specifications
+        // Re-enable page scroll, i.e. revert to external CSS-specifications
         console.log("Reanable viewport scroll");
-        //if ((self.options.disablePageScroll === true && popupWindows.length === 0) || popupWindows.length === 0) {
         if (self.options.disablePageScroll) {
             document.getElementsByTagName("body")[0].style.overflow = "";
             document.getElementsByTagName("body")[0].style.marginLeft = "";
