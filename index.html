@@ -13,7 +13,8 @@
         <link rel="stylesheet" href="css/modal.css">
         <style type="text/css">
             body {
-                background-image: url(data:image/jpeg;base64,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);
+                background-image: url(data:image/png;base64,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);
+                background-color: #c0c0c0;
             }
 
             .test {
@@ -41,15 +42,12 @@
             }
 
             pre code {
-                background-color: transparent;
                 white-space: pre-wrap;
             }
-/*
-            code {
-                background-color:
-                white-space: pre;
+
+            .highlight code {
+                background-color: transparent;
             }
-*/
 
             .test-callout {
                 border-left: 3px solid #eee;
@@ -75,6 +73,12 @@
             .test-callout--danger {
                 border-color: #d9534f;
                 background-color: #fdf7f7;
+            }
+
+            .test-section {
+                padding: 4px;
+                background-color: #5bc0de;
+                color: white;
             }
 
             .test-case {
@@ -112,8 +116,7 @@
                 <p>The modal component makes it easy to use modal-windows in your HTML5 project. It's framework independent; versatile; and hopefully you'll find it easy to work with. Features include:</p>
                 <ul>
                     <li>Self-closing (timed) modals, e.g. for notification use - countdown timer included.</li>
-                    <li>Replacement for native HTML prompt().</li>
-                    <li>Replacement for native HTML confirm().</li>
+                    <li>Built-in, fully functional replacement for native HTML prompt() and confirm().</li>
                     <li>Updatable modals so that you can update the content of the individual modal windows.</li>
                     <li>Auto-placement, also when resizing the viewport or scrolling (although page-scrolling is disabled for desktops when the modal overlay is visible).</li>
                 </ul>
@@ -139,6 +142,7 @@
                 <p>The <code>.modal</code> wrapper can contain multiple <code>.modal-window</code> elements and will only display the top element in the stack.</p>
             </div>
 
+<!--
             <div class="test-callout test-callout--info">
                 <h4>Info</h4>
             </div>
@@ -154,16 +158,27 @@
             <div class="test-callout test-callout--danger">
                 <h4>Danger</h4>
             </div>
+-->
 
-            <h3 class="test-title">Normal</h3>
+            <h2 class="test-section">Normal</h2>
+
+            <h3 class="test-title">Plain</h3>
+
+            <div class="test-callout test-callout--interface">
+                <p><code>new Modal({content: 'modal HTML content'})</code></p>
+            </div>
+
             <div class="test-case">
                 <button type="button" class="btn btn--primary" onclick="javascript: new Modal({content: '<h2>Alert</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus. Nulla augue nisl, fermentum quis hendrerit sed, fermentum at mauris. Cras sodales risus vel nisi pellentesque rhoncus. Praesent vulputate dolor nisi, id pharetra nisi varius eu. Fusce non auctor dui. Quisque a ullamcorper nisi. Integer laoreet velit et suscipit luctus.</p>'})">Basic modal (no bells or whistles - or modifier-classnames)</button>
             </div>
 
-            <h3 class="test-title">With special class</h3>
+            <h3 class="test-title">With modifier-classname for modal-window</h3>
 
             <div class="test-callout test-callout--interface">
-                <p><code>className: 'modal-window--alert'</code></p>
+                <p><pre><code>new Modal({
+    content: 'modal HTML content',
+    className: 'modal-window--alert'
+});</code></pre></p>
             </div>
 
             <div class="test-case">
@@ -178,31 +193,105 @@
             <h3 class="test-title">Vertically centered</h3>
 
             <div class="test-callout test-callout--interface">
-                <p><code>verticalCenter: true</code></p>
+                <p><pre><code>new Modal({
+    content: 'modal HTML content',
+    className: 'modal-window--alert',
+    verticalCenter: true
+});</code></pre></p>
             </div>
 
             <div class="test-case">
                 <button type="button" class="btn btn--primary" onclick="javascript: new Modal({className: 'modal-window--alert', buttonCancelText: 'close', verticalCenter: true, content: '<h2>Alert</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus. Nulla augue nisl, fermentum quis hendrerit sed, fermentum at mauris. Cras sodales risus vel nisi pellentesque rhoncus. Praesent vulputate dolor nisi, id pharetra nisi varius eu. Fusce non auctor dui. Quisque a ullamcorper nisi. Integer laoreet velit et suscipit luctus.</p>'})">Simple modal (vertically centered)</button>
             </div>
 
+            <h3 class="test-title">Buttonless Modal</h3>
+            <div class="test-callout test-callout--interface">
+                <p><pre><code>new Modal({
+    content: 'modal HTML content',
+    className: 'modal-window--alert',
+    buttons: false
+});</code></pre></p>
+            </div>
+
             <div class="test-case">
                 <button type="button" class="btn btn--primary" onclick="javascript: new Modal({className: 'modal-window--alert', buttons: false, content: '<h2>Alert</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus. Nulla augue nisl, fermentum quis hendrerit sed, fermentum at mauris. Cras sodales risus vel nisi pellentesque rhoncus. Praesent vulputate dolor nisi, id pharetra nisi varius eu. Fusce non auctor dui. Quisque a ullamcorper nisi. Integer laoreet velit et suscipit luctus.</p>'})">Simple modal without buttons</button>
             </div>
 
-            <div class="test-case">
-                <button type="button" class="btn btn--primary" onclick="javascript: new Modal({className: 'modal-window--alert', callback: function() { alert('callback');}, buttonCancelText: 'close', content: '<h2>Alert</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus. Nulla augue nisl, fermentum quis hendrerit sed, fermentum at mauris. Cras sodales risus vel nisi pellentesque rhoncus. Praesent vulputate dolor nisi, id pharetra nisi varius eu. Fusce non auctor dui. Quisque a ullamcorper nisi. Integer laoreet velit et suscipit luctus.</p>'})">Simple modal with callback</button>
+            <h3 class="test-title">Self-closing</h3>
+            <div class="test-callout test-callout--interface">
+                <p><pre><code>new Modal({
+    content: 'modal HTML content',
+    className: 'modal-window--alert',
+    displayTime: 5000
+});</code></pre></p>
             </div>
 
             <div class="test-case">
                 <button type="button" class="btn btn--primary" onclick="javascript: new Modal({className: 'modal-window--alert', displayTime: 5000, buttonCancelText: 'close', content: '<h2>Notification</h2><p>This message will self-desctuct.</p>'})">Simple modal with displayTime (auto-closing)</button>
             </div>
 
+            <h2 class="test-section">Modals with callbacks</h2>
+            <div class="test-callout test-callout--interface">
+                <p><pre><code>new Modal({
+    content: 'modal HTML content',
+    className: 'modal-window--alert',
+    callback: function() { alert('callback'); }
+});</code></pre></p>
+            </div>
+
+            <div class="test-case">
+                <button type="button" class="btn btn--primary" onclick="javascript: new Modal({className: 'modal-window--alert', callback: function() { alert('callback');}, buttonCancelText: 'close', content: '<h2>Alert</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus. Nulla augue nisl, fermentum quis hendrerit sed, fermentum at mauris. Cras sodales risus vel nisi pellentesque rhoncus. Praesent vulputate dolor nisi, id pharetra nisi varius eu. Fusce non auctor dui. Quisque a ullamcorper nisi. Integer laoreet velit et suscipit luctus.</p>'})">Simple modal with callback</button>
+            </div>
+
+
+            <h3 class="test-title">Native HTML confirm() replacements</h3>
+            <div class="test-callout test-callout--interface">
+                <p><pre><code>new Modal({
+    content: 'modal HTML content',
+    className: 'modal-window--alert',
+    type: 'confirm',
+    callback: function () { alert('confirmed'); }
+});</code></pre></p>
+            </div>
             <div class="test-case">
                 <button type="button" class="btn btn--primary" onclick="javascript: new Modal({className: 'modal-window--alert', type: 'confirm', callback: function () { alert('confirmed'); }, content: '<h2>Confirm</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus.</p>'})">Confirm</button>
             </div>
 
+
+            <h3 class="test-title">Native HTML prompt() replacements</h3>
+            <div class="test-callout test-callout--interface">
+                <p><pre><code>new Modal({
+    content: 'modal HTML content',
+    className: 'modal-window--alert',
+    type: 'prompt',
+    inputFieldType: 'email',
+    inputFieldClass: 'formcontrol-input',
+    inputFieldPlaceholder: 'email@domain.tld',
+    inputFieldValue: 'prefilled@domain.tld',
+    callback: function (data) { alert('From prompt: ' + data); },
+    buttonConfirmText: 'submit',
+    buttonCancelText: 'close'});</code></pre></p>
+            </div>
             <div class="test-case">
                 <button type="button" class="btn btn--primary" onclick="javascript: new Modal({className: 'modal-window--alert', type: 'prompt', inputFieldType: 'email', inputFieldClass: 'formcontrol-input', inputFieldPlaceholder: 'email@domain.tld', inputFieldValue: 'prefilled@domain.tld', callback: function (data) { alert('From prompt: ' + data);}, buttonConfirmText: 'submit', buttonCancelText: 'close', content: '<h2>Prompt</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus.</p>'})">Prompt</button>
+            </div>
+
+
+            <h2 class="test-section">Modal with onReady callback</h2>
+            <div class="test-callout test-callout--info">
+                <h4>JavaScript onReady-functions as part of 'test-case'</h4>
+                <p>The JavaScript function(s) that are initiated by the onReady-callback function are inlined as part of the 'test-case' element.</p>
+            </div>
+
+            <div class="test-callout test-callout--interface">
+                <p><pre><code>new Modal({
+    className: 'modal-window--alert',
+    buttons: false,
+    content: '&lt;h2>Form<&lt;h2>&lt;form>&lt;fieldset>&lt;label class="formcontrol">&lt;p class="formcontrol-label">Email&lt;/p>&lt;input class="formcontrol-input" type="email" placeholder="email@domain.tld" required="required" autofocus="autofocus"/>&lt;/label>&lt;label class="formcontrol">&lt;p class="formcontrol-label">Password&lt;/p>&lt;input class="formcontrol-input" type="password" required="required"/>&lt;/label>&lt;/fieldset>&lt;button type="submit" class="btn btn--primary js-submit">Sign in&lt;/button>&lt;button type="button" class="btn btn--secondary js-close">close&lt;/button>&lt;/form>',
+    onReady: function (data) {
+        formInit(data);
+    }
+});</code></pre></p>
             </div>
 
             <div class="test-case">
