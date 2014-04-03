@@ -25,13 +25,14 @@ Modal script
 
 --------------------------------------------------------------------------------
 Description:
-Function that enable an integrated modal-window (popup) which sits in front of
-the "normal" page content.
+Function that enable an integrated modal (popup) window which overlays the
+"normal" page content.
 
 --------------------------------------------------------------------------------
 Usage:
 Simply place a link to the this script in the the HTML page. The script will
-then automatically execute when the related constructor is subsequently invoked.
+then automatically execute when the related Modal-constructor is subsequently
+invoked.
 
 --------------------------------------------------------------------------------
 Example:
@@ -356,8 +357,6 @@ var Modal = function (options, evt) {
         if (self.options.time === initialTime) {
             timer();
         }
-
-
     };
 
     addButtons = function () {
