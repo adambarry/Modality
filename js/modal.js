@@ -98,8 +98,8 @@ var Modal = function (options, evt) {
         content: false, //The HTML contents of the modal-window
         className: false, //Classname for the modal-window
         time: false, //Time in milliseconds, e.g. 2500, before the popup is automatically closed.
-        timeSec: "second",
-        timeSecs: "seconds",
+        timeSec: "second", //Label for remaining second (single)
+        timeSecs: "seconds", //Label for remaining seconds (plural)
         onReady: false, //A function that is executed when the modal has loaded its content, e.g. onReady: function (data) { console.log("onReady", data); }
         callback: false, //A function that is executed upon closing the modal-window, e.g. callback: function (data) { alert("callback: " + data); }
         buttons: true, //Add buttons (depending on the type-property)
