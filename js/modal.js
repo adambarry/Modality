@@ -566,7 +566,8 @@ var Modal = function (options, evt) {
             modalContainer.appendChild(modalWindow);
 
             //Add the modal-close element
-            modalClose = document.createElement("a");
+            modalClose = document.createElement("button");
+            modalClose.setAttribute("type", "button")
             modalClose.className = "modal-close";
             modalClose.innerHTML = self.options.closeLink;
 

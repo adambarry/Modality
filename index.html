@@ -160,7 +160,7 @@
     &ltdiv class="modal-container"&gt;
 
         &ltdiv class="modal-window modal-window--alert"&gt;
-            &lta class="modal-close"&gt;&lt;/a&gt;
+            &ltbutton class="modal-close"&gt;&lt;/button&gt;
 
             &ltdiv class="modal-content"&gt;
                 &lt;!-- Content goes here --&gt;
@@ -211,7 +211,7 @@
                     <!-- <div class="modal" style="position: relative;"> -->
                         <div class="modal-container" style="position: relative;">
                             <div class="modal-window">
-                                <a class="modal-close"><span>Close <span class="hotkey">(esc)</span></span></a>
+                                <button type="button" class="modal-close"><span>Close <span class="hotkey">(esc)</span></span></button>
 
                                 <div class="modal-content">
                                     <h2>Modal Content</h2>
@@ -431,6 +431,24 @@
                 </div>
 
 
+            </div>
+
+            <div class="test-section">
+                <h2>Updated modal</h2>
+                <p>So why be able to update modals in the first place? Well, sometimes you might want to show the modal with an AJAX-loader while for instance AJAX-requesting the content.</p>
+
+                <div class="test-callout test-callout--info">
+                    <h4>TODO: Updates on confirm</h4>
+                    <p>The below example launches a (confirm) modal, which is subsequently updated upon confirm.</p>
+                </div>
+
+                <div class="test-callout test-callout--interface">
+                    <p><pre><code>new Modal({
+    });</code></pre></p>
+                </div>
+
+                <div class="test-example">
+                </div>
             </div>
 
         </article>
