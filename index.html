@@ -197,6 +197,8 @@
 
                 <h2>Appearance</h2>
 
+                <p>The appearance of the modal is (of course) styled completely using CSS, so you can easily change it to fit your specific project, but the positioning of the individual modal-windows is done using JavaScript.</p>
+
                 <div class="test-callout test-callout--danger">
                     <h4><code>.modal</code> wrapper element excluded</h4>
                     <p>In the below example, the <code>.modal</code> wrapper element has been disabled to prevent the remainder of the modal-test-examples on this page from adding themselves to the wrapper-element.</p>
@@ -358,11 +360,16 @@
                     <p>The JavaScript function(s) that are initiated by the onReady-callback function are inlined as part of the 'test-example' element.</p>
                 </div>
 
+                <div class="test-callout test-callout--danger">
+                    <h4>Scroll on <code>autofocus="autofocus"</code></h4>
+                    <p>If the HTML content your filling into the modal contains a form element with <code>autofocus="autofocus"</code> it will most likely make the page scroll when loading the modal.</p>
+                </div>
+
                 <div class="test-callout test-callout--interface">
                     <p><pre><code>new Modal({
         className: 'modal-window--alert',
         buttons: false,
-        content: '&lt;h2>Form<&lt;h2>&lt;form>&lt;fieldset>&lt;label class="formcontrol">&lt;p class="formcontrol-label">Email&lt;/p>&lt;input class="formcontrol-input" type="email" placeholder="email@domain.tld" required="required" autofocus="autofocus"/>&lt;/label>&lt;label class="formcontrol">&lt;p class="formcontrol-label">Password&lt;/p>&lt;input class="formcontrol-input" type="password" required="required"/>&lt;/label>&lt;/fieldset>&lt;button type="submit" class="btn btn--primary js-submit">Sign in&lt;/button>&lt;button type="button" class="btn btn--secondary js-close">close&lt;/button>&lt;/form>',
+        content: '&lt;h2>Form<&lt;h2>&lt;form>&lt;fieldset class="modal-fieldset">&lt;label class="formcontrol">&lt;p class="formcontrol-label">Email&lt;/p>&lt;input class="formcontrol-input" type="email" placeholder="email@domain.tld" required="required"/>&lt;/label>&lt;label class="formcontrol">&lt;p class="formcontrol-label">Password&lt;/p>&lt;input class="formcontrol-input" type="password" required="required"/>&lt;/label>&lt;/fieldset>&lt;button type="submit" class="btn btn--primary js-submit">Sign in&lt;/button>&lt;button type="button" class="btn btn--secondary js-close">close&lt;/button>&lt;/form>',
         onReady: function (data) {
             formInit(data);
         }
@@ -377,14 +384,14 @@
                         var theFormModal;
 
                         function formInit(data) {
-                            //alert("init the form");
                             console.log("theFormModal", data);
 
                             var modalWindow = data.element,
                                 i,
                                 buttons = modalWindow.getElementsByTagName("button"),
                                 btnSubmit,
-                                btnClose;
+                                btnClose,
+                                elements = modalWindow.getElementsByTagName("*");
 
                             for (i = 0; i < buttons.length; i += 1) {
                                 if (buttons[i].className.indexOf("js-submit") > -1) {
@@ -396,14 +403,26 @@
                                 }
                             }
 
+                            //Make the close button work with the modal
                             btnClose.onclick = data.abort;
+
+                            //Set focus to the first form element that isn't hidden
+                            for (i = 0; i < elements.length; i += 1) {
+                                if (elements[i].tagName.toLowerCase() === "input" || elements[i].tagName.toLowerCase() === "select" || elements[i].tagName.toLowerCase() === "textarea") {
+                                    if (elements[i].getAttribute("type") != "hidden") {
+                                        elements[i].focus();
+                                        elements[i].select();
+                                        break;
+                                    }
+                                }
+                            }
                         }
 
                         var formModal = function () {
                             theFormModal = new Modal({
                                 className: 'modal-window--alert',
                                 buttons: false,
-                                content: '<h2>Form</h2><form><fieldset><label class="formcontrol"><p class="formcontrol-label">Email</p><input class="formcontrol-input" type="email" placeholder="email@domain.tld" required="required" autofocus="autofocus"/></label><label class="formcontrol"><p class="formcontrol-label">Password</p><input class="formcontrol-input" type="password" required="required"/></label></fieldset><button type="submit" class="btn btn--primary js-submit">Sign in</button><button type="button" class="btn btn--secondary js-close">close</button></form>',
+                                content: '<h2>Form</h2><form><fieldset class="modal-fieldset"><label class="formcontrol"><p class="formcontrol-label">Email</p><input class="formcontrol-input" type="email" placeholder="email@domain.tld" required="required"/></label><label class="formcontrol"><p class="formcontrol-label">Password</p><input class="formcontrol-input" type="password" required="required"/></label></fieldset><button type="submit" class="btn btn--primary js-submit">Sign in</button><button type="button" class="btn btn--secondary js-close">close</button></form>',
                                 onReady: function (data) {
                                     formInit(data);
                                 }

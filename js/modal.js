@@ -378,6 +378,7 @@ var Modal = function (options, evt) {
 
                 //Create and add the fieldset
                 theFieldset = document.createElement("fieldset");
+                theFieldset.className = "modal-fieldset";
                 theForm.appendChild(theFieldset);
 
                 //Create the input field and add it to the fieldset
@@ -402,12 +403,17 @@ var Modal = function (options, evt) {
 
                 theFieldset.appendChild(inputField);
 
-                /*
-try {
-                    inputField.focus();
-                    inputField.select();
+                try {
+                    //Delay focusing on the field until its visible
+                    defer({
+                        func: function () {
+                            inputField.focus();
+                            console.log("focus");
+                            inputField.select();
+                        },
+                        delay: self.options.fadeTime
+                    });
                 } catch (ignore) {}
-*/
             }
 
             //Create and add the confirm-button
@@ -448,11 +454,14 @@ try {
             modalContent.appendChild(buttonReset);
 
             //Set focus to the cancel button
-            /*
-if (self.options.type !== "prompt") {
-                buttonReset.focus();
+            if (self.options.type !== "prompt") {
+                defer({
+                    func: function () {
+                        buttonReset.focus();
+                    },
+                    delay: self.options.fadeTime
+                });
             }
-*/
         }
 
         console.groupEnd();
@@ -518,7 +527,10 @@ if (self.options.type !== "prompt") {
                                 window.setTimeout(function () {
                                     console.log("Remove modal from DOM");
                                     destroyActions();
-                                    wrapper.parentNode.removeChild(wrapper);
+                                    try {
+                                        wrapper.parentNode.removeChild(wrapper);
+                                    } catch (ignore) {}
+
                                 }, fadeTime);
                             };
                         },
@@ -633,14 +645,20 @@ if (self.options.type !== "prompt") {
 
         //The modal is loaded and in position, so fire the onReady function
         if (self.options.onReady) {
-            console.group("Modal: onReady");
-            self.options.onReady({
-                element: modalWindow,
-                update: function (html) { update(html); },
-                close: destroy, //include the close-function so that it's available before the return has been executed
-                abort: abort
+            defer({
+                func: function () {
+                    console.group("Modal: onReady");
+                    self.options.onReady({
+                        element: modalWindow,
+                        update: function (html) { update(html); },
+                        close: destroy, //include the close-function so that it's available before the return has been executed
+                        abort: abort
+                    });
+                    console.groupEnd();
+                },
+                delay: self.options.fadeTime
             });
-            console.groupEnd();
+
         }
 
         (function autoClose() {
