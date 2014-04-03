@@ -45,7 +45,7 @@ Component: Modal
     position: absolute;
     top: 0;
     left: 0;
-    display: none;
+    z-index: 1;
     background-color: #f0efed;
     color: inherit;
     cursor: default;
@@ -67,7 +67,6 @@ Component: Modal
 .modal-close {
     width: 42px;
     height: 36px;
-    /*float: right;*/
     position: absolute;
     top: 0;
     right: 0;
