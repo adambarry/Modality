@@ -32,7 +32,7 @@ Component: Modal
 }
 
 .modal--hidden {
-    opacity: 0;  /* make things invisible upon start */
+    opacity: 0;  /* make things invisible upon start and end if CSS3 transitions are supported by the browser*/
 }
 
 .modal > .modal-container:last-child {
