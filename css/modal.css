@@ -55,7 +55,6 @@ Component: Modal
     padding: 15px 0;   /* Top and bottom padding equivalent to scroll-bar-size */
     margin-left: 15px; /* Left margin equivalent to scroll-bar-size */
     overflow: auto;
-    /*float: left;*/
     position: relative;
     background-color: transparent;
     color: inherit;
