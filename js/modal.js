@@ -71,7 +71,7 @@ var Modal = function (options, evt) {
         newWindowSize,
         sizeDelta,
         cancelDelay = 400, //milliseconds. To prevent doubleclicks accidentally closing the modal,
-        cancelCounter = false, //Counter used for showing remaining visible time for displayTime modal-windows
+        cancelCounter = false, //Counter used for showing remaining visible time for time modal-windows
         triggerElement = false, //Element that triggered the modal-window
 
 
@@ -97,7 +97,9 @@ var Modal = function (options, evt) {
         type: false, //false|confirm|prompt (adds functionality corresponding to the type)
         content: false, //The HTML contents of the modal-window
         className: false, //Classname for the modal-window
-        displayTime: false, //Time in milliseconds, e.g. 2500, before the popup is automatically closed
+        time: false, //Time in milliseconds, e.g. 2500, before the popup is automatically closed.
+        timeSec: "second",
+        timeSecs: "seconds",
         onReady: false, //A function that is executed when the modal has loaded its content, e.g. onReady: function (data) { console.log("onReady", data); }
         callback: false, //A function that is executed upon closing the modal-window, e.g. callback: function (data) { alert("callback: " + data); }
         buttons: true, //Add buttons (depending on the type-property)
@@ -313,10 +315,12 @@ var Modal = function (options, evt) {
 
     countdown = function (obj) {
         var refreshRate = 500, //Milliseconds
-            initialTime = self.options.displayTime,
+            initialTime = self.options.time,
             buttonText,
             updateCounter,
-            timer;
+            timer,
+            sec = false,
+            secs = false;
 
         console.log("Modal: countdown()");
 
@@ -324,8 +328,20 @@ var Modal = function (options, evt) {
 
         buttonText = obj.element.innerHTML;
 
+        if (self.options.timeSec || self.options.timeSecs) {
+            sec = self.options.timeSec ? " " + self.options.timeSec : "";
+            secs = self.options.timeSecs ? " " + self.options.timeSecs : "";
+        }
+
         updateCounter = function () {
-            obj.element.innerHTML = buttonText + " (" + Math.round(initialTime / 1000) + " sec.)";
+            var remainingSecs = Math.round(initialTime / 1000),
+                remainingSecsText = "";
+
+            if (sec|| secs) {
+                remainingSecsText = (remainingSecs === 1) ? sec : secs;
+            }
+
+            obj.element.innerHTML = buttonText + " (" + remainingSecs + remainingSecsText + ")";
             initialTime -= refreshRate;
         };
 
@@ -337,7 +353,7 @@ var Modal = function (options, evt) {
             }, refreshRate);
         };
 
-        if (self.options.displayTime === initialTime) {
+        if (self.options.time === initialTime) {
             timer();
         }
 
@@ -424,7 +440,7 @@ try {
                 delay: cancelDelay
             });
 
-            if (self.options.displayTime) {
+            if (self.options.time) {
                 countdown({
                     element: buttonReset
                 });
@@ -630,13 +646,13 @@ if (self.options.type !== "prompt") {
 
         (function autoClose() {
             //If the popupWindow is set to auto-close
-            if (self.options.displayTime) {
+            if (self.options.time) {
                 // Wait for time to pass, and then close the popupWindow while passing on the onClose-function
                 defer({
                     func: function () {
                         destroy();
                     },
-                    delay: self.options.displayTime
+                    delay: self.options.time
                 });
             }
         }());

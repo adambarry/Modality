@@ -259,12 +259,12 @@
                 <p><pre><code>new Modal({
     content: 'modal HTML content',
     className: 'modal-window--alert',
-    displayTime: 5000
+    time: 5000
 });</code></pre></p>
             </div>
 
             <div class="test-case">
-                <button type="button" class="btn btn--primary" onclick="javascript: new Modal({className: 'modal-window--alert', displayTime: 5000, buttonCancelText: 'close', content: '<h2>Notification</h2><p>This message will self-desctuct.</p>'})">Simple modal with displayTime (auto-closing)</button>
+                <button type="button" class="btn btn--primary" onclick="javascript: new Modal({className: 'modal-window--alert', time: 5000, buttonCancelText: 'close', content: '<h2>Notification</h2><p>This message will self-desctuct.</p>'})">Simple modal with time (auto-closing)</button>
             </div>
 
             <h2 class="test-section">Modals with callbacks</h2>
