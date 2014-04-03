@@ -461,7 +461,7 @@ if (self.options.type !== "prompt") {
             var elements = document.getElementsByTagName("div");
 
             for (i = 0; i < elements.length; i += 1) {
-                if (elements[i].className.indexOf('modal') > -1) {
+                if (elements[i].className === "modal") {
                     //console.log("wrapper found", elements[i])
                     wrapper = elements[i];
                     break;
