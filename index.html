@@ -361,6 +361,7 @@
                 <div class="test-callout test-callout--danger">
                     <h4>Scroll on <code>autofocus="autofocus"</code></h4>
                     <p>If the HTML content your filling into the modal contains a form element with <code>autofocus="autofocus"</code> it will most likely make the page scroll when loading the modal.</p>
+                    <p>Instead use the <code>formFieldFocus: true</code> property (enabled by default), which will set focus to the first non-hidden form-field in the modal window.</p>
                 </div>
 
                 <div class="test-callout test-callout--interface">
@@ -404,7 +405,8 @@
                             //Make the close button work with the modal
                             btnClose.onclick = data.abort;
 
-                            //Set focus to the first form element that isn't hidden
+                            /*
+//Set focus to the first form element that isn't hidden
                             for (i = 0; i < elements.length; i += 1) {
                                 if (elements[i].tagName.toLowerCase() === "input" || elements[i].tagName.toLowerCase() === "select" || elements[i].tagName.toLowerCase() === "textarea") {
                                     if (elements[i].getAttribute("type") != "hidden") {
@@ -414,6 +416,7 @@
                                     }
                                 }
                             }
+*/
                         }
 
                         var formModal = function () {
