@@ -361,6 +361,7 @@
     inputFieldPlaceholder: 'email@domain.tld',
     inputFieldValue: 'prefilled@domain.tld',
     callback: function (data) {
+        console.log('data', data);
         alert('From prompt: ' + data.value);
     },
     buttonConfirmText: 'submit',
