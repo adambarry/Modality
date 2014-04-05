@@ -391,17 +391,36 @@ var Modal = function (options, evt) {
     addButtons = function () {
         console.group("Modal: addButtons()");
 
-        var buttonConfirm,
+        var formSubmit,
+            buttonConfirm,
             theForm,
             theFieldset,
             inputField;
 
-        if (self.options.type === "prompt") {
+        formSubmit = function (e) {
+            //console.log("form", this);
+
+            //Prevent the submit action from performing a postback
+            e.preventDefault();
+
+            var value = inputField ? inputField.value : false;
+
+            //Close the modal-window and send the inputField-value to the onClose-function
+            destroy({
+                value: value
+            });
+        };
+
+        //As we have buttons we should also have a form
+        (function () {
             //Create and add the form
             theForm = document.createElement("form");
             //theForm.setAttribute("onsubmit", "return validateForm(this)");
+            theForm.onsubmit = formSubmit;
             modalContent.appendChild(theForm);
+        }());
 
+        if (self.options.type === "prompt") {
             //Create and add the fieldset
             theFieldset = document.createElement("fieldset");
             theFieldset.className = "modal-fieldset";
@@ -409,6 +428,8 @@ var Modal = function (options, evt) {
 
             //Create the input field and add it to the fieldset
             inputField = document.createElement("input");
+            inputField.setAttribute("required", "required");
+
             if (self.options.inputFieldType) {
                 inputField.setAttribute("type", self.options.inputFieldType);
             } else {
@@ -438,11 +459,7 @@ var Modal = function (options, evt) {
                 buttonConfirm.setAttribute("class", self.options.buttonConfirmClass);
             }
             buttonConfirm.innerHTML = self.options.buttonConfirmText;
-            buttonConfirm.onclick = function () {
-                var value = inputField ? inputField.value : false;
-                destroy(value);
-            };
-            modalContent.appendChild(buttonConfirm);
+            theForm.appendChild(buttonConfirm);
         }
 
 
@@ -465,8 +482,9 @@ var Modal = function (options, evt) {
             });
         }
 
-        modalContent.appendChild(buttonReset);
+        theForm.appendChild(buttonReset);
 
+        //Set focus to the relevant form element
         if (self.options.formFieldFocus) {
             defer({
                func: function () {

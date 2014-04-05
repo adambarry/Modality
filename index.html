@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!--[if lt IE 7]>      <html class="lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class=""> <!--<![endif]-->
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -231,7 +231,9 @@
                 <h3 class="test-title">Plain</h3>
 
                 <div class="test-callout test-callout--interface">
-                    <p><code>new Modal({content: 'modal HTML content'});</code></p>
+                    <p><pre><code>new Modal({
+    content: 'modal HTML content'
+});</code></pre></p>
                 </div>
 
                 <div class="test-example">
@@ -247,9 +249,9 @@
 
                 <div class="test-callout test-callout--interface">
                     <p><pre><code>new Modal({
-        content: 'modal HTML content',
-        className: 'modal-window--alert'
-    });</code></pre></p>
+    content: 'modal HTML content',
+    className: 'modal-window--alert'
+});</code></pre></p>
                 </div>
 
                 <div class="test-example">
@@ -260,36 +262,36 @@
 
                 <div class="test-callout test-callout--interface">
                     <p><pre><code>new Modal({
-        content: 'modal HTML content',
-        className: 'modal-window--alert',
-        verticalCenter: true
-    });</code></pre></p>
+    content: 'modal HTML content',
+    className: 'modal-window--alert',
+    verticalCenter: true
+});</code></pre></p>
                 </div>
 
                 <div class="test-example">
-                    <button type="button" class="btn btn--primary" onclick="javascript: new Modal({className: 'modal-window--alert', buttonCancelText: 'close', verticalCenter: true, content: '<h2>Alert</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus. Nulla augue nisl, fermentum quis hendrerit sed, fermentum at mauris. Cras sodales risus vel nisi pellentesque rhoncus. Praesent vulputate dolor nisi, id pharetra nisi varius eu. Fusce non auctor dui. Quisque a ullamcorper nisi. Integer laoreet velit et suscipit luctus.</p>'})">Simple modal (vertically centered)</button>
+                    <button type="button" class="btn btn--primary" onclick="javascript: new Modal({className: 'modal-window--alert', buttonCancelText: 'close', verticalCenter: true, content: '<h2>Alert</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus. Nulla augue nisl, fermentum quis hendrerit sed, fermentum at mauris. Cras sodales risus vel nisi pellentesque rhoncus. Praesent vulputate dolor nisi, id pharetra nisi varius eu. Fusce non auctor dui. Quisque a ullamcorper nisi. Integer laoreet velit et suscipit luctus.</p>'})">Modal (vertically centered)</button>
                 </div>
 
-                <h3 class="test-title">Buttonless Modal</h3>
+                <h3 class="test-title">Buttonless modal</h3>
                 <div class="test-callout test-callout--interface">
                     <p><pre><code>new Modal({
-        content: 'modal HTML content',
-        className: 'modal-window--alert',
-        buttons: false
-    });</code></pre></p>
+    content: 'modal HTML content',
+    className: 'modal-window--alert',
+    buttons: false
+});</code></pre></p>
                 </div>
 
                 <div class="test-example">
-                    <button type="button" class="btn btn--primary" onclick="javascript: new Modal({className: 'modal-window--alert', buttons: false, content: '<h2>Alert</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus. Nulla augue nisl, fermentum quis hendrerit sed, fermentum at mauris. Cras sodales risus vel nisi pellentesque rhoncus. Praesent vulputate dolor nisi, id pharetra nisi varius eu. Fusce non auctor dui. Quisque a ullamcorper nisi. Integer laoreet velit et suscipit luctus.</p>'})">Simple modal without buttons</button>
+                    <button type="button" class="btn btn--primary" onclick="javascript: new Modal({className: 'modal-window--alert', buttons: false, content: '<h2>Alert</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus. Nulla augue nisl, fermentum quis hendrerit sed, fermentum at mauris. Cras sodales risus vel nisi pellentesque rhoncus. Praesent vulputate dolor nisi, id pharetra nisi varius eu. Fusce non auctor dui. Quisque a ullamcorper nisi. Integer laoreet velit et suscipit luctus.</p>'})">Buttonless modal</button>
                 </div>
 
                 <h3 class="test-title">Self-closing</h3>
                 <div class="test-callout test-callout--interface">
                     <p><pre><code>new Modal({
-        content: 'modal HTML content',
-        className: 'modal-window--alert',
-        time: 5000
-    });</code></pre></p>
+    content: 'modal HTML content',
+    className: 'modal-window--alert',
+    time: 5000
+});</code></pre></p>
                 </div>
 
                 <div class="test-example">
@@ -303,48 +305,54 @@
                 <h2>Modals with callbacks</h2>
                 <div class="test-callout test-callout--interface">
                     <p><pre><code>new Modal({
-        content: 'modal HTML content',
-        className: 'modal-window--alert',
-        callback: function() { alert('callback'); }
-    });</code></pre></p>
+    content: 'modal HTML content',
+    className: 'modal-window--alert',
+    callback: function() {
+        alert('callback');
+    }
+});</code></pre></p>
                 </div>
 
                 <div class="test-example">
-                    <button type="button" class="btn btn--primary" onclick="javascript: new Modal({className: 'modal-window--alert', callback: function() { alert('callback');}, buttonCancelText: 'close', content: '<h2>Alert</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus. Nulla augue nisl, fermentum quis hendrerit sed, fermentum at mauris. Cras sodales risus vel nisi pellentesque rhoncus. Praesent vulputate dolor nisi, id pharetra nisi varius eu. Fusce non auctor dui. Quisque a ullamcorper nisi. Integer laoreet velit et suscipit luctus.</p>'})">Simple modal with callback</button>
+                    <button type="button" class="btn btn--primary" onclick="javascript: new Modal({className: 'modal-window--alert', callback: function() { alert('callback');}, buttonCancelText: 'close', content: '<h2>Alert</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus. Nulla augue nisl, fermentum quis hendrerit sed, fermentum at mauris. Cras sodales risus vel nisi pellentesque rhoncus. Praesent vulputate dolor nisi, id pharetra nisi varius eu. Fusce non auctor dui. Quisque a ullamcorper nisi. Integer laoreet velit et suscipit luctus.</p>'})">Modal with callback</button>
                 </div>
 
 
                 <h3 class="test-title">Native HTML confirm() replacements</h3>
                 <div class="test-callout test-callout--interface">
                     <p><pre><code>new Modal({
-        content: 'modal HTML content',
-        className: 'modal-window--alert',
-        type: 'confirm',
-        callback: function () { alert('confirmed'); }
-    });</code></pre></p>
+    content: 'modal HTML content',
+    className: 'modal-window--alert',
+    type: 'confirm',
+    callback: function () {
+        alert('confirmed');
+    }
+});</code></pre></p>
                 </div>
                 <div class="test-example">
-                    <button type="button" class="btn btn--primary" onclick="javascript: new Modal({className: 'modal-window--alert', type: 'confirm', callback: function () { alert('confirmed'); }, content: '<h2>Confirm</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus.</p>'})">Confirm</button>
+                    <button type="button" class="btn btn--primary" onclick="javascript: new Modal({className: 'modal-window--alert', type: 'confirm', callback: function () { alert('confirmed'); }, content: '<h2>Confirm</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus.</p>'})">Confirm modal</button>
                 </div>
 
 
                 <h3 class="test-title">Native HTML prompt() replacements</h3>
                 <div class="test-callout test-callout--interface">
                     <p><pre><code>new Modal({
-        content: 'modal HTML content',
-        className: 'modal-window--alert',
-        type: 'prompt',
-        inputFieldType: 'email',
-        inputFieldClass: 'formcontrol-input',
-        inputFieldPlaceholder: 'email@domain.tld',
-        inputFieldValue: 'prefilled@domain.tld',
-        callback: function (data) { alert('From prompt: ' + data); },
-        buttonConfirmText: 'submit',
-        buttonCancelText: 'close'
-    });</code></pre></p>
+    content: 'modal HTML content',
+    className: 'modal-window--alert',
+    type: 'prompt',
+    inputFieldType: 'email',
+    inputFieldClass: 'formcontrol-input',
+    inputFieldPlaceholder: 'email@domain.tld',
+    inputFieldValue: 'prefilled@domain.tld',
+    callback: function (data) {
+        alert('From prompt: ' + data.value);
+    },
+    buttonConfirmText: 'submit',
+    buttonCancelText: 'close'
+});</code></pre></p>
                 </div>
                 <div class="test-example">
-                    <button type="button" class="btn btn--primary" onclick="javascript: new Modal({className: 'modal-window--alert', type: 'prompt', inputFieldType: 'email', inputFieldClass: 'formcontrol-input', inputFieldPlaceholder: 'email@domain.tld', inputFieldValue: 'prefilled@domain.tld', callback: function (data) { alert('From prompt: ' + data);}, buttonConfirmText: 'submit', buttonCancelText: 'close', content: '<h2>Prompt</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus.</p>'})">Prompt</button>
+                    <button type="button" class="btn btn--primary" onclick="javascript: new Modal({className: 'modal-window--alert', type: 'prompt', inputFieldType: 'email', inputFieldClass: 'formcontrol-input', inputFieldPlaceholder: 'email@domain.tld', inputFieldValue: 'prefilled@domain.tld', callback: function (data) { console.log('data', data); alert('From prompt: ' + data.value);}, buttonConfirmText: 'submit', buttonCancelText: 'close', content: '<h2>Prompt</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus.</p>'})">Prompt modal</button>
                 </div>
 
 
@@ -366,13 +374,13 @@
 
                 <div class="test-callout test-callout--interface">
                     <p><pre><code>new Modal({
-        className: 'modal-window--alert',
-        buttons: false,
-        content: '&lt;h2>Form<&lt;h2>&lt;form>&lt;fieldset class="modal-fieldset">&lt;label class="formcontrol">&lt;p class="formcontrol-label">Email&lt;/p>&lt;input class="formcontrol-input" type="email" placeholder="email@domain.tld" required="required"/>&lt;/label>&lt;label class="formcontrol">&lt;p class="formcontrol-label">Password&lt;/p>&lt;input class="formcontrol-input" type="password" required="required"/>&lt;/label>&lt;/fieldset>&lt;button type="submit" class="btn btn--primary js-submit">Sign in&lt;/button>&lt;button type="button" class="btn btn--secondary js-close">close&lt;/button>&lt;/form>',
-        onReady: function (data) {
-            formInit(data);
-        }
-    });</code></pre></p>
+    className: 'modal-window--alert',
+    buttons: false,
+    content: '&lt;h2>Form<&lt;h2>&lt;form>&lt;fieldset class="modal-fieldset">&lt;label class="formcontrol">&lt;p class="formcontrol-label">Email&lt;/p>&lt;input class="formcontrol-input" type="email" placeholder="email@domain.tld" required="required"/>&lt;/label>&lt;label class="formcontrol">&lt;p class="formcontrol-label">Password&lt;/p>&lt;input class="formcontrol-input" type="password" required="required"/>&lt;/label>&lt;/fieldset>&lt;button type="submit" class="btn btn--primary js-submit">Sign in&lt;/button>&lt;button type="button" class="btn btn--secondary js-close">close&lt;/button>&lt;/form>',
+    onReady: function (data) {
+        formInit(data);
+    }
+});</code></pre></p>
                 </div>
 
                 <div class="test-example">
@@ -382,10 +390,10 @@
 
                         var theFormModal;
 
-                        function formInit(data) {
-                            console.log("theFormModal", data);
+                        function formInit(modal) {
+                            console.log("theFormModal", modal);
 
-                            var modalWindow = data.element,
+                            var modalWindow = modal.element,
                                 i,
                                 buttons = modalWindow.getElementsByTagName("button"),
                                 btnSubmit,
@@ -403,20 +411,7 @@
                             }
 
                             //Make the close button work with the modal
-                            btnClose.onclick = data.abort;
-
-                            /*
-//Set focus to the first form element that isn't hidden
-                            for (i = 0; i < elements.length; i += 1) {
-                                if (elements[i].tagName.toLowerCase() === "input" || elements[i].tagName.toLowerCase() === "select" || elements[i].tagName.toLowerCase() === "textarea") {
-                                    if (elements[i].getAttribute("type") != "hidden") {
-                                        elements[i].focus();
-                                        elements[i].select();
-                                        break;
-                                    }
-                                }
-                            }
-*/
+                            btnClose.onclick = modal.abort;
                         }
 
                         var formModal = function () {
@@ -430,7 +425,7 @@
                             });
                         };
                     </script>
-                    <button type="button" class="btn btn--primary" onclick="javascript: formModal();">HTML form (with onReady-function)</button>
+                    <button type="button" class="btn btn--primary" onclick="javascript: formModal();">Modal with custom HTML form content (and onReady-function to initialize the form)</button>
                 </div>
 
 
@@ -447,7 +442,7 @@
 
                 <div class="test-callout test-callout--interface">
                     <p><pre><code>new Modal({
-    });</code></pre></p>
+});</code></pre></p>
                 </div>
 
                 <div class="test-example">
