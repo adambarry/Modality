@@ -295,8 +295,24 @@
                 </div>
 
                 <div class="test-example">
-                    <button type="button" class="btn btn--primary" onclick="javascript: new Modal({className: 'modal-window--alert', time: 5000, buttonCancelText: 'close', content: '<h2>Notification</h2><p>This message will self-desctuct.</p>'})">Timed modal (auto-closing)</button>
+                    <button type="button" class="btn btn--primary" onclick="javascript: new Modal({className: 'modal-window--alert', time: 5000, buttonCancelText: 'close', content: '<h2>Notification</h2><p>This message will self-desctuct.</p>'})">Self-closing modal (auto-closing)</button>
                 </div>
+
+                <h3 class="test-title">Self-closing, buttonless modal</h3>
+
+                <div class="test-callout test-callout--interface">
+                    <p><pre><code>new Modal({
+    className: 'modal-window--alert',
+    buttons: false,
+    time: 2500,
+    content: 'modal HTML content'
+})</code></pre></p>
+                </div>
+
+                <div class="test-example">
+                    <button type="button" class="btn btn--primary" onclick="javascript: new Modal({className: 'modal-window--alert', buttons: false, time: 2500, content: '<h2>Notification</h2><p>This message will self-desctuct in 2,5 seconds.</p>'})">Self-closing, buttonless modal</button>
+                </div>
+
 
             </div>
 
