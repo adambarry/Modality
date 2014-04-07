@@ -72,8 +72,8 @@ var Modality = function (options, evt) {
         newWindowSize,
         sizeDelta,
         cancelDelay = 400, //milliseconds. To prevent doubleclicks accidentally closing the modal,
-        cancelCounter = false, //Counter used for showing remaining visible time for time modality-windows
-        triggerElement = false, //Element that triggered the modality-window
+        cancelCounter = false, //Counter used for showing remaining visible time for time Modality-windows
+        triggerElement = false, //Element that triggered the Modality-window
         buttonReset,
 
 
@@ -120,8 +120,8 @@ var Modality = function (options, evt) {
         disablePageScroll: true, //When set to true, body.style.overflow will be set to hidden, while modalWindows are active
         verticalCenter: false, //When set to true, the popupWindow will be centered vertically, instead of being placed towards the top of the screen
         fadeTime: 250, //Milliseconds for CSS3-based fade-in/out for the "modality" element
-        fadeHiddenClass: "modality--hidden",
-        closeLink: "<span>Close <span class=\"hotkey\">(esc)</span></span>" //Contents of permanent close button for the modality-window
+        fadeHiddenClass: "Modality--hidden",
+        closeLink: "<span>Close <span class=\"hotkey\">(esc)</span></span>" //Contents of permanent close button for the Modality-window
     };
 
     //User defined options
@@ -191,7 +191,7 @@ var Modality = function (options, evt) {
         }());
 
         (function removeModalFromDOM () {
-            //If no more modality-windows are present, remove the wrapper
+            //If no more Modality-windows are present, remove the wrapper
             if (wrapper.childNodes.length === 0) {
                 wrapper.className += " " + self.options.fadeHiddenClass;
 
@@ -405,7 +405,7 @@ var Modality = function (options, evt) {
 
             var value = inputField ? inputField.value : false;
 
-            //Close the modality-window and send the inputField-value to the onClose-function
+            //Close the Modality-window and send the inputField-value to the onClose-function
             destroy({
                 value: value
             });
@@ -423,7 +423,7 @@ var Modality = function (options, evt) {
         if (self.options.type === "prompt") {
             //Create and add the fieldset
             theFieldset = document.createElement("fieldset");
-            theFieldset.className = "modality-fieldset";
+            theFieldset.className = "Modality-fieldset";
             theForm.appendChild(theFieldset);
 
             //Create the input field and add it to the fieldset
@@ -436,7 +436,7 @@ var Modality = function (options, evt) {
                 inputField.setAttribute("type", "text");
             }
 
-            inputField.setAttribute("class", "modality-prompt");
+            inputField.setAttribute("class", "Modality-prompt");
 
             if (self.options.inputFieldClass) {
                 inputField.className += " " + self.options.inputFieldClass;
@@ -517,7 +517,7 @@ var Modality = function (options, evt) {
             var elements = document.getElementsByTagName("div");
 
             for (i = 0; i < elements.length; i += 1) {
-                if (elements[i].className === "modal") {
+                if (elements[i].className === "Modality") {
                     //console.log("wrapper found", elements[i])
                     wrapper = elements[i];
                     break;
@@ -528,7 +528,7 @@ var Modality = function (options, evt) {
             if (!wrapper) {
                 //create a new wrapper element
                 wrapper = document.createElement("div");
-                wrapper.className = "modal";
+                wrapper.className = "Modality";
                 wrapper.className += " " + self.options.fadeHiddenClass;
 
                 //Add the wrapper to the DOM
@@ -536,7 +536,7 @@ var Modality = function (options, evt) {
 
                 //Make sure that the fade-in transition starts after the element has been added to the DOM, i.e. on nextTick
                 defer({
-                   func: function () { wrapper.className = "modality"; }
+                   func: function () { wrapper.className = "Modality"; }
                 });
             }
 
@@ -551,7 +551,7 @@ var Modality = function (options, evt) {
                     defer({
                         func: function () {
                             wrapper.onclick = function () {
-                                //Give the wrapper its own closing function to prevent binding it to a certain modality-objects abort-function
+                                //Give the wrapper its own closing function to prevent binding it to a certain Modality-objects abort-function
                                 enableViewportScroll();
 
                                 wrapper.className += " " + fadeHiddenClass;
@@ -571,12 +571,12 @@ var Modality = function (options, evt) {
                 }
             }());
 
-            //Add the modality-container
+            //Add the Modality-container
             modalContainer = document.createElement("div");
-            modalContainer.className = "modality-container";
+            modalContainer.className = "Modality-container";
             wrapper.appendChild(modalContainer);
 
-            //Prevent clicks on the modality-container to bubble up to the modality-window
+            //Prevent clicks on the Modality-container to bubble up to the Modality-window
             modalContainer.onclick = function (event) {
                 var e = event || window.event; //get window.event if argument is falsy (in IE)
 
@@ -592,18 +592,18 @@ var Modality = function (options, evt) {
             };
 
 
-            //Add the modality-window
+            //Add the Modality-window
             modalWindow = document.createElement("div");
-            modalWindow.className = "modality-window";
+            modalWindow.className = "Modality-window";
             if(self.options.className) {
                 modalWindow.className += " " + self.options.className;
             }
             modalContainer.appendChild(modalWindow);
 
-            //Add the modality-close element
+            //Add the Modality-close element
             modalClose = document.createElement("button");
             modalClose.setAttribute("type", "button");
-            modalClose.className = "modality-close";
+            modalClose.className = "Modality-close";
             modalClose.innerHTML = self.options.closeLink;
 
             defer({
@@ -615,9 +615,9 @@ var Modality = function (options, evt) {
 
             modalWindow.appendChild(modalClose);
 
-            // Add the modality-content
+            // Add the Modality-content
             modalContent = document.createElement('div');
-            modalContent.className = "modality-content";
+            modalContent.className = "Modality-content";
             modalWindow.appendChild(modalContent);
 
         }());
@@ -630,7 +630,7 @@ var Modality = function (options, evt) {
             }
         }());
 
-        //Add buttons to the modality-window
+        //Add buttons to the Modality-window
         if (self.options.buttons) {
             addButtons();
         }
@@ -664,7 +664,7 @@ var Modality = function (options, evt) {
                 resize();
             });
 
-            //Make sure that the modality-wndow is repositioned when scrolling (for iOS)
+            //Make sure that the Modality-wndow is repositioned when scrolling (for iOS)
             window.addEventListener("scroll", function () {
                 position();
             });

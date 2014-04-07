@@ -12,7 +12,7 @@
 /*******************************************************************************
 Component: Modal
 *******************************************************************************/
-.modality {
+.Modality {
     background-color: rgba(0,0,0,.75);
     position: absolute;
     top: 0; right: 0; bottom: 0; left: 0; /* Stretch the entire viewport*/
@@ -26,32 +26,33 @@ Component: Modal
     transition: opacity .25s ease-in-out;
 }
 
-.lt-ie9 .modality {
+.lt-ie9 .Modality {
     background-color: transparent;
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NDAzOURCREJFMDY0MTFFMDgwRkU4QkZDMERDMzA2NUIiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NDAzOURCRENFMDY0MTFFMDgwRkU4QkZDMERDMzA2NUIiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo0MDM5REJEOUUwNjQxMUUwODBGRThCRkMwREMzMDY1QiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo0MDM5REJEQUUwNjQxMUUwODBGRThCRkMwREMzMDY1QiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pv7DXXUAAAAsSURBVHjaYpSVld7MQGPAxEAHMGrJqCWjloxaMmrJqCWjloxaMmoJA0CAAQApiwE6CN2WyQAAAABJRU5ErkJggg==);
 }
 
-.modality--hidden {
+.Modality--hidden {
     opacity: 0;  /* make things invisible upon start and end if CSS3 transitions are supported by the browser*/
 }
 
-.modality > .modality-container:last-child {
-    display: block; /* Only display the top element in the modal-container stack */
-}
-
-.modality-container {
+.Modality-container {
     width: auto;
     overflow: auto;
     position: absolute;
     top: 0;
     left: 0;
     z-index: 1;
+    display: none; /* Initial state: hidden */
     background-color: #f0efed;
     color: inherit;
     cursor: default;
 }
 
-.modality-window {
+.Modality > .Modality-container:last-child {
+    display: block; /* Only display the top element in the modal-container stack */
+}
+
+.Modality-window {
     padding: 15px 0;   /* Top and bottom padding equivalent to scroll-bar-size */
     margin-left: 15px; /* Left margin equivalent to scroll-bar-size */
     overflow: auto;
@@ -60,11 +61,11 @@ Component: Modal
     color: inherit;
 }
 
-.modality-window--alert {
+.Modality-window--alert {
     width: 465px;
 }
 
-.modality-close {
+.Modality-close {
     width: 42px;
     height: 36px;
     border: none;
@@ -78,39 +79,39 @@ Component: Modal
     outline: none; /* Remove focus/selected glow */
 }
 
-.modality-close span {
+.Modality-close span {
   display: none;
 }
 
-.modality-content {
+.Modality-content {
     margin-right: 15px; /* Right margin equivalent to scroll-bar-size */
 }
 
-.modality-content :last-child {
+.Modality-content :last-child {
     margin-bottom: 0;
 }
 
 
 /*: Modal elements
 -------------------------------------------------------------------------------*/
-.modality-fieldset {
+.Modality-fieldset {
     border: none;
     padding: 0 0 12px 0;
     margin: 0;
 }
 
-.modality-prompt {
+.Modality-prompt {
     width: 100%;
 }
 
 
 /*: Modal elements
 -------------------------------------------------------------------------------*/
-.modality-window .btn {
+.Modality-window .btn {
     margin: 0 .5em;
     float: right;
 }
 
-.modality-window .btn--primary {
+.Modality-window .btn--primary {
     margin-right: 0;
 }
