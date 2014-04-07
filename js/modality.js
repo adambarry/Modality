@@ -139,7 +139,7 @@ var Modality = function (options, evt) {
         if (options.func) {
             window.setTimeout(function () {
                 if (self) {
-                    console.log("Modal: defer()");
+                    console.log("Modality: defer()");
                     try {
                         options.func();
                     } catch (ignore) {}
@@ -181,7 +181,7 @@ var Modality = function (options, evt) {
     };
 
     destroy = function (data) {
-        console.group("Modal: Destroy()");
+        console.group("Modality: Destroy()");
 
         enableViewportScroll();
 
@@ -306,7 +306,7 @@ var Modality = function (options, evt) {
     };
 
     update = function (html) {
-        console.group("Modal: update()");
+        console.group("Modality: update()");
 
         modalContent.innerHTML = html;
 
@@ -328,7 +328,7 @@ var Modality = function (options, evt) {
             sec = false,
             secs = false;
 
-        console.log("Modal: countdown()");
+        console.log("Modality: countdown()");
 
         if (!obj.element) { return false; }
 
@@ -389,7 +389,7 @@ var Modality = function (options, evt) {
     };
 
     addButtons = function () {
-        console.group("Modal: addButtons()");
+        console.group("Modality: addButtons()");
 
         var formSubmit,
             buttonConfirm,
@@ -500,7 +500,7 @@ var Modality = function (options, evt) {
     };
 
     (function init() {
-        console.group("Modal: init()");
+        console.group("Modality: init()");
 
         (function removeFocusFromTrigger () {
             var event = evt || window.event; //get window.event if argument is falsy (in IE)
@@ -674,7 +674,7 @@ var Modality = function (options, evt) {
         if (self.options.onReady) {
             defer({
                 func: function () {
-                    console.group("Modal: onReady");
+                    console.group("Modality: onReady");
                     self.options.onReady({
                         element: modalWindow,
                         update: function (html) { update(html); },
