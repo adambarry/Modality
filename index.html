@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Test-page for Modal-component</title>
+        <title>Test-page for Modality-component</title>
         <meta name="description" content="Test-page for Modality modal-component">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="css/normalize.css" />
@@ -143,7 +143,7 @@
 
         <article class="test">
 
-            <h1>Modality (Modal Windows)</h1>
+            <h1>Modality (Comprehensive Modal Window Component)</h1>
 
             <p>Modality makes it easy to use modal-windows in your HTML5 project. It's framework independent; versatile; and hopefully you'll find it easy to work with. Features include:</p>
             <ul>
@@ -156,13 +156,13 @@
             <p>The modal is built using a <a href="http://coding.smashingmagazine.com/2012/04/16/a-new-front-end-methodology-bem/" target="_blank">BEM</a> inspired CSS model (using hyphens instead of double underscores), resulting in the following fundamental component HTML:</p>
             <pre class="highlight">
                 <code>
-&ltdiv class="modal"&gt;
-    &ltdiv class="modal-container"&gt;
+&ltdiv class="modality"&gt;
+    &ltdiv class="modality-container"&gt;
 
-        &ltdiv class="modal-window modal-window--alert"&gt;
-            &ltbutton class="modal-close"&gt;&lt;/button&gt;
+        &ltdiv class="modality-window modality-window--alert"&gt;
+            &ltbutton class="modality-close"&gt;&lt;/button&gt;
 
-            &ltdiv class="modal-content"&gt;
+            &ltdiv class="modality-content"&gt;
                 &lt;!-- Content goes here --&gt;
             &lt/div&gt;
         &lt/div&gt;
@@ -171,7 +171,7 @@
                 </code>
             </pre>
 
-            <p>The <code>.modal</code> wrapper can contain multiple <code>.modal-window</code> elements and will only display the top element in the stack, i.e. the <em>last</em> <code>.modal-window</code> inside the <code>.modal-container</code> element.</p>
+            <p>The <code>.modality</code> wrapper can contain multiple <code>.modality-window</code> elements and will only display the top element in the stack, i.e. the <em>last</em> <code>.modality-window</code> inside the <code>.modality-container</code> element.</p>
 
 <!--
             <div class="test-callout test-callout--info">
@@ -195,25 +195,25 @@
 
                 <h2>Appearance</h2>
 
-                <p>The appearance of the modal is (of course) styled completely using CSS, so you can easily change it to fit your specific project, but the positioning of the individual modal-windows is done using JavaScript.</p>
+                <p>The appearance of the modal is (of course) styled completely using CSS, so you can easily change it to fit your specific project, but the positioning of the individual modality-windows is done using JavaScript.</p>
 
                 <div class="test-callout test-callout--danger">
                     <h4><code>.modal</code> wrapper element excluded</h4>
-                    <p>In the below example, the <code>.modal</code> wrapper element has been disabled to prevent the remainder of the modal-test-examples on this page from adding themselves to the wrapper-element.</p>
+                    <p>In the below example, the <code>.modal</code> wrapper element has been disabled to prevent the remainder of the modality-test-examples on this page from adding themselves to the wrapper-element.</p>
                 </div>
 
                 <div class="test-callout test-callout--warning">
                     <h4>Position-properties changed in test-example</h4>
-                    <p>In order to get the below test-example to display the modal correctly, <code>style="position: relative;"</code> has been added to the <code>.modal-container</code> element which is otherwise absolutely positioned.</p>
+                    <p>In order to get the below test-example to display the modal correctly, <code>style="position: relative;"</code> has been added to the <code>.modality-container</code> element which is otherwise absolutely positioned.</p>
                 </div>
 
                 <div class="test-example">
                     <!-- <div class="modal" style="position: relative;"> -->
-                        <div class="modal-container" style="position: relative;">
-                            <div class="modal-window">
-                                <button type="button" class="modal-close"><span>Close <span class="hotkey">(esc)</span></span></button>
+                        <div class="modality-container" style="position: relative;">
+                            <div class="modality-window">
+                                <button type="button" class="modality-close"><span>Close <span class="hotkey">(esc)</span></span></button>
 
-                                <div class="modal-content">
+                                <div class="modality-content">
                                     <h2>Modal Content</h2>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus. Nulla augue nisl, fermentum quis hendrerit sed, fermentum at mauris. Cras sodales risus vel nisi pellentesque rhoncus. Praesent vulputate dolor nisi, id pharetra nisi varius eu. Fusce non auctor dui. Quisque a ullamcorper nisi. Integer laoreet velit et suscipit luctus.</p><button type="button" class="btn btn--secondary">close</button>
                                 </div>
@@ -231,78 +231,78 @@
                 <h3 class="test-title">Plain</h3>
 
                 <div class="test-callout test-callout--interface">
-                    <p><pre><code>new Modal({
+                    <p><pre><code>new Modality({
     content: 'modal HTML content'
 });</code></pre></p>
                 </div>
 
                 <div class="test-example">
-                    <button type="button" class="btn btn--primary" onclick="javascript: new Modal({content: '<h2>Alert</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus. Nulla augue nisl, fermentum quis hendrerit sed, fermentum at mauris. Cras sodales risus vel nisi pellentesque rhoncus. Praesent vulputate dolor nisi, id pharetra nisi varius eu. Fusce non auctor dui. Quisque a ullamcorper nisi. Integer laoreet velit et suscipit luctus.</p>'})">Basic modal (no bells or whistles - or modifier-classnames)</button>
+                    <button type="button" class="btn btn--primary" onclick="javascript: new Modality({content: '<h2>Alert</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus. Nulla augue nisl, fermentum quis hendrerit sed, fermentum at mauris. Cras sodales risus vel nisi pellentesque rhoncus. Praesent vulputate dolor nisi, id pharetra nisi varius eu. Fusce non auctor dui. Quisque a ullamcorper nisi. Integer laoreet velit et suscipit luctus.</p>'})">Basic modal (no bells or whistles - or modifier-classnames)</button>
                 </div>
 
-                <h3 class="test-title">With modifier-classname for modal-window</h3>
+                <h3 class="test-title">With modifier-classname for modality-window</h3>
 
                 <div class="test-callout test-callout--info">
-                    <h4>Modifier class <code>modal-window--alert</code> added to remainder of test cases</h4>
-                    <p>In order to display modals realistically, i.e. displaying a modal that doesn't fill the entire width of the screen, the remainder of the test-examples all contain a modal-window modifier-class.</p>
+                    <h4>Modifier class <code>modality-window--alert</code> added to remainder of test cases</h4>
+                    <p>In order to display modals realistically, i.e. displaying a modal that doesn't fill the entire width of the screen, the remainder of the test-examples all contain a modality-window modifier-class.</p>
                 </div>
 
                 <div class="test-callout test-callout--interface">
-                    <p><pre><code>new Modal({
+                    <p><pre><code>new Modality({
     content: 'modal HTML content',
-    className: 'modal-window--alert'
+    className: 'modality-window--alert'
 });</code></pre></p>
                 </div>
 
                 <div class="test-example">
-                    <button type="button" class="btn btn--primary" onclick="javascript: new Modal({className: 'modal-window--alert', content: '<h2>Alert</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus. Nulla augue nisl, fermentum quis hendrerit sed, fermentum at mauris. Cras sodales risus vel nisi pellentesque rhoncus. Praesent vulputate dolor nisi, id pharetra nisi varius eu. Fusce non auctor dui. Quisque a ullamcorper nisi. Integer laoreet velit et suscipit luctus.</p>'})">Simple modal (equivalent to alert)</button>
+                    <button type="button" class="btn btn--primary" onclick="javascript: new Modality({className: 'modality-window--alert', content: '<h2>Alert</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus. Nulla augue nisl, fermentum quis hendrerit sed, fermentum at mauris. Cras sodales risus vel nisi pellentesque rhoncus. Praesent vulputate dolor nisi, id pharetra nisi varius eu. Fusce non auctor dui. Quisque a ullamcorper nisi. Integer laoreet velit et suscipit luctus.</p>'})">Simple modal (equivalent to alert)</button>
                 </div>
 
                 <h3 class="test-title">Vertically centered</h3>
 
                 <div class="test-callout test-callout--interface">
-                    <p><pre><code>new Modal({
+                    <p><pre><code>new Modality({
     content: 'modal HTML content',
-    className: 'modal-window--alert',
+    className: 'modality-window--alert',
     verticalCenter: true
 });</code></pre></p>
                 </div>
 
                 <div class="test-example">
-                    <button type="button" class="btn btn--primary" onclick="javascript: new Modal({className: 'modal-window--alert', buttonCancelText: 'close', verticalCenter: true, content: '<h2>Alert</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus. Nulla augue nisl, fermentum quis hendrerit sed, fermentum at mauris. Cras sodales risus vel nisi pellentesque rhoncus. Praesent vulputate dolor nisi, id pharetra nisi varius eu. Fusce non auctor dui. Quisque a ullamcorper nisi. Integer laoreet velit et suscipit luctus.</p>'})">Modal (vertically centered)</button>
+                    <button type="button" class="btn btn--primary" onclick="javascript: new Modality({className: 'modality-window--alert', buttonCancelText: 'close', verticalCenter: true, content: '<h2>Alert</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus. Nulla augue nisl, fermentum quis hendrerit sed, fermentum at mauris. Cras sodales risus vel nisi pellentesque rhoncus. Praesent vulputate dolor nisi, id pharetra nisi varius eu. Fusce non auctor dui. Quisque a ullamcorper nisi. Integer laoreet velit et suscipit luctus.</p>'})">Modal (vertically centered)</button>
                 </div>
 
                 <h3 class="test-title">Buttonless modal</h3>
                 <div class="test-callout test-callout--interface">
-                    <p><pre><code>new Modal({
+                    <p><pre><code>new Modality({
     content: 'modal HTML content',
-    className: 'modal-window--alert',
+    className: 'modality-window--alert',
     buttons: false
 });</code></pre></p>
                 </div>
 
                 <div class="test-example">
-                    <button type="button" class="btn btn--primary" onclick="javascript: new Modal({className: 'modal-window--alert', buttons: false, content: '<h2>Alert</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus. Nulla augue nisl, fermentum quis hendrerit sed, fermentum at mauris. Cras sodales risus vel nisi pellentesque rhoncus. Praesent vulputate dolor nisi, id pharetra nisi varius eu. Fusce non auctor dui. Quisque a ullamcorper nisi. Integer laoreet velit et suscipit luctus.</p>'})">Buttonless modal</button>
+                    <button type="button" class="btn btn--primary" onclick="javascript: new Modality({className: 'modality-window--alert', buttons: false, content: '<h2>Alert</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus. Nulla augue nisl, fermentum quis hendrerit sed, fermentum at mauris. Cras sodales risus vel nisi pellentesque rhoncus. Praesent vulputate dolor nisi, id pharetra nisi varius eu. Fusce non auctor dui. Quisque a ullamcorper nisi. Integer laoreet velit et suscipit luctus.</p>'})">Buttonless modal</button>
                 </div>
 
                 <h3 class="test-title">Self-closing</h3>
                 <div class="test-callout test-callout--interface">
-                    <p><pre><code>new Modal({
+                    <p><pre><code>new Modality({
     content: 'modal HTML content',
-    className: 'modal-window--alert',
+    className: 'modality-window--alert',
     time: 5000
 });</code></pre></p>
                 </div>
 
                 <div class="test-example">
-                    <button type="button" class="btn btn--primary" onclick="javascript: new Modal({className: 'modal-window--alert', time: 5000, buttonCancelText: 'close', content: '<h2>Notification</h2><p>This message will self-desctuct.</p>'})">Self-closing modal (auto-closing)</button>
+                    <button type="button" class="btn btn--primary" onclick="javascript: new Modality({className: 'modality-window--alert', time: 5000, buttonCancelText: 'close', content: '<h2>Notification</h2><p>This message will self-desctuct.</p>'})">Self-closing modal (auto-closing)</button>
                 </div>
 
                 <h3 class="test-title">Self-closing, buttonless modal</h3>
 
                 <div class="test-callout test-callout--interface">
-                    <p><pre><code>new Modal({
-    className: 'modal-window--alert',
+                    <p><pre><code>new Modality({
+    className: 'modality-window--alert',
     buttons: false,
     time: 2500,
     content: 'modal HTML content'
@@ -310,7 +310,7 @@
                 </div>
 
                 <div class="test-example">
-                    <button type="button" class="btn btn--primary" onclick="javascript: new Modal({className: 'modal-window--alert', buttons: false, time: 2500, content: '<h2>Notification</h2><p>This message will self-desctuct in 2,5 seconds.</p>'})">Self-closing, buttonless modal</button>
+                    <button type="button" class="btn btn--primary" onclick="javascript: new Modality({className: 'modality-window--alert', buttons: false, time: 2500, content: '<h2>Notification</h2><p>This message will self-desctuct in 2,5 seconds.</p>'})">Self-closing, buttonless modal</button>
                 </div>
 
 
@@ -320,9 +320,9 @@
 
                 <h2>Modals with callbacks</h2>
                 <div class="test-callout test-callout--interface">
-                    <p><pre><code>new Modal({
+                    <p><pre><code>new Modality({
     content: 'modal HTML content',
-    className: 'modal-window--alert',
+    className: 'modality-window--alert',
     callback: function() {
         alert('callback');
     }
@@ -330,15 +330,15 @@
                 </div>
 
                 <div class="test-example">
-                    <button type="button" class="btn btn--primary" onclick="javascript: new Modal({className: 'modal-window--alert', callback: function() { alert('callback');}, buttonCancelText: 'close', content: '<h2>Alert</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus. Nulla augue nisl, fermentum quis hendrerit sed, fermentum at mauris. Cras sodales risus vel nisi pellentesque rhoncus. Praesent vulputate dolor nisi, id pharetra nisi varius eu. Fusce non auctor dui. Quisque a ullamcorper nisi. Integer laoreet velit et suscipit luctus.</p>'})">Modal with callback</button>
+                    <button type="button" class="btn btn--primary" onclick="javascript: new Modality({className: 'modality-window--alert', callback: function() { alert('callback');}, buttonCancelText: 'close', content: '<h2>Alert</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus. Nulla augue nisl, fermentum quis hendrerit sed, fermentum at mauris. Cras sodales risus vel nisi pellentesque rhoncus. Praesent vulputate dolor nisi, id pharetra nisi varius eu. Fusce non auctor dui. Quisque a ullamcorper nisi. Integer laoreet velit et suscipit luctus.</p>'})">Modal with callback</button>
                 </div>
 
 
                 <h3 class="test-title">Native HTML confirm() replacements</h3>
                 <div class="test-callout test-callout--interface">
-                    <p><pre><code>new Modal({
+                    <p><pre><code>new Modality({
     content: 'modal HTML content',
-    className: 'modal-window--alert',
+    className: 'modality-window--alert',
     type: 'confirm',
     callback: function () {
         alert('confirmed');
@@ -346,15 +346,15 @@
 });</code></pre></p>
                 </div>
                 <div class="test-example">
-                    <button type="button" class="btn btn--primary" onclick="javascript: new Modal({className: 'modal-window--alert', type: 'confirm', callback: function () { alert('confirmed'); }, content: '<h2>Confirm</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus.</p>'})">Confirm modal</button>
+                    <button type="button" class="btn btn--primary" onclick="javascript: new Modality({className: 'modality-window--alert', type: 'confirm', callback: function () { alert('confirmed'); }, content: '<h2>Confirm</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus.</p>'})">Confirm modal</button>
                 </div>
 
 
                 <h3 class="test-title">Native HTML prompt() replacements</h3>
                 <div class="test-callout test-callout--interface">
-                    <p><pre><code>new Modal({
+                    <p><pre><code>new Modality({
     content: 'modal HTML content',
-    className: 'modal-window--alert',
+    className: 'modality-window--alert',
     type: 'prompt',
     inputFieldType: 'email',
     inputFieldClass: 'formcontrol-input',
@@ -369,7 +369,7 @@
 });</code></pre></p>
                 </div>
                 <div class="test-example">
-                    <button type="button" class="btn btn--primary" onclick="javascript: new Modal({className: 'modal-window--alert', type: 'prompt', inputFieldType: 'email', inputFieldClass: 'formcontrol-input', inputFieldPlaceholder: 'email@domain.tld', inputFieldValue: 'prefilled@domain.tld', callback: function (data) { console.log('data', data); alert('From prompt: ' + data.value);}, buttonConfirmText: 'submit', buttonCancelText: 'close', content: '<h2>Prompt</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus.</p>'})">Prompt modal</button>
+                    <button type="button" class="btn btn--primary" onclick="javascript: new Modality({className: 'modality-window--alert', type: 'prompt', inputFieldType: 'email', inputFieldClass: 'formcontrol-input', inputFieldPlaceholder: 'email@domain.tld', inputFieldValue: 'prefilled@domain.tld', callback: function (data) { console.log('data', data); alert('From prompt: ' + data.value);}, buttonConfirmText: 'submit', buttonCancelText: 'close', content: '<h2>Prompt</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus.</p>'})">Prompt modal</button>
                 </div>
 
 
@@ -390,10 +390,10 @@
                 </div>
 
                 <div class="test-callout test-callout--interface">
-                    <p><pre><code>new Modal({
-    className: 'modal-window--alert',
+                    <p><pre><code>new Modality({
+    className: 'modality-window--alert',
     buttons: false,
-    content: '&lt;h2>Form<&lt;h2>&lt;form>&lt;fieldset class="modal-fieldset">&lt;label class="formcontrol">&lt;p class="formcontrol-label">Email&lt;/p>&lt;input class="formcontrol-input" type="email" placeholder="email@domain.tld" required="required"/>&lt;/label>&lt;label class="formcontrol">&lt;p class="formcontrol-label">Password&lt;/p>&lt;input class="formcontrol-input" type="password" required="required"/>&lt;/label>&lt;/fieldset>&lt;button type="submit" class="btn btn--primary js-submit">Sign in&lt;/button>&lt;button type="button" class="btn btn--secondary js-close">close&lt;/button>&lt;/form>',
+    content: '&lt;h2>Form<&lt;h2>&lt;form>&lt;fieldset class="modality-fieldset">&lt;label class="formcontrol">&lt;p class="formcontrol-label">Email&lt;/p>&lt;input class="formcontrol-input" type="email" placeholder="email@domain.tld" required="required"/>&lt;/label>&lt;label class="formcontrol">&lt;p class="formcontrol-label">Password&lt;/p>&lt;input class="formcontrol-input" type="password" required="required"/>&lt;/label>&lt;/fieldset>&lt;button type="submit" class="btn btn--primary js-submit">Sign in&lt;/button>&lt;button type="button" class="btn btn--secondary js-close">close&lt;/button>&lt;/form>',
     onReady: function (data) {
         formInit(data);
     }
@@ -432,10 +432,10 @@
                         }
 
                         var formModal = function () {
-                            theFormModal = new Modal({
-                                className: 'modal-window--alert',
+                            theFormModal = new Modality({
+                                className: 'modality-window--alert',
                                 buttons: false,
-                                content: '<h2>Form</h2><form><fieldset class="modal-fieldset"><label class="formcontrol"><p class="formcontrol-label">Email</p><input class="formcontrol-input" type="email" placeholder="email@domain.tld" required="required"/></label><label class="formcontrol"><p class="formcontrol-label">Password</p><input class="formcontrol-input" type="password" required="required"/></label></fieldset><button type="submit" class="btn btn--primary js-submit">Sign in</button><button type="button" class="btn btn--secondary js-close">close</button></form>',
+                                content: '<h2>Form</h2><form><fieldset class="modality-fieldset"><label class="formcontrol"><p class="formcontrol-label">Email</p><input class="formcontrol-input" type="email" placeholder="email@domain.tld" required="required"/></label><label class="formcontrol"><p class="formcontrol-label">Password</p><input class="formcontrol-input" type="password" required="required"/></label></fieldset><button type="submit" class="btn btn--primary js-submit">Sign in</button><button type="button" class="btn btn--secondary js-close">close</button></form>',
                                 onReady: function (data) {
                                     formInit(data);
                                 }
@@ -458,7 +458,7 @@
                 </div>
 
                 <div class="test-callout test-callout--interface">
-                    <p><pre><code>new Modal({
+                    <p><pre><code>new Modality({
 });</code></pre></p>
                 </div>
 

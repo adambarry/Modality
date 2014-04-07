@@ -21,7 +21,7 @@ SOFTWARE.
 --------------------------------------------------------------------------------
 
 Name:
-Modal script
+Modality script
 
 --------------------------------------------------------------------------------
 Description:
@@ -31,13 +31,13 @@ Function that enable an integrated modal (popup) window which overlays the
 --------------------------------------------------------------------------------
 Usage:
 Simply place a link to the this script in the the HTML page. The script will
-then automatically execute when the related Modal-constructor is subsequently
+then automatically execute when the related Modality-constructor is subsequently
 invoked.
 
 --------------------------------------------------------------------------------
 Example:
 
-<script type="text/javascript" src="modal.js"></script>
+<script type="text/javascript" src="modality.js"></script>
 
 --------------------------------------------------------------------------------
 Options:
@@ -55,7 +55,7 @@ None
 */
 
 
-var Modal = function (options, evt) {
+var Modality = function (options, evt) {
     "use strict";
 
 
@@ -72,8 +72,8 @@ var Modal = function (options, evt) {
         newWindowSize,
         sizeDelta,
         cancelDelay = 400, //milliseconds. To prevent doubleclicks accidentally closing the modal,
-        cancelCounter = false, //Counter used for showing remaining visible time for time modal-windows
-        triggerElement = false, //Element that triggered the modal-window
+        cancelCounter = false, //Counter used for showing remaining visible time for time modality-windows
+        triggerElement = false, //Element that triggered the modality-window
         buttonReset,
 
 
@@ -99,13 +99,13 @@ var Modal = function (options, evt) {
     //Default options
     self.options = {
         type: false, //false|confirm|prompt (adds functionality corresponding to the type)
-        content: false, //The HTML contents of the modal-window
-        className: false, //Classname for the modal-window
+        content: false, //The HTML contents of the modalWindow
+        className: false, //Classname for the modalWindow
         time: false, //Time in milliseconds, e.g. 2500, before the popup is automatically closed.
         timeSec: "second", //Label for remaining second (single)
         timeSecs: "seconds", //Label for remaining seconds (plural)
         onReady: false, //A function that is executed when the modal has loaded its content, e.g. onReady: function (data) { console.log("onReady", data); }
-        callback: false, //A function that is executed upon closing the modal-window, e.g. callback: function (data) { alert("callback: " + data); }
+        callback: false, //A function that is executed upon closing the modalWindow, e.g. callback: function (data) { alert("callback: " + data); }
         buttons: true, //Add buttons (depending on the type-property)
         buttonCloseText: "close", //Text for cancel/close button
         buttonCancelClass: "btn btn--secondary",
@@ -116,12 +116,12 @@ var Modal = function (options, evt) {
         inputFieldPlaceholder: false, //For type === "confirm"
         inputFieldValue: false, //For type === "confirm"
         formFieldFocus: true,
-        margin: 5, //Minimum distance in px between the viewport border and the modal-window. Modal-window will shrink when too little space
-        disablePageScroll: true, //When set to true, body.style.overflow will be set to hidden, while modal-windows are active
+        margin: 5, //Minimum distance in px between the viewport border and the modalWindow. ModalWindow will shrink when too little space
+        disablePageScroll: true, //When set to true, body.style.overflow will be set to hidden, while modalWindows are active
         verticalCenter: false, //When set to true, the popupWindow will be centered vertically, instead of being placed towards the top of the screen
-        fadeTime: 250, //Milliseconds for CSS3-based fade-in/out for the modal element
-        fadeHiddenClass: "modal--hidden",
-        closeLink: "<span>Close <span class=\"hotkey\">(esc)</span></span>" //Contents of permanent close button for the modal-window
+        fadeTime: 250, //Milliseconds for CSS3-based fade-in/out for the "modality" element
+        fadeHiddenClass: "modality--hidden",
+        closeLink: "<span>Close <span class=\"hotkey\">(esc)</span></span>" //Contents of permanent close button for the modality-window
     };
 
     //User defined options
@@ -191,7 +191,7 @@ var Modal = function (options, evt) {
         }());
 
         (function removeModalFromDOM () {
-            //If no more modal-windows are present, remove the wrapper
+            //If no more modality-windows are present, remove the wrapper
             if (wrapper.childNodes.length === 0) {
                 wrapper.className += " " + self.options.fadeHiddenClass;
 
@@ -405,7 +405,7 @@ var Modal = function (options, evt) {
 
             var value = inputField ? inputField.value : false;
 
-            //Close the modal-window and send the inputField-value to the onClose-function
+            //Close the modality-window and send the inputField-value to the onClose-function
             destroy({
                 value: value
             });
@@ -423,7 +423,7 @@ var Modal = function (options, evt) {
         if (self.options.type === "prompt") {
             //Create and add the fieldset
             theFieldset = document.createElement("fieldset");
-            theFieldset.className = "modal-fieldset";
+            theFieldset.className = "modality-fieldset";
             theForm.appendChild(theFieldset);
 
             //Create the input field and add it to the fieldset
@@ -436,7 +436,7 @@ var Modal = function (options, evt) {
                 inputField.setAttribute("type", "text");
             }
 
-            inputField.setAttribute("class", "modal-prompt");
+            inputField.setAttribute("class", "modality-prompt");
 
             if (self.options.inputFieldClass) {
                 inputField.className += " " + self.options.inputFieldClass;
@@ -536,7 +536,7 @@ var Modal = function (options, evt) {
 
                 //Make sure that the fade-in transition starts after the element has been added to the DOM, i.e. on nextTick
                 defer({
-                   func: function () { wrapper.className = "modal"; }
+                   func: function () { wrapper.className = "modality"; }
                 });
             }
 
@@ -551,13 +551,13 @@ var Modal = function (options, evt) {
                     defer({
                         func: function () {
                             wrapper.onclick = function () {
-                                //Give the wrapper its own closing function to prevent binding it to a certain Modal-objects abort-function
+                                //Give the wrapper its own closing function to prevent binding it to a certain modality-objects abort-function
                                 enableViewportScroll();
 
                                 wrapper.className += " " + fadeHiddenClass;
 
                                 window.setTimeout(function () {
-                                    console.log("Remove modal from DOM");
+                                    console.log("Remove modality from DOM");
                                     destroyActions();
                                     try {
                                         wrapper.parentNode.removeChild(wrapper);
@@ -571,12 +571,12 @@ var Modal = function (options, evt) {
                 }
             }());
 
-            //Add the modal-container
+            //Add the modality-container
             modalContainer = document.createElement("div");
-            modalContainer.className = "modal-container";
+            modalContainer.className = "modality-container";
             wrapper.appendChild(modalContainer);
 
-            //Prevent clicks on the modal-container to bubble up to the modal-window
+            //Prevent clicks on the modality-container to bubble up to the modality-window
             modalContainer.onclick = function (event) {
                 var e = event || window.event; //get window.event if argument is falsy (in IE)
 
@@ -592,18 +592,18 @@ var Modal = function (options, evt) {
             };
 
 
-            //Add the modal-window
+            //Add the modality-window
             modalWindow = document.createElement("div");
-            modalWindow.className = "modal-window";
+            modalWindow.className = "modality-window";
             if(self.options.className) {
                 modalWindow.className += " " + self.options.className;
             }
             modalContainer.appendChild(modalWindow);
 
-            //Add the modal-close element
+            //Add the modality-close element
             modalClose = document.createElement("button");
             modalClose.setAttribute("type", "button");
-            modalClose.className = "modal-close";
+            modalClose.className = "modality-close";
             modalClose.innerHTML = self.options.closeLink;
 
             defer({
@@ -615,9 +615,9 @@ var Modal = function (options, evt) {
 
             modalWindow.appendChild(modalClose);
 
-            // Add the modal-content
+            // Add the modality-content
             modalContent = document.createElement('div');
-            modalContent.className = "modal-content";
+            modalContent.className = "modality-content";
             modalWindow.appendChild(modalContent);
 
         }());
@@ -630,7 +630,7 @@ var Modal = function (options, evt) {
             }
         }());
 
-        //Add buttons to the modal-window
+        //Add buttons to the modality-window
         if (self.options.buttons) {
             addButtons();
         }
@@ -664,7 +664,7 @@ var Modal = function (options, evt) {
                 resize();
             });
 
-            //Make sure that the modal-wndow is repositioned when scrolling (for iOS)
+            //Make sure that the modality-wndow is repositioned when scrolling (for iOS)
             window.addEventListener("scroll", function () {
                 position();
             });
