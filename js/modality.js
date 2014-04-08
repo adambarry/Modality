@@ -90,7 +90,8 @@ var Modality = function (options, evt) {
         cancelAction,
         update,
         countdown,
-        focus;
+        focus,
+        keyClose;
 
 
     //Private functions
@@ -159,6 +160,15 @@ var Modality = function (options, evt) {
 
     cancelAction = function () {
         abort();
+    };
+
+    keyClose = function (event) {
+        var e = event || window.event; //get window.event if argument is falsy (in IE)
+
+        //Close the modal-window on Escape-key
+        if (e.keyCode === 27) {
+            abort();
+        }
     };
 
     destroyActions = function () {
@@ -301,8 +311,19 @@ var Modality = function (options, evt) {
         position();
     };
 
-    update = function (html) {
+    update = function (html, options) {
         console.group("Modality: update()");
+
+        var t;
+
+        //Redefine the options for the modality
+        if (typeof options === 'object') {
+            for (t in options) {
+                if (options.hasOwnProperty(t)) {
+                    self.options[t] = options[t];
+                }
+            }
+        }
 
         modalContent.innerHTML = html;
 
@@ -540,7 +561,7 @@ var Modality = function (options, evt) {
                 });
             }
 
-            console.log("wrapper", wrapper);
+            //console.log("wrapper", wrapper);
 
             (function () {
                 //Store the fadeTime variable as 'self' may not exist any longer when the wrapper is clicked
@@ -589,21 +610,13 @@ var Modality = function (options, evt) {
                 }
             };
 
-
             //Add the Modality-window
             modalWindow = document.createElement("div");
             modalWindow.className = "Modality-window";
             if(self.options.className) {
                 modalWindow.className += " " + self.options.className;
             }
-            modalWindow.addEventListener("keydown", function (event) {
-                var e = event || window.event; //get window.event if argument is falsy (in IE)
-
-                //Close the modal-window on Escape-key
-                if (e.keyCode === 27) {
-                    abort();
-                }
-            });
+            modalWindow.addEventListener("keydown", keyClose, false);
 
             modalContainer.appendChild(modalWindow);
 
@@ -724,8 +737,8 @@ var Modality = function (options, evt) {
         options: self.options,
         close: destroy,
         abort: abort,
-        update: function (html) {
-            update(html);
+        update: function (html, options) {
+            update(html, options);
         },
         element: modalWindow
     };
