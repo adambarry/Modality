@@ -158,11 +158,7 @@ var Modality = function (options, evt) {
     };
 
     cancelAction = function () {
-        if (self.options.type) {
-            abort();
-        } else {
-            destroy();
-        }
+        abort();
     };
 
     destroyActions = function () {
@@ -472,7 +468,9 @@ var Modality = function (options, evt) {
         buttonReset.innerHTML = self.options.buttonCloseText;
 
         defer({
-            func: function () { buttonReset.onclick = cancelAction; },
+            func: function () {
+                buttonReset.onclick = cancelAction;
+            },
             delay: cancelDelay
         });
 
@@ -536,7 +534,9 @@ var Modality = function (options, evt) {
 
                 //Make sure that the fade-in transition starts after the element has been added to the DOM, i.e. on nextTick
                 defer({
-                   func: function () { wrapper.className = "Modality"; }
+                    func: function () {
+                        wrapper.className = "Modality";
+                    }
                 });
             }
 
@@ -582,11 +582,9 @@ var Modality = function (options, evt) {
 
                 if (e.stopPropagation) {
                     //For all the clever browsers
-                    //e.preventDefault();
                     e.stopPropagation();
                 } else {
                     //For IE
-                    //e.returnValue = false;
                     e.cancelBubble = true;
                 }
             };
@@ -601,7 +599,6 @@ var Modality = function (options, evt) {
             modalWindow.addEventListener("keydown", function (event) {
                 var e = event || window.event; //get window.event if argument is falsy (in IE)
 
-                //console.log("event", e);
                 //Close the modal-window on Escape-key
                 if (e.keyCode === 27) {
                     abort();
@@ -615,15 +612,8 @@ var Modality = function (options, evt) {
             modalClose.setAttribute("type", "button");
             modalClose.className = "Modality-close";
             modalClose.innerHTML = self.options.closeLink;
-
-            defer({
-                func: function () {
-                    modalClose.onclick = cancelAction;
-                },
-                delay: cancelDelay
-            });
-
             modalWindow.appendChild(modalClose);
+            modalClose.onclick = cancelAction;
 
             // Add the Modality-content
             modalContent = document.createElement('div');
@@ -643,6 +633,14 @@ var Modality = function (options, evt) {
         //Add buttons to the Modality-window
         if (self.options.buttons) {
             addButtons();
+        } else {
+            //If the modal is buttonless, set focus to the Modal-close element
+            defer({
+               func: function () {
+                   modalClose.focus();
+               },
+               delay: self.options.fadeTime
+            });
         }
 
 
