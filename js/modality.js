@@ -598,6 +598,16 @@ var Modality = function (options, evt) {
             if(self.options.className) {
                 modalWindow.className += " " + self.options.className;
             }
+            modalWindow.addEventListener("keydown", function (event) {
+                var e = event || window.event; //get window.event if argument is falsy (in IE)
+
+                //console.log("event", e);
+                //Close the modal-window on Escape-key
+                if (e.keyCode === 27) {
+                    abort();
+                }
+            });
+
             modalContainer.appendChild(modalWindow);
 
             //Add the Modality-close element
