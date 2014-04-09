@@ -647,7 +647,7 @@ var Modality = function (options, evt) {
         if (self.options.buttons) {
             addButtons();
         } else {
-            //If the modal is buttonless, set focus to the Modal-close element
+            //If the modal is buttonless, set focus to the Modal-close element. Wait to do so until the modal is visible to prevent the page accidentally scolling to the top
             defer({
                func: function () {
                    modalClose.focus();
@@ -691,7 +691,7 @@ var Modality = function (options, evt) {
             });
         }());
 
-        //The modal is loaded and in position, so fire the onReady function
+        //When the modal is loaded and in position, fire the onReady function
         if (self.options.onReady) {
             defer({
                 func: function () {
