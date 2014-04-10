@@ -204,13 +204,18 @@
                 </div>
 
                 <div class="test-callout test-callout--warning">
-                    <h4>Position-properties changed in test-example</h4>
+                    <h4>Position-property changed in test-example</h4>
                     <p>In order to get the below test-example to display the modal correctly, <code>style="position: relative;"</code> has been added to the <code>.Modality-container</code> element which is otherwise absolutely positioned.</p>
+                </div>
+
+                <div class="test-callout test-callout--warning">
+                    <h4>Display-property changed in test-example</h4>
+                    <p>In order to get the below test-example to display the modal correctly, <code>style="display: block;"</code> has been added to the <code>.Modality-container</code> element which is otherwise absolutely positioned.</p>
                 </div>
 
                 <div class="test-example">
                     <!-- <div class="modal" style="position: relative;"> -->
-                        <div class="Modality-container" style="position: relative;">
+                        <div class="Modality-container" style="position: relative; display: block;">
                             <div class="Modality-window">
                                 <button type="button" class="Modality-close"><span>Close <span class="hotkey">(esc)</span></span></button>
 
