@@ -1,14 +1,3 @@
-/*  Apply a natural box layout model to all elements
-    NB: Not required for Modal to work */
-*,
-*:before,
-*:after {
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-}
-
-
 /*******************************************************************************
 Component: Modal
 *******************************************************************************/
@@ -46,6 +35,8 @@ Component: Modal
     background-color: #f0efed;
     color: inherit;
     cursor: default;
+
+    -webkit-overflow-scrolling: touch;
 }
 
 .Modality > .Modality-container:last-child {

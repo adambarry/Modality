@@ -1,148 +1,46 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class=""> <!--<![endif]-->
+<html dir="ltr">
     <head>
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Test-page for Modality-component</title>
-        <meta name="description" content="Test-page for Modality modal-component">
+        <title>Modality Test Page</title>
+        <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!--[if IE)><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif[-->
+        <link rel="stylesheet" href="modality.css">
+        <link rel="stylesheet" href="test.css" />
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.min.css" />
-        <link rel="stylesheet" href="css/modality.css">
+
         <style type="text/css">
+            /*
+                apply a natural box layout model to all elements
+                Source: http://www.paulirish.com/2012/box-sizing-border-box-ftw/
+            */
 
-            /*******************************************************************************
-            Test page styles
-            *******************************************************************************/
-            body {
-                background-color: #c0c0c0;
-                background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAMAAABHPGVmAAAACXBIWXMAAAsTAAALEwEAmpwYAAAKT2lDQ1BQaG90b3Nob3AgSUNDIHByb2ZpbGUAAHjanVNnVFPpFj333vRCS4iAlEtvUhUIIFJCi4AUkSYqIQkQSoghodkVUcERRUUEG8igiAOOjoCMFVEsDIoK2AfkIaKOg6OIisr74Xuja9a89+bN/rXXPues852zzwfACAyWSDNRNYAMqUIeEeCDx8TG4eQuQIEKJHAAEAizZCFz/SMBAPh+PDwrIsAHvgABeNMLCADATZvAMByH/w/qQplcAYCEAcB0kThLCIAUAEB6jkKmAEBGAYCdmCZTAKAEAGDLY2LjAFAtAGAnf+bTAICd+Jl7AQBblCEVAaCRACATZYhEAGg7AKzPVopFAFgwABRmS8Q5ANgtADBJV2ZIALC3AMDOEAuyAAgMADBRiIUpAAR7AGDIIyN4AISZABRG8lc88SuuEOcqAAB4mbI8uSQ5RYFbCC1xB1dXLh4ozkkXKxQ2YQJhmkAuwnmZGTKBNA/g88wAAKCRFRHgg/P9eM4Ors7ONo62Dl8t6r8G/yJiYuP+5c+rcEAAAOF0ftH+LC+zGoA7BoBt/qIl7gRoXgugdfeLZrIPQLUAoOnaV/Nw+H48PEWhkLnZ2eXk5NhKxEJbYcpXff5nwl/AV/1s+X48/Pf14L7iJIEyXYFHBPjgwsz0TKUcz5IJhGLc5o9H/LcL//wd0yLESWK5WCoU41EScY5EmozzMqUiiUKSKcUl0v9k4t8s+wM+3zUAsGo+AXuRLahdYwP2SycQWHTA4vcAAPK7b8HUKAgDgGiD4c93/+8//UegJQCAZkmScQAAXkQkLlTKsz/HCAAARKCBKrBBG/TBGCzABhzBBdzBC/xgNoRCJMTCQhBCCmSAHHJgKayCQiiGzbAdKmAv1EAdNMBRaIaTcA4uwlW4Dj1wD/phCJ7BKLyBCQRByAgTYSHaiAFiilgjjggXmYX4IcFIBBKLJCDJiBRRIkuRNUgxUopUIFVIHfI9cgI5h1xGupE7yAAygvyGvEcxlIGyUT3UDLVDuag3GoRGogvQZHQxmo8WoJvQcrQaPYw2oefQq2gP2o8+Q8cwwOgYBzPEbDAuxsNCsTgsCZNjy7EirAyrxhqwVqwDu4n1Y8+xdwQSgUXACTYEd0IgYR5BSFhMWE7YSKggHCQ0EdoJNwkDhFHCJyKTqEu0JroR+cQYYjIxh1hILCPWEo8TLxB7iEPENyQSiUMyJ7mQAkmxpFTSEtJG0m5SI+ksqZs0SBojk8naZGuyBzmULCAryIXkneTD5DPkG+Qh8lsKnWJAcaT4U+IoUspqShnlEOU05QZlmDJBVaOaUt2ooVQRNY9aQq2htlKvUYeoEzR1mjnNgxZJS6WtopXTGmgXaPdpr+h0uhHdlR5Ol9BX0svpR+iX6AP0dwwNhhWDx4hnKBmbGAcYZxl3GK+YTKYZ04sZx1QwNzHrmOeZD5lvVVgqtip8FZHKCpVKlSaVGyovVKmqpqreqgtV81XLVI+pXlN9rkZVM1PjqQnUlqtVqp1Q61MbU2epO6iHqmeob1Q/pH5Z/YkGWcNMw09DpFGgsV/jvMYgC2MZs3gsIWsNq4Z1gTXEJrHN2Xx2KruY/R27iz2qqaE5QzNKM1ezUvOUZj8H45hx+Jx0TgnnKKeX836K3hTvKeIpG6Y0TLkxZVxrqpaXllirSKtRq0frvTau7aedpr1Fu1n7gQ5Bx0onXCdHZ4/OBZ3nU9lT3acKpxZNPTr1ri6qa6UbobtEd79up+6Ynr5egJ5Mb6feeb3n+hx9L/1U/W36p/VHDFgGswwkBtsMzhg8xTVxbzwdL8fb8VFDXcNAQ6VhlWGX4YSRudE8o9VGjUYPjGnGXOMk423GbcajJgYmISZLTepN7ppSTbmmKaY7TDtMx83MzaLN1pk1mz0x1zLnm+eb15vft2BaeFostqi2uGVJsuRaplnutrxuhVo5WaVYVVpds0atna0l1rutu6cRp7lOk06rntZnw7Dxtsm2qbcZsOXYBtuutm22fWFnYhdnt8Wuw+6TvZN9un2N/T0HDYfZDqsdWh1+c7RyFDpWOt6azpzuP33F9JbpL2dYzxDP2DPjthPLKcRpnVOb00dnF2e5c4PziIuJS4LLLpc+Lpsbxt3IveRKdPVxXeF60vWdm7Obwu2o26/uNu5p7ofcn8w0nymeWTNz0MPIQ+BR5dE/C5+VMGvfrH5PQ0+BZ7XnIy9jL5FXrdewt6V3qvdh7xc+9j5yn+M+4zw33jLeWV/MN8C3yLfLT8Nvnl+F30N/I/9k/3r/0QCngCUBZwOJgUGBWwL7+Hp8Ib+OPzrbZfay2e1BjKC5QRVBj4KtguXBrSFoyOyQrSH355jOkc5pDoVQfujW0Adh5mGLw34MJ4WHhVeGP45wiFga0TGXNXfR3ENz30T6RJZE3ptnMU85ry1KNSo+qi5qPNo3ujS6P8YuZlnM1VidWElsSxw5LiquNm5svt/87fOH4p3iC+N7F5gvyF1weaHOwvSFpxapLhIsOpZATIhOOJTwQRAqqBaMJfITdyWOCnnCHcJnIi/RNtGI2ENcKh5O8kgqTXqS7JG8NXkkxTOlLOW5hCepkLxMDUzdmzqeFpp2IG0yPTq9MYOSkZBxQqohTZO2Z+pn5mZ2y6xlhbL+xW6Lty8elQfJa7OQrAVZLQq2QqboVFoo1yoHsmdlV2a/zYnKOZarnivN7cyzytuQN5zvn//tEsIS4ZK2pYZLVy0dWOa9rGo5sjxxedsK4xUFK4ZWBqw8uIq2Km3VT6vtV5eufr0mek1rgV7ByoLBtQFr6wtVCuWFfevc1+1dT1gvWd+1YfqGnRs+FYmKrhTbF5cVf9go3HjlG4dvyr+Z3JS0qavEuWTPZtJm6ebeLZ5bDpaql+aXDm4N2dq0Dd9WtO319kXbL5fNKNu7g7ZDuaO/PLi8ZafJzs07P1SkVPRU+lQ27tLdtWHX+G7R7ht7vPY07NXbW7z3/T7JvttVAVVN1WbVZftJ+7P3P66Jqun4lvttXa1ObXHtxwPSA/0HIw6217nU1R3SPVRSj9Yr60cOxx++/p3vdy0NNg1VjZzG4iNwRHnk6fcJ3/ceDTradox7rOEH0x92HWcdL2pCmvKaRptTmvtbYlu6T8w+0dbq3nr8R9sfD5w0PFl5SvNUyWna6YLTk2fyz4ydlZ19fi753GDborZ752PO32oPb++6EHTh0kX/i+c7vDvOXPK4dPKy2+UTV7hXmq86X23qdOo8/pPTT8e7nLuarrlca7nuer21e2b36RueN87d9L158Rb/1tWeOT3dvfN6b/fF9/XfFt1+cif9zsu72Xcn7q28T7xf9EDtQdlD3YfVP1v+3Njv3H9qwHeg89HcR/cGhYPP/pH1jw9DBY+Zj8uGDYbrnjg+OTniP3L96fynQ89kzyaeF/6i/suuFxYvfvjV69fO0ZjRoZfyl5O/bXyl/erA6xmv28bCxh6+yXgzMV70VvvtwXfcdx3vo98PT+R8IH8o/2j5sfVT0Kf7kxmTk/8EA5jz/GMzLdsAAAAgY0hSTQAAeiUAAICDAAD5/wAAgOkAAHUwAADqYAAAOpgAABdvkl/FRgAAAwBQTFRFZpnMM2aZ////AwMDBAQEBQUFBgYGBwcHCAgICQkJCgoKCwsLDAwMDQ0NDg4ODw8PEBAQEREREhISExMTFBQUFRUVFhYWFxcXGBgYGRkZGhoaGxsbHBwcHR0dHh4eHx8fICAgISEhIiIiIyMjJCQkJSUlJiYmJycnKCgoKSkpKioqKysrLCwsLS0tLi4uLy8vMDAwMTExMjIyMzMzNDQ0NTU1NjY2Nzc3ODg4OTk5Ojo6Ozs7PDw8PT09Pj4+Pz8/QEBAQUFBQkJCQ0NDRERERUVFRkZGR0dHSEhISUlJSkpKS0tLTExMTU1NTk5OT09PUFBQUVFRUlJSU1NTVFRUVVVVVlZWV1dXWFhYWVlZWlpaW1tbXFxcXV1dXl5eX19fYGBgYWFhYmJiY2NjZGRkZWVlZmZmZ2dnaGhoaWlpampqa2trbGxsbW1tbm5ub29vcHBwcXFxcnJyc3NzdHR0dXV1dnZ2d3d3eHh4eXl5enp6e3t7fHx8fX19fn5+f39/gICAgYGBgoKCg4ODhISEhYWFhoaGh4eHiIiIiYmJioqKi4uLjIyMjY2Njo6Oj4+PkJCQkZGRkpKSk5OTlJSUlZWVlpaWl5eXmJiYmZmZmpqam5ubnJycnZ2dnp6en5+foKCgoaGhoqKio6OjpKSkpaWlpqamp6enqKioqampqqqqq6urrKysra2trq6ur6+vsLCwsbGxsrKys7OztLS0tbW1tra2t7e3uLi4ubm5urq6u7u7vLy8vb29vr6+v7+/wMDAwcHBwsLCw8PDxMTExcXFxsbGx8fHyMjIycnJysrKy8vLzMzMzc3Nzs7Oz8/P0NDQ0dHR0tLS09PT1NTU1dXV1tbW19fX2NjY2dnZ2tra29vb3Nzc3d3d3t7e39/f4ODg4eHh4uLi4+Pj5OTk5eXl5ubm5+fn6Ojo6enp6urq6+vr7Ozs7e3t7u7u7+/v8PDw8fHx8vLy8/Pz9PT09fX19vb29/f3+Pj4+fn5+vr6+/v7/Pz8/f39/v7+/////qTbfwAAAAN0Uk5T//8A18oNQQAAAGxJREFUeNrs1TEKACAMBLDW/z/aSVwtWEFIXVwcwvUwxppou+W+nk79RQYJyeeSGMVTfyETEhKNlwkJicbLhIRE420XCcmtxvePTEhI/PEyISHReJmQkGi87SIh0XjbRUJSluSDmQAAAP//AwCyZUWQV1ffCwAAAABJRU5ErkJggg==);
-                background-position: center top;
-            }
-
-            .test {
-                width: 800px;
-                padding: 12px;
-                margin: 0 auto;
-                background-color: white;
-            }
-
-            .test-section {
-                border: 1px solid #5bc0de;
-                padding: 12px;
-                margin: 24px 0;
-                position: relative;
-            }
-
-            .test-section:last-child {
-                margin-bottom: 0;
-            }
-
-            .test-section > :first-child {
-                margin-top: 0;
-            }
-
-            .test-section > :last-child {
-                margin-bottom: 0;
-            }
-
-            .test-section > h2 {
-                width: calc(100% + 24px);
-                padding: 4px 12px;
-                position: relative;
-                top: -12px;
-                left: -12px;
-                background-color: #5bc0de;
-                color: white;
-            }
-
-            .test-title {
-            }
-
-            .test-example {
-                border: 1px solid #e1e1e8;
-                border-radius: 4px;
-                padding: 24px 12px 12px 12px;
-                margin-bottom: 24px;
-                position: relative;
-            }
-
-            .test-example:before {
-                content: "Example";
-                border-right: 1px solid #e1e1e8;
-                border-bottom: 1px solid #e1e1e8;
-                border-bottom-right-radius: 4px;
-                padding: 4px;
-                margin-bottom: 14px;
-                position: absolute;
-                top: 0;
-                left: 0;
-                background-color: #f7f7f9;
-                font-size: 9px;
-                color: gray;
-            }
-
-            code {
-                border-radius: 4px;
-                padding: 2px 4px;
-                background-color: #f9f2f4;
-                font-size: 90%;
-                color: #c7254e;
-                white-space: nowrap;
-            }
-
-            .highlight {
-                border: 1px solid #e1e1e8;
-                border-radius: 4px;
-                padding: 10px;
-                margin-bottom: 14px;
-                background-color: #f7f7f9;
-            }
-
-            pre code {
-                white-space: pre-wrap;
-            }
-
-            .highlight code {
-                background-color: transparent;
-            }
-
-
-            /*: Callouts
-            *******************************************************************************/
-            .test-callout {
-                border-left: 3px solid #eee;
-                padding: 10px;
-                margin: 1.5em 0;
-            }
-
-            .test-callout--info {
-                border-color: #5bc0de;
-                background-color: #f4f8fa;
-            }
-
-            .test-callout--interface {
-                border-color: #8ee66c;
-                background-color: #dff0d8;
-            }
-
-            .test-callout--warning {
-                border-color: #f0ad4e;
-                background-color: #fcf8f2;
-            }
-
-            .test-callout--danger {
-                border-color: #d9534f;
-                background-color: #fdf7f7;
-            }
+            *,
+            *:before,
+            *:after {
+                -moz-box-sizing: border-box;
+                -webkit-box-sizing: border-box;
+                box-sizing: border-box;
+             }
         </style>
-        <script src="js/modality.js"></script>
+        <!-- SyntaxHighlighter -->
+        <link type="text/css" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/styles/shThemeDefault.css" />
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shCore.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shAutoloader.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushJScript.min.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushCss.min.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushXml.min.js"></script>
+        <script type="text/javascript" src="modality.js"></script>
     </head>
     <body>
 
-        <article class="test">
+        <article class="test test--constrain-width">
+
+
+        </article>
+
+        <article class="test test--constrain-width test--show-classes- test--grids">
 
             <h1>Modality (Comprehensive Modal Window Component)</h1>
 
@@ -155,42 +53,26 @@
             </ul>
 
             <p>The modal is built using a <a href="http://coding.smashingmagazine.com/2012/04/16/a-new-front-end-methodology-bem/" target="_blank">BEM</a> CSS model, resulting in the following fundamental component HTML:</p>
-            <pre class="highlight">
-                <code>
-&ltdiv class="Modality"&gt;
-    &ltdiv class="Modality-container"&gt;
+            <script type="syntaxhighlighter" class="brush: html"><![CDATA[
 
-        &ltdiv class="Modality-window Modality-window--alert"&gt;
-            &ltbutton class="Modality-close"&gt;&lt;/button&gt;
+                <!-- Code Example: -->
+                <div class="Modality">
+                    <div class="Modality-container">
 
-            &ltdiv class="Modality-content"&gt;
-                &lt;!-- Content goes here --&gt;
-            &lt/div&gt;
-        &lt/div&gt;
-    &lt/div&gt;
-&lt/div&gt;
-                </code>
-            </pre>
+                        <div class="Modality-window Modality-window--modifier">
+                            <button class="Modality-close"></button>
+
+                            <div class="Modality-content">
+                                <!-- Content goes here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            ]]></script>
 
             <p>The <code>.modality</code> wrapper can contain multiple <code>.Modality-window</code> elements and will only display the top element in the stack, i.e. the <em>last</em> <code>.Modality-window</code> inside the <code>.Modality-container</code> element.</p>
 
-<!--
-            <div class="test-callout test-callout--info">
-                <h4>Info</h4>
-            </div>
-
-            <div class="test-callout test-callout--interface">
-                <h4>Interface</h4>
-            </div>
-
-            <div class="test-callout test-callout--warning">
-                <h4>Warning</h4>
-            </div>
-
-            <div class="test-callout test-callout--danger">
-                <h4>Danger</h4>
-            </div>
--->
 
             <div class="test-section">
 
@@ -237,9 +119,13 @@
                 <h3 class="test-title">Plain</h3>
 
                 <div class="test-callout test-callout--interface">
-                    <p><pre><code>new Modality({
-    content: 'modal HTML content'
-});</code></pre></p>
+                    <script type="syntaxhighlighter" class="brush: js"><![CDATA[
+
+                        new Modality({
+                            content: 'modal HTML content'
+                        });
+
+                    ]]></script>
                 </div>
 
                 <div class="test-example">
@@ -254,10 +140,14 @@
                 </div>
 
                 <div class="test-callout test-callout--interface">
-                    <p><pre><code>new Modality({
-    content: 'modal HTML content',
-    className: 'Modality-window--alert'
-});</code></pre></p>
+                    <script type="syntaxhighlighter" class="brush: js"><![CDATA[
+
+                        new Modality({
+                            content: 'modal HTML content',
+                            className: 'Modality-window--alert'
+                        });
+
+                    ]]></script>
                 </div>
 
                 <div class="test-example">
@@ -267,24 +157,34 @@
                 <h3 class="test-title">Vertically centered</h3>
 
                 <div class="test-callout test-callout--interface">
-                    <p><pre><code>new Modality({
-    content: 'modal HTML content',
-    className: 'Modality-window--alert',
-    verticalCenter: true
-});</code></pre></p>
+                    <script type="syntaxhighlighter" class="brush: js"><![CDATA[
+
+                        new Modality({
+                            content: 'modal HTML content',
+                            className: 'Modality-window--alert',
+                            verticalCenter: true
+                        });
+
+                    ]]></script>
                 </div>
 
                 <div class="test-example">
                     <button type="button" class="btn btn--primary" onclick="javascript: new Modality({className: 'Modality-window--alert', buttonCancelText: 'close', verticalCenter: true, content: '<h2>Alert</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus. Nulla augue nisl, fermentum quis hendrerit sed, fermentum at mauris. Cras sodales risus vel nisi pellentesque rhoncus. Praesent vulputate dolor nisi, id pharetra nisi varius eu. Fusce non auctor dui. Quisque a ullamcorper nisi. Integer laoreet velit et suscipit luctus.</p>'})">Modal (vertically centered)</button>
                 </div>
 
+
                 <h3 class="test-title">Buttonless modal</h3>
+
                 <div class="test-callout test-callout--interface">
-                    <p><pre><code>new Modality({
-    content: 'modal HTML content',
-    className: 'Modality-window--alert',
-    buttons: false
-});</code></pre></p>
+                    <script type="syntaxhighlighter" class="brush: js"><![CDATA[
+
+                        new Modality({
+                            content: 'modal HTML content',
+                            className: 'Modality-window--alert',
+                            buttons: false
+                        });
+
+                    ]]></script>
                 </div>
 
                 <div class="test-example">
@@ -293,30 +193,38 @@
 
                 <h3 class="test-title">Self-closing</h3>
                 <div class="test-callout test-callout--interface">
-                    <p><pre><code>new Modality({
-    content: 'modal HTML content',
-    className: 'Modality-window--alert',
-    time: 5000
-});</code></pre></p>
+                    <script type="syntaxhighlighter" class="brush: js"><![CDATA[
+
+                        new Modality({
+                            content: 'modal HTML content',
+                            className: 'Modality-window--alert',
+                            time: 5000
+                        });
+
+                    ]]></script>
                 </div>
 
                 <div class="test-example">
-                    <button type="button" class="btn btn--primary" onclick="javascript: new Modality({className: 'Modality-window--alert', time: 5000, buttonCancelText: 'close', content: '<h2>Notification</h2><p>This message will self-desctuct.</p>'})">Self-closing modal (auto-closing)</button>
+                    <button type="button" class="btn btn--primary" onclick="javascript: new Modality({className: 'Modality-window--alert', time: 5000, buttonCancelText: 'close', content: '<h2>Notification</h2><p>This message will self-destruct.</p>'})">Self-closing modal (auto-closing)</button>
                 </div>
 
                 <h3 class="test-title">Self-closing, buttonless modal</h3>
 
                 <div class="test-callout test-callout--interface">
-                    <p><pre><code>new Modality({
-    className: 'Modality-window--alert',
-    buttons: false,
-    time: 2500,
-    content: 'modal HTML content'
-})</code></pre></p>
+                    <script type="syntaxhighlighter" class="brush: js"><![CDATA[
+
+                        new Modality({
+                            className: 'Modality-window--alert',
+                            buttons: false,
+                            time: 2500,
+                            content: 'modal HTML content'
+                        });
+
+                    ]]></script>
                 </div>
 
                 <div class="test-example">
-                    <button type="button" class="btn btn--primary" onclick="javascript: new Modality({className: 'Modality-window--alert', buttons: false, time: 2500, content: '<h2>Notification</h2><p>This message will self-desctuct in 2,5 seconds.</p>'})">Self-closing, buttonless modal</button>
+                    <button type="button" class="btn btn--primary" onclick="javascript: new Modality({className: 'Modality-window--alert', buttons: false, time: 2500, content: '<h2>Notification</h2><p>This message will self-destruct in 2,5 seconds.</p>'})">Self-closing, buttonless modal</button>
                 </div>
 
 
@@ -327,14 +235,18 @@
                 <h2>Modals with callbacks</h2>
                 <h3 class="test-title">Native HTML confirm() replacements</h3>
                 <div class="test-callout test-callout--interface">
-                    <p><pre><code>new Modality({
-    content: 'modal HTML content',
-    className: 'Modality-window--alert',
-    type: 'confirm',
-    callback: function () {
-        alert('confirmed');
-    }
-});</code></pre></p>
+                    <script type="syntaxhighlighter" class="brush: js"><![CDATA[
+
+                        new Modality({
+                            content: 'modal HTML content',
+                            className: 'Modality-window--alert',
+                            type: 'confirm',
+                            callback: function () {
+                                alert('confirmed');
+                            }
+                        });
+
+                    ]]></script>
                 </div>
                 <div class="test-example">
                     <button type="button" class="btn btn--primary" onclick="javascript: new Modality({className: 'Modality-window--alert', type: 'confirm', callback: function () { alert('confirmed'); }, content: '<h2>Confirm</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus.</p>'})">Confirm modal</button>
@@ -343,21 +255,25 @@
 
                 <h3 class="test-title">Native HTML prompt() replacements</h3>
                 <div class="test-callout test-callout--interface">
-                    <p><pre><code>new Modality({
-    content: 'modal HTML content',
-    className: 'Modality-window--alert',
-    type: 'prompt',
-    inputFieldType: 'email',
-    inputFieldClass: 'formcontrol-input',
-    inputFieldPlaceholder: 'email@domain.tld',
-    inputFieldValue: 'prefilled@domain.tld',
-    callback: function (data) {
-        console.log('data', data);
-        alert('From prompt: ' + data.value);
-    },
-    buttonConfirmText: 'submit',
-    buttonCancelText: 'close'
-});</code></pre></p>
+                    <script type="syntaxhighlighter" class="brush: js"><![CDATA[
+
+                        new Modality({
+                            content: 'modal HTML content',
+                            className: 'Modality-window--alert',
+                            type: 'prompt',
+                            inputFieldType: 'email',
+                            inputFieldClass: 'formcontrol-input',
+                            inputFieldPlaceholder: 'email@domain.tld',
+                            inputFieldValue: 'prefilled@domain.tld',
+                            callback: function (data) {
+                                console.log('data', data);
+                                alert('From prompt: ' + data.value);
+                            },
+                            buttonConfirmText: 'submit',
+                            buttonCancelText: 'close'
+                        });
+
+                    ]]></script>
                 </div>
                 <div class="test-example">
                     <button type="button" class="btn btn--primary" onclick="javascript: new Modality({className: 'Modality-window--alert', type: 'prompt', inputFieldType: 'email', inputFieldClass: 'formcontrol-input', inputFieldPlaceholder: 'email@domain.tld', inputFieldValue: 'prefilled@domain.tld', callback: function (data) { console.log('data', data); alert('From prompt: ' + data.value);}, buttonConfirmText: 'submit', buttonCancelText: 'close', content: '<h2>Prompt</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ipsum sit amet nulla bibendum rhoncus.</p>'})">Prompt modal</button>
@@ -381,14 +297,55 @@
                 </div>
 
                 <div class="test-callout test-callout--interface">
-                    <p><pre><code>new Modality({
-    className: 'Modality-window--alert',
-    buttons: false,
-    content: '&lt;h2>Form<&lt;h2>&lt;form>&lt;fieldset class="Modality-fieldset">&lt;label class="formcontrol">&lt;p class="formcontrol-label">Email&lt;/p>&lt;input class="formcontrol-input" type="email" placeholder="email@domain.tld" required="required"/>&lt;/label>&lt;label class="formcontrol">&lt;p class="formcontrol-label">Password&lt;/p>&lt;input class="formcontrol-input" type="password" required="required"/>&lt;/label>&lt;/fieldset>&lt;button type="submit" class="btn btn--primary js-submit">Sign in&lt;/button>&lt;button type="button" class="btn btn--secondary js-close">close&lt;/button>&lt;/form>',
-    onReady: function (data) {
-        formInit(data);
-    }
-});</code></pre></p>
+                    <script type="syntaxhighlighter" class="brush: js"><![CDATA[
+
+                        new Modality({
+                            className: 'Modality-window--alert',
+                            buttons: false,
+                            content: '&lt;h2>Form<&lt;h2>&lt;form>&lt;fieldset class="Modality-fieldset">&lt;label class="formcontrol">&lt;p class="formcontrol-label">Email&lt;/p>&lt;input class="formcontrol-input" type="email" placeholder="email@domain.tld" required="required"/>&lt;/label>&lt;label class="formcontrol">&lt;p class="formcontrol-label">Password&lt;/p>&lt;input class="formcontrol-input" type="password" required="required"/>&lt;/label>&lt;/fieldset>&lt;button type="submit" class="btn btn--primary js-submit">Sign in&lt;/button>&lt;button type="button" class="btn btn--secondary js-close">close&lt;/button>&lt;/form>',
+                            onReady: function (data) {
+                                formInit(data);
+                            }
+                        });
+
+                        var theFormModal;
+
+                        function formInit(modal) {
+                            console.log("theFormModal", modal);
+
+                            var modalWindow = modal.element,
+                                i,
+                                buttons = modalWindow.getElementsByTagName("button"),
+                                btnSubmit,
+                                btnClose,
+                                elements = modalWindow.getElementsByTagName("*");
+
+                            for (i = 0; i < buttons.length; i += 1) {
+                                if (buttons[i].className.indexOf("js-submit") > -1) {
+                                    btnSubmit = buttons[i];
+                                }
+
+                                if (buttons[i].className.indexOf("js-close") > -1) {
+                                    btnClose = buttons[i];
+                                }
+                            }
+
+                            //Make the close button work with the modal
+                            btnClose.onclick = modal.abort;
+                        }
+
+                        var formModal = function () {
+                            theFormModal = new Modality({
+                                className: 'Modality-window--alert',
+                                buttons: false,
+                                content: '<h2>Form</h2><form><fieldset class="Modality-fieldset"><label class="formcontrol"><p class="formcontrol-label">Email</p><input class="formcontrol-input" type="email" placeholder="email@domain.tld" required="required"/></label><label class="formcontrol"><p class="formcontrol-label">Password</p><input class="formcontrol-input" type="password" required="required"/></label></fieldset><button type="submit" class="btn btn--primary js-submit">Sign in</button><button type="button" class="btn btn--secondary js-close">close</button></form>',
+                                onReady: function (data) {
+                                    formInit(data);
+                                }
+                            });
+                        };
+
+                    ]]></script>
                 </div>
 
                 <div class="test-example">
@@ -449,8 +406,34 @@
                 </div>
 
                 <div class="test-callout test-callout--interface">
-                    <p><pre><code>new Modality({
-});</code></pre></p>
+                    <script type="syntaxhighlighter" class="brush: js"><![CDATA[
+
+                        var requestAndShow,
+                            requestAndShowModal;
+
+                        requestAndShow = function () {
+                            requestAndShowModal = new Modality({
+                                className: "Modality-window--alert",
+                                content: "<p style='text-align: center'><img src='data:image/gif;base64,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' alt=''/></p>",
+                                buttons: false
+                            });
+
+                            //fake the AJAX-request
+                            window.setTimeout(function () {
+                                requestAndShowModal.update('<h2>Updated modality</h2><p>The modal has just been updated with new content</p>', {
+                                    buttons: true,
+                                    type: 'confirm',
+                                    callback: function () {
+                                        alert("confirmed the updated modality");
+                                    }
+                                });
+                            }, 2000);
+                        };
+
+                        //Execute the function - equivalent of button onclick
+                        requestAndShow();
+
+                    ]]></script>
                 </div>
 
                 <div class="test-example">
@@ -484,5 +467,13 @@
             </div>
 
         </article>
+
+
+        <script type="text/javascript">
+            if (SyntaxHighlighter) {
+                SyntaxHighlighter.all();
+            }
+        </script>
+        <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
     </body>
 </html>
